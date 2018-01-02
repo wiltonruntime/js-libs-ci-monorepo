@@ -1,0 +1,49 @@
+{
+    "name": "saxpath",
+    "description": "XPath expression evaluator against a XML-SAX stream",
+    "version": "0.6.5",
+    "author": "Steven Looman <steven.looman@gmail.com>",
+    "keywords": [ "xml", "sax", "xpath", "parser", "evaluator" ],
+    "licenses" : [
+        {
+            "type": "2-clause BSD",
+            "url": "https://raw.github.com/StevenLooman/saxpath/master/LICENSE"
+        }
+    ],
+
+    "dependencies": {
+    },
+    "devDependencies": {
+        "sax": "1.1.1",
+        "pegjs": "0.9.0",
+        "mocha": "2.1.0",
+        "jscover": "0.2.4",
+        "mocha-lcov-reporter": "0.0.1",
+        "jshint": "2.8.0"
+    },
+    "directories": {
+        "lib": "./lib",
+        "test": "./test"
+    },
+    "main": "index.js",
+    "engines": {
+        "node": ">= 0.10.0"
+    },
+    "scripts": {
+        "test": "node_modules/.bin/mocha --check-leaks test/*js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/StevenLooman/saxpath.git"
+    },
+    "wilton": {
+        "excludes": [
+          "examples",
+          "lib/xpath_parser.pegjs",
+          "test",
+          "Makefile",
+          "run.js",
+          "sonar-project.properties"
+        ]
+    }
+}

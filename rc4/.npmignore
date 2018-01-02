@@ -1,0 +1,11 @@
+.npmignore
+.gitignore
+.jshintrc
+.eslintrc
+.jscsrc
+.travis.yml
+
+synopsis.js
+
+coverage/
+test/

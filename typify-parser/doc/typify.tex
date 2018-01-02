@@ -1,0 +1,175 @@
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fullpage}
+\usepackage{amsmath,amssymb,amsthm,mathtools,bbm}
+\usepackage{mathrsfs} % mathscr
+\usepackage{color}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+
+% multicol
+\usepackage{multicol}
+\usepackage{array}
+
+% graphics
+\usepackage{graphicx}
+\DeclareGraphicsRule{*}{mps}{*}{}
+
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true
+}
+
+\usepackage{mathpazo}
+\usepackage{helvet}
+%\usepackage{courier}
+\usepackage{inconsolata}
+
+\title{Typify types}
+\author{Oleg Grenrus}
+%\date{July 25, 2014}
+
+\setlength\parindent{0pt}
+\setlength{\parskip}{3mm plus1mm minus1mm}
+
+\begin{document}
+\maketitle
+
+Parser and tools for type signatures of \href{https://github.com/phadej/typify}{typify}. 
+Essentially the language is dependent type theory, with omitted lambda constructor.
+
+\section{Formal syntax definition}
+
+\newcommand{\rulename}[1]{\ \boxed{\textsc{\footnotesize #1}}}
+\newcommand{\syntaxrule}[3]{\frac{#2}{#3}\rulename{#1}}
+
+\begin{figure}[ht]
+\small
+\begin{flalign*}
+&
+\textbf{Terminals:} \\&
+\syntaxrule{Any}{}{\top : \mathsf{type}} \qquad
+\syntaxrule{Nothing}{}{\bot : \mathsf{type}} \qquad
+\syntaxrule{Unit}{}{\mathbbm{1} : \mathsf{type}}
+\\&
+\syntaxrule{Number}{}{\mathtt{number} : \mathsf{type}} \qquad
+\syntaxrule{String}{}{\mathtt{string} : \mathsf{type}} \qquad
+\syntaxrule{Boolean}{}{\mathtt{bool} : \mathsf{type}}
+\\&
+\textbf{Identifiers:} \\&
+\syntaxrule{Identifier}{n : \mathsf{name}}{n : \mathsf{type}}
+\\&
+\textbf{Record pairs:} \\&
+\syntaxrule{Record-Pair}{n : \mathsf{name} \quad a : \mathsf{type}}{n : a : \mathsf{pair}} \qquad
+\syntaxrule{Record-Singleton}{r : \mathsf{pair}}{r : \mathsf{rlist}} \qquad
+\syntaxrule{Record-Cons}{p : \mathsf{pair} \quad r : \mathsf{rlist}}{p ;\, r : \mathsf{rlist}}  
+\\&
+\textbf{Records:} \\&
+\syntaxrule{Empty-Record}{}{\{\} : \mathsf{type}} \qquad
+\syntaxrule{Record}{r : \mathsf{rlist}}{\{ r \} : \mathsf{type}}
+\\&
+\textbf{Row types:} \\&
+\syntaxrule{Conjunction}{a : \mathsf{type} \quad b : \mathsf{type}}{a \land b : \mathsf{type}} \qquad
+\syntaxrule{Disjunction}{a : \mathsf{type} \quad b : \mathsf{type}}{a \lor b : \mathsf{type}} \qquad
+\syntaxrule{Optional}{a : \mathsf{type}}{a ? : \mathsf{type}}
+\\&
+\textbf{Application:} \\&
+\syntaxrule{Application}{a : \mathsf{type} \qquad b : \mathsf{type}}{a\ b : \mathsf{type}}
+\\&
+\textbf{Special modifiers:} \\&
+\syntaxrule{Product}{a : \mathsf{type} \quad b : \mathsf{type}}{a \times  b : \mathsf{type}} \qquad
+\syntaxrule{Variadic}{a : \mathsf{type}}{a\ldots : \mathsf{type}} \qquad
+\syntaxrule{Named}{n : \mathsf{name} \quad p : \mathsf{type}}{n : p : \mathsf{type}}
+\\&
+\textbf{Brackets:} \\&
+\syntaxrule{Brackets}{p : \mathsf{type}}{[p] : \mathsf{type}}
+\\&
+\textbf{Functions:} \\&
+\syntaxrule{Function}{a : \mathsf{type} \quad b : \mathsf{type}}{a \to b : \mathsf{type}}
+\\&
+\textbf{Recursive types:} \\&
+\syntaxrule{Recursive}{n : \mathsf{name} \quad a : \mathsf{type}}{\mu\ n \to a : \mathsf{type}}
+\end{flalign*}
+\caption{Typify syntax rules}
+\end{figure}
+
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{clcll}
+level & name & & associativity & example \\
+\hline
+8 & optional     & $?$      & postfix            & $a?$ \\
+7 & application  & $a\;b$   & left associative   & $a\;b\;c \equiv (a\;b)\;c$ \\ 
+6 & conjunction  & $\land$  & associative        & $(a \land b) \land c \equiv a \land (b \land c)$ \\
+5 & disjunction  & $\lor$   & associative        & $(a \lor b) \lor c \equiv a \lor (b \lor c)$ \\
+4 & ellipsis     & $\ldots$ & postfix            & $a \ldots$ \\
+3 & type         & $:$      & right associative  & $x : a$ \\
+2 & product      & $\times$ & associative        & $(a \times b) \times c \equiv a \times (b \times c)$ \\
+1 & function     & $\to$    & right associative  & $a \to b \to c \equiv a \to (b \to c)$ \\
+0 & recursive    & $\mu$    & prefix, right associative & $\mu\; a \to \mu\; b \to a\; b \equiv \mu\; a \to (\mu\; b \to (a\; b))$ \\
+-1 & semicolon    & $;$      & associative        & \\
+\end{tabular}
+\end{center}
+\caption{Operator precedence}
+\end{table}
+
+
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{lcl}
+name & & code variants \\
+\hline
+any          & $\top$   & $\top$ $\mathtt{*}$ \\
+nothing      & $\bot$   & $\bot$ $\mathtt{\_|\_}$ \\
+unit         & $\mathbbm{1}$ & $\mathbbm{1}$ $\mathtt{()}$ \\
+optional     & $?$      & $\mathtt{?}$ \\
+conjunction  & $\land$  & $\land$ $\mathtt{|}$ \\
+disjunction  & $\lor$   & $\lor$ $\mathtt{\&}$ \\
+ellipsis     & $\ldots$ & \texttt{\ldots} (either three dots, or unicode ellipsis) \\
+type         & $:$      & $\mathtt{:}$ \\
+product      & $\times$ & $\times$ $\mathtt{,}$ \\
+function     & $\to$    & $\to$ \texttt{->} \\
+semicolon    & $;$      & $\mathtt{;}$ \\
+rec          & $\mu$    & $\mu$ $\mathtt{rec}$
+\end{tabular}
+\end{center}
+\caption{Special character code representations}
+\end{table}
+
+\begin{figure}[ht]
+\begin{align*}
+&\begin{aligned}
+&a \times ys : b \ldots \times c \to d \to e \\
+&\quad\equiv x : a \times ys : (b \ldots) \times c \to d \to e \\
+&\quad\equiv (x : a) \times (ys : (b \ldots)) \times c \to d \to e \\
+&\quad\equiv ((x : a) \times \big(ys : (b \ldots)) \times c) \to d \to e \\
+&\quad\equiv ((x : a) \times \big(ys : (b \ldots)) \times c) \to (d \to e)
+\end{aligned}
+&
+&\begin{aligned}
+&a \lor b? \land c\; d \ldots \to e \\
+&\quad\equiv a \lor (b?) \land (c\; d) \ldots \to e \\
+&\quad\equiv a \lor ((b?) \land (c\; d)) \ldots \to e \\
+&\quad\equiv (a \lor ((b?) \land (c\; d))) \ldots \to e \\
+&\quad\equiv ((a \lor ((b?) \land (c\; d))) \ldots) \to e \\
+\end{aligned}
+\\
+&\begin{aligned}
+&a \times y : b \to c \\
+&\quad\equiv a \times (y : b) \to c \\
+&\quad\equiv (a \times (y : b)) \to c \\
+\end{aligned}
+&
+\end{align*}
+\caption{Examples of operator precedence}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{flalign*}
+&Either\;a\;b \equiv \{  type : \mathtt{"left"} ;\, value : a \} \lor \{ type: \mathtt{"right"} ;\, value: b \} \\
+&flatMap : (@ : Observable\; A \times f : A \to Observable\; B \lor Event\; B\lor B) \to EventStream\; B \\
+\end{flalign*}
+\caption{Examples of real world types}
+\end{figure}
+
+\end{document}

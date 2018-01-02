@@ -1,0 +1,37 @@
+sudo: false
+language: node_js
+
+matrix:
+  include:
+    - node_js: "0.10"
+      env: TESTSUITE=NPM
+    - node_js: "0.11"
+      env: TESTSUITE=NPM
+    - node_js: "0.12"
+      env: TESTSUITE=NPM
+    - node_js: "0.12"
+      env: TESTSUITE=STACK
+      addons:
+        apt:
+          sources:
+          - hvr-ghc
+          packages:
+          - ghc-7.8.4
+
+
+before_install:
+  # stack
+  - export PATH=~/.local/bin:$PATH
+  # GHC
+  - export PATH=/opt/ghc/7.8.4/bin:$PATH
+
+install:
+  - sh travis-install.sh
+
+script:
+  - sh travis-script.sh
+
+cache:
+  directories:
+  - $HOME/.stack
+

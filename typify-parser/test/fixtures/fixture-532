@@ -1,0 +1,3 @@
+(* -> *)?
+[]
+{"arg":{"result":{"type":"true"},"arg":{"type":"true"},"type":"function"},"type":"optional"}

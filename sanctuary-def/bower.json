@@ -1,0 +1,39 @@
+{
+  "name": "sanctuary-def",
+  "description": "Run-time type system for JavaScript",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sanctuary-js/sanctuary-def.git"
+  },
+  "main": "index.js",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "currying",
+    "functional",
+    "safe",
+    "safety",
+    "sanctuary",
+    "types"
+  ],
+  "dependencies": {
+    "sanctuary-type-classes": "6.0.x",
+    "sanctuary-type-identifiers": "2.0.x"
+  },
+  "ignore": [
+    "/.git/",
+    "/bower_components/",
+    "/coverage/",
+    "/node_modules/",
+    "/test/",
+    "/.*",
+    "/CONTRIBUTING.md",
+    "/Makefile",
+    "/circle.yml",
+    "/package.json"
+  ]
+}

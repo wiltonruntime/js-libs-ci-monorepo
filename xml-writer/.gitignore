@@ -1,0 +1,7 @@
+*.tgz
+*.swp
+*.swo
+README.html
+*.sw?
+coverage/
+node_modules/

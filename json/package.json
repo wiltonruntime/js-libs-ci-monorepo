@@ -1,0 +1,17 @@
+{
+    "name": "json",
+    "version": "1.0",
+    "description": "An AMD loader plugin for loading JSON resources.",
+    "categories": [
+        "Loader plugins"
+    ],
+    "main": "json.js",
+    "github": "https://github.com/wilton-iot/requirejs-json-plugin",
+    "license": "MIT",
+    "wilton": {
+        "excludes": [
+            "test.js",
+            "sample.json"
+        ]
+    }
+}

@@ -1,0 +1,3 @@
+rec a -> *?
+[]
+{"arg":{"arg":{"type":"true"},"type":"optional"},"name":"a","type":"recursive"}

@@ -1,0 +1,15 @@
+define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
+import assertString from './util/assertString';
+
+export default function unescape(str) {
+  assertString(str);
+  return (str.replace(/&amp;/g, '&')
+        .replace(/&quot;/g, '"')
+        .replace(/&#x27;/g, "'")
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&#x2F;/g, '/')
+        .replace(/&#96;/g, '`'));
+}
+
+require = requireOrig;});
