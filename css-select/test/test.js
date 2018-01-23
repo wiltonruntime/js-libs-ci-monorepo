@@ -3,7 +3,7 @@ var test = require("tape-compat");
 var describe = test.describe;
 var it = test.it;    
 describe("nwmatcher", function(){
-	require("css-select/test/nwmatcher/");
+	require("css-select/test/nwmatcher/index.js");
 });
 
 describe("sizzle", function(){
@@ -13,7 +13,7 @@ describe("sizzle", function(){
 });
 
 describe("qwery", function(){
-	exportsRun(require("css-select/test/qwery/"));
+	exportsRun(require("css-select/test/qwery/index.js"));
 });
 
 function exportsRun(mod){
