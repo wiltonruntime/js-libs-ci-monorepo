@@ -77,8 +77,10 @@ define([
     // JIT-only
 
     var browser = "undefined" === typeof(WILTON_wiltoncall);
-
-    if (browser || "jsc" === WILTON_requiresync("wilton/misc").wiltonConfig().defaultScriptEngine) {
+    
+    if (browser 
+            || "jsc" === WILTON_requiresync("wilton/misc").wiltonConfig().defaultScriptEngine
+            || "chakra" === WILTON_requiresync("wilton/misc").wiltonConfig().defaultScriptEngine) {
 
         require(["sjcl/test/bn_test"], function(tests) {
             forEach(tests, function(ts) { ts.run(); });
