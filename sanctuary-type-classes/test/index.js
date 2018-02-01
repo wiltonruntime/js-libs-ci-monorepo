@@ -523,7 +523,7 @@ test('toString', function() {
 
 test('equals', function() {
   eq(Z.equals.length, 2);
-  eq(Z.equals.name, 'equals');
+//  eq(Z.equals.name, 'equals');
 
 //  eq(Z.equals(null, null), true);
   eq(Z.equals(null, undefined), false);
@@ -637,7 +637,7 @@ test('equals', function() {
 
 test('lt', function() {
   eq(Z.lt.length, 2);
-  eq(Z.lt.name, 'lt');
+//  eq(Z.lt.name, 'lt');
 
   eq(Z.lt(0, 0), false);
   eq(Z.lt(0, 1), true);
@@ -647,7 +647,7 @@ test('lt', function() {
 
 test('lte', function() {
   eq(Z.lte.length, 2);
-  eq(Z.lte.name, 'lte');
+//  eq(Z.lte.name, 'lte');
 
 //  eq(Z.lte(null, null), true);
   eq(Z.lte(null, undefined), false);
@@ -761,7 +761,7 @@ test('lte', function() {
 
 test('gt', function() {
   eq(Z.gt.length, 2);
-  eq(Z.gt.name, 'gt');
+//  eq(Z.gt.name, 'gt');
 
   eq(Z.gt(0, 0), false);
   eq(Z.gt(0, 1), false);
@@ -771,7 +771,7 @@ test('gt', function() {
 
 test('gte', function() {
   eq(Z.gte.length, 2);
-  eq(Z.gte.name, 'gte');
+//  eq(Z.gte.name, 'gte');
 
   eq(Z.gte(0, 0), true);
   eq(Z.gte(0, 1), false);
@@ -781,7 +781,7 @@ test('gte', function() {
 
 test('min', function() {
   eq(Z.min.length, 2);
-  eq(Z.min.name, 'min');
+//  eq(Z.min.name, 'min');
 
   eq(Z.min(0, 1), 0);
   eq(Z.min(['x', 'x'], ['x']), ['x']);
@@ -789,7 +789,7 @@ test('min', function() {
 
 test('max', function() {
   eq(Z.max.length, 2);
-  eq(Z.max.name, 'max');
+//  eq(Z.max.name, 'max');
 
   eq(Z.max(0, 1), 1);
   eq(Z.max(['x', 'x'], ['x']), ['x', 'x']);
@@ -797,21 +797,21 @@ test('max', function() {
 
 test('compose', function() {
   eq(Z.compose.length, 2);
-  eq(Z.compose.name, 'compose');
+//  eq(Z.compose.name, 'compose');
 
   eq(Z.compose(Math.sqrt, inc)(99), 10);
 });
 
 test('id', function() {
   eq(Z.id.length, 1);
-  eq(Z.id.name, 'id');
+//  eq(Z.id.name, 'id');
 
   eq(Z.id(Function)(42), 42);
 });
 
 test('concat', function() {
   eq(Z.concat.length, 2);
-  eq(Z.concat.name, 'concat');
+//  eq(Z.concat.name, 'concat');
 
   eq(Z.concat('', ''), '');
   eq(Z.concat('', 'abc'), 'abc');
@@ -840,7 +840,7 @@ test('concat', function() {
 
 test('empty', function() {
   eq(Z.empty.length, 1);
-  eq(Z.empty.name, 'empty');
+//  eq(Z.empty.name, 'empty');
 
   eq(Z.empty(String), '');
   eq(Z.empty(Array), []);
@@ -851,7 +851,7 @@ test('empty', function() {
 
 test('invert', function() {
   eq(Z.invert.length, 1);
-  eq(Z.invert.name, 'invert');
+//  eq(Z.invert.name, 'invert');
 
   eq(Z.invert(Sum(5)), Sum(-5));
   eq(Z.invert(Sum(-5)), Sum(5));
@@ -859,7 +859,7 @@ test('invert', function() {
 
 test('map', function() {
   eq(Z.map.length, 2);
-  eq(Z.map.name, 'map');
+//  eq(Z.map.name, 'map');
 
   eq(Z.map(inc, []), []);
   eq(Z.map(inc, [1, 2, 3]), [2, 3, 4]);
@@ -874,14 +874,14 @@ test('map', function() {
 
 test('bimap', function() {
   eq(Z.bimap.length, 3);
-  eq(Z.bimap.name, 'bimap');
+//  eq(Z.bimap.name, 'bimap');
 
   eq(Z.bimap(toUpper, inc, Tuple('abc', 123)), Tuple('ABC', 124));
 });
 
 test('promap', function() {
   eq(Z.promap.length, 3);
-  eq(Z.promap.name, 'promap');
+//  eq(Z.promap.name, 'promap');
 
   eq(Z.promap(
        function(xs) { return xs.reduce(function(acc, x) { return acc.concat([x.length]); }, []); },
@@ -893,7 +893,7 @@ test('promap', function() {
 
 test('ap', function() {
   eq(Z.ap.length, 2);
-  eq(Z.ap.name, 'ap');
+//  eq(Z.ap.name, 'ap');
 
   eq(Z.ap([], []), []);
   eq(Z.ap([], [1, 2, 3]), []);
@@ -921,7 +921,7 @@ test('ap', function() {
 
 test('lift2', function() {
   eq(Z.lift2.length, 3);
-  eq(Z.lift2.name, 'lift2');
+//  eq(Z.lift2.name, 'lift2');
 
   eq(Z.lift2(pow, [10], [1, 2, 3]), [10, 100, 1000]);
   eq(Z.lift2(pow, Identity(10), Identity(3)), Identity(1000));
@@ -929,7 +929,7 @@ test('lift2', function() {
 
 test('lift3', function() {
   eq(Z.lift3.length, 4);
-  eq(Z.lift3.name, 'lift3');
+//  eq(Z.lift3.name, 'lift3');
 
   eq(Z.lift3(wrap, ['<'], ['>'], ['foo', 'bar', 'baz']), ['<foo>', '<bar>', '<baz>']);
   eq(Z.lift3(wrap, Identity('<'), Identity('>'), Identity('baz')), Identity('<baz>'));
@@ -937,7 +937,7 @@ test('lift3', function() {
 
 test('apFirst', function() {
   eq(Z.apFirst.length, 2);
-  eq(Z.apFirst.name, 'apFirst');
+//  eq(Z.apFirst.name, 'apFirst');
 
   eq(Z.apFirst([1, 2], [3, 4]), [1, 1, 2, 2]);
   eq(Z.apFirst(Identity(1), Identity(2)), Identity(1));
@@ -945,7 +945,7 @@ test('apFirst', function() {
 
 test('apSecond', function() {
   eq(Z.apSecond.length, 2);
-  eq(Z.apSecond.name, 'apSecond');
+//  eq(Z.apSecond.name, 'apSecond');
 
   eq(Z.apSecond([1, 2], [3, 4]), [3, 4, 3, 4]);
   eq(Z.apSecond(Identity(1), Identity(2)), Identity(2));
@@ -953,7 +953,7 @@ test('apSecond', function() {
 
 test('of', function() {
   eq(Z.of.length, 2);
-  eq(Z.of.name, 'of');
+//  eq(Z.of.name, 'of');
 
   eq(Z.of(Array, 42), [42]);
   eq(Z.of(Function, 42)(null), 42);
@@ -964,7 +964,7 @@ test('of', function() {
 
 test('append', function() {
   eq(Z.append.length, 2);
-  eq(Z.append.name, 'append');
+//  eq(Z.append.name, 'append');
 
   eq(Z.append(3, []), [3]);
   eq(Z.append(3, [1, 2]), [1, 2, 3]);
@@ -977,7 +977,7 @@ test('append', function() {
 
 test('prepend', function() {
   eq(Z.prepend.length, 2);
-  eq(Z.prepend.name, 'prepend');
+//  eq(Z.prepend.name, 'prepend');
 
   eq(Z.prepend(1, []), [1]);
   eq(Z.prepend(1, [2, 3]), [1, 2, 3]);
@@ -990,7 +990,7 @@ test('prepend', function() {
 
 test('chain', function() {
   eq(Z.chain.length, 2);
-  eq(Z.chain.name, 'chain');
+//  eq(Z.chain.name, 'chain');
 
   eq(Z.chain(duplicate, []), []);
   eq(Z.chain(duplicate, [1, 2, 3]), [1, 1, 2, 2, 3, 3]);
@@ -1004,7 +1004,7 @@ test('chain', function() {
 
 test('join', function() {
   eq(Z.join.length, 1);
-  eq(Z.join.name, 'join');
+//  eq(Z.join.name, 'join');
 
   eq(Z.join([]), []);
   eq(Z.join([[]]), []);
@@ -1017,7 +1017,7 @@ test('join', function() {
 
 test('chainRec', function() {
   eq(Z.chainRec.length, 3);
-  eq(Z.chainRec.name, 'chainRec');
+//  eq(Z.chainRec.name, 'chainRec');
 
   var count = 0;
 
@@ -1044,7 +1044,7 @@ test('chainRec', function() {
 
 test('filter', function() {
   eq(Z.filter.length, 2);
-  eq(Z.filter.name, 'filter');
+//  eq(Z.filter.name, 'filter');
 
   eq(Z.filter(odd, []), []);
   eq(Z.filter(odd, [1, 2, 3, 4, 5]), [1, 3, 5]);
@@ -1054,7 +1054,7 @@ test('filter', function() {
 
 test('filterM', function() {
   eq(Z.filterM.length, 2);
-  eq(Z.filterM.name, 'filterM');
+//  eq(Z.filterM.name, 'filterM');
 
   eq(Z.filterM(odd, []), []);
   eq(Z.filterM(odd, [1, 2, 3, 4, 5]), [1, 3, 5]);
@@ -1067,7 +1067,7 @@ test('filterM', function() {
 
 test('alt', function() {
   eq(Z.alt.length, 2);
-  eq(Z.alt.name, 'alt');
+//  eq(Z.alt.name, 'alt');
 
   eq(Z.alt([], []), []);
   eq(Z.alt([], [1, 2, 3]), [1, 2, 3]);
@@ -1088,7 +1088,7 @@ test('alt', function() {
 
 test('zero', function() {
   eq(Z.zero.length, 1);
-  eq(Z.zero.name, 'zero');
+//  eq(Z.zero.name, 'zero');
 
   eq(Z.zero(Array), []);
   eq(Z.zero(Object), {});
@@ -1097,7 +1097,7 @@ test('zero', function() {
 
 test('reduce', function() {
   eq(Z.reduce.length, 3);
-  eq(Z.reduce.name, 'reduce');
+//  eq(Z.reduce.name, 'reduce');
 
   eq(Z.reduce(Z.concat, 'x', []), 'x');
   eq(Z.reduce(Z.concat, 'x', ['a', 'b', 'c']), 'xabc');
@@ -1111,7 +1111,7 @@ test('reduce', function() {
 
 test('size', function() {
   eq(Z.size.length, 1);
-  eq(Z.size.name, 'size');
+//  eq(Z.size.name, 'size');
 
   eq(Z.size([]), 0);
   eq(Z.size(['foo']), 1);
@@ -1129,7 +1129,7 @@ test('size', function() {
 
 test('elem', function() {
   eq(Z.elem.length, 2);
-  eq(Z.elem.name, 'elem');
+//  eq(Z.elem.name, 'elem');
 
   eq(Z.elem('a', ['a', 'b', 'c']), true);
   eq(Z.elem('b', ['a', 'b', 'c']), true);
@@ -1146,7 +1146,7 @@ test('elem', function() {
 
 test('reverse', function() {
   eq(Z.reverse.length, 1);
-  eq(Z.reverse.name, 'reverse');
+//  eq(Z.reverse.name, 'reverse');
 
   eq(Z.reverse([]), []);
   eq(Z.reverse([1]), [1]);
@@ -1160,7 +1160,7 @@ test('reverse', function() {
 
 test('sort', function() {
   eq(Z.sort.length, 1);
-  eq(Z.sort.name, 'sort');
+//  eq(Z.sort.name, 'sort');
 
   eq(Z.sort([]), []);
   eq(Z.sort(['foo']), ['foo']);
@@ -1174,7 +1174,7 @@ test('sort', function() {
 
 test('sortBy', function() {
   eq(Z.sortBy.length, 2);
-  eq(Z.sortBy.name, 'sortBy');
+//  eq(Z.sortBy.name, 'sortBy');
 
   function rank(card) { return card.rank; }
   function suit(card) { return card.suit; }
@@ -1190,7 +1190,7 @@ test('sortBy', function() {
 
 test('takeWhile', function() {
   eq(Z.takeWhile.length, 2);
-  eq(Z.takeWhile.name, 'takeWhile');
+//  eq(Z.takeWhile.name, 'takeWhile');
 
   eq(Z.takeWhile(odd, []), []);
   eq(Z.takeWhile(odd, [1]), [1]);
@@ -1208,7 +1208,7 @@ test('takeWhile', function() {
 
 test('dropWhile', function() {
   eq(Z.dropWhile.length, 2);
-  eq(Z.dropWhile.name, 'dropWhile');
+//  eq(Z.dropWhile.name, 'dropWhile');
 
   eq(Z.dropWhile(odd, []), []);
   eq(Z.dropWhile(odd, [1]), []);
@@ -1226,7 +1226,7 @@ test('dropWhile', function() {
 
 test('traverse', function() {
   eq(Z.traverse.length, 3);
-  eq(Z.traverse.name, 'traverse');
+//  eq(Z.traverse.name, 'traverse');
 
   eq(Z.traverse(Array, identity, []), [[]]);
   eq(Z.traverse(Array, identity, [[1], [2], [3]]), [[1, 2, 3]]);
@@ -1243,7 +1243,7 @@ test('traverse', function() {
 
 test('sequence', function() {
   eq(Z.sequence.length, 2);
-  eq(Z.sequence.name, 'sequence');
+//  eq(Z.sequence.name, 'sequence');
 
   eq(Z.sequence(Identity, []), Identity([]));
   eq(Z.sequence(Identity, [Identity(1), Identity(2), Identity(3)]), Identity([1, 2, 3]));
@@ -1259,7 +1259,7 @@ test('sequence', function() {
 
 test('extend', function() {
   eq(Z.extend.length, 2);
-  eq(Z.extend.name, 'extend');
+//  eq(Z.extend.name, 'extend');
 
   eq(Z.extend(joinWith(''), []), []);
   eq(Z.extend(joinWith(''), ['x']), ['x']);
@@ -1270,14 +1270,14 @@ test('extend', function() {
 
 test('extract', function() {
   eq(Z.extract.length, 1);
-  eq(Z.extract.name, 'extract');
+//  eq(Z.extract.name, 'extract');
 
   eq(Z.extract(Identity(42)), 42);
 });
 
 test('contramap', function() {
   eq(Z.contramap.length, 2);
-  eq(Z.contramap.name, 'contramap');
+//  eq(Z.contramap.name, 'contramap');
 
   eq(Z.contramap(length, inc)('abc'), 4);
 });
