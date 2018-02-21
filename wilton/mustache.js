@@ -54,11 +54,13 @@ define([
     "use strict";
 
     dyload({
-        name: "wilton_http"
+        name: "wilton_server"
     });
 
     /**
      * @function render
+     * 
+     * Render template specified as a string.
      * 
      * Renders template specified as a string.
      * 
@@ -84,6 +86,10 @@ define([
 
     /**
      * @function renderFile
+     * 
+     * Render template specified as a path to file.
+     * 
+     * Renders template specified as a path to file.
      * 
      * @param templateFile `String` path to template file
      * @param values `Object|Undefined` template parameters to use
