@@ -15,11 +15,10 @@
  */
 
 define([
-    "wilton/httpClient",
     "wilton/Logger",
     "wilton/Server",
     "wilton/thread"
-], function(http, Logger, Server, thread) {
+], function(Logger, Server, thread) {
     "use strict";
 
     var logger = new Logger("server.main");
@@ -40,7 +39,9 @@ define([
             for(;;) {
                 logger.info("Server is running ...");
                 thread.sleepMillis(5000);
-            }            
+            }
+
+            server.stop();
         }
     };
 });
