@@ -29,7 +29,7 @@ define([
     "pwdauth/authorize",
     // auth callbacks
     "pwdauth/createPasswordHash",
-    "pwdauth/createRequest",
+    "pwdauth/createRequest"
 ], function(
         assert, moment, random, isArray, isNil, isObject, isString, // modules
         authErrors, authenticate, authorize, // auth api
@@ -54,22 +54,22 @@ define([
     };
 
     function createToken(user, request) {
-        userInDB.sessionKey = random.uuid4(random.engines.mt19937().autoSeed())
-        userInDB.sessionStartTime = moment().format()
+        userInDB.sessionKey = random.uuid4(random.engines.mt19937().autoSeed());
+        userInDB.sessionStartTime = moment().format();
         //logger: created $token for $user by $request
-        return userInDB.sessionKey
+        return userInDB.sessionKey;
     }
     
     function loadUserById(userId) {
         if (userInDB.id === userId){
-            return userInDB
+            return userInDB;
         }
         return null;
     }
 
     function loadUserByToken(token) {
         if (userInDB.sessionKey === token){
-            return userInDB
+            return userInDB;
         }
         return null;
     }
@@ -92,11 +92,11 @@ define([
     var pwdHash = createPasswordHash(pwdClear, userId);
     var timestamp = moment();
     var tokenRequest = createRequest(
-        '/auth',
+        "/auth1",
         userId,
         pwdHash,
         timestamp.format()
-    )
+    );
     // obtain token
     var token = myAuthenticate(tokenRequest);
 
@@ -120,16 +120,19 @@ define([
     assert.equal(myAuthenticate("foo").error, authErrors.REQUEST_NOT_WELL_FORMED);
     assert.equal(myAuthenticate({foo: "bar"}).error, authErrors.REQUEST_NOT_WELL_FORMED);
     assert.equal(myAuthenticate({
+        path: "/auth1",
         acessKey: userId,
         timestamp: timestamp.format("MM.DD.YYYY"),
         hmac: "..."
     }).error, authErrors.INVALID_DATE_FORMAT);
     assert.equal(myAuthenticate({
+        path: "/auth2",
         acessKey: "foo1",
         timestamp: timestamp.format(),
         hmac: "..."
     }).error, authErrors.USER_NOT_FOUND);
     assert.equal(myAuthenticate({
+        path: "/auth2",
         acessKey: userId,
         timestamp: timestamp.format(),
         hmac: "..."
@@ -142,7 +145,7 @@ define([
     assert.equal(myAuthorize(null).error, authErrors.TOKEN_NOT_WELL_FORMED);
     assert.equal(myAuthorize({foo: "bar"}).error, authErrors.TOKEN_NOT_WELL_FORMED);
     assert.equal(myAuthorize({sessionKey: "foo"}).error, authErrors.INVALID_TOKEN_HASH);
-    userInDB.sessionStartTime = moment().add(-40, "minutes").format()
+    userInDB.sessionStartTime = moment().add(-40, "minutes").format();
     assert.equal(myAuthorize(token).error, authErrors.TOKEN_EXPIRED);
     // no-op to run directly
 
