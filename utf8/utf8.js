@@ -3,11 +3,13 @@ define(function(localRequire, exports, module) { var requireOrig = require; requ
 
 	/*--------------------------------------------------------------------------*/
 
+        var StringBuilder = require("arrays/StringBuilder");
+        var Uint32ArrayList = require("arrays/Uint32ArrayList");
 	var stringFromCharCode = String.fromCharCode;
 
 	// Taken from https://mths.be/punycode
 	function ucs2decode(string) {
-		var output = [];
+		var output = new Uint32ArrayList();
 		var counter = 0;
 		var length = string.length;
 		var value;
@@ -29,7 +31,8 @@ define(function(localRequire, exports, module) { var requireOrig = require; requ
 				output.push(value);
 			}
 		}
-		return output;
+                output.shrinkToFit();
+		return output.array;
 	}
 
 	// Taken from https://mths.be/punycode
@@ -37,16 +40,17 @@ define(function(localRequire, exports, module) { var requireOrig = require; requ
 		var length = array.length;
 		var index = -1;
 		var value;
-		var output = '';
+                var sb = new StringBuilder();
 		while (++index < length) {
 			value = array[index];
 			if (value > 0xFFFF) {
 				value -= 0x10000;
-				output += stringFromCharCode(value >>> 10 & 0x3FF | 0xD800);
+				sb.pushCharCode(value >>> 10 & 0x3FF | 0xD800);
 				value = 0xDC00 | value & 0x3FF;
 			}
-			output += stringFromCharCode(value);
+			sb.pushCharCode(value);
 		}
+		var output = sb.toString();
 		return output;
 	}
 
@@ -91,11 +95,12 @@ define(function(localRequire, exports, module) { var requireOrig = require; requ
 		var length = codePoints.length;
 		var index = -1;
 		var codePoint;
-		var byteString = '';
+                var sb = new StringBuilder();
 		while (++index < length) {
 			codePoint = codePoints[index];
-			byteString += encodeCodePoint(codePoint);
+			sb.push(encodeCodePoint(codePoint));
 		}
+		var byteString = sb.toString();
 		return byteString;
 	}
 
