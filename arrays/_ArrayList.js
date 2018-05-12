@@ -20,7 +20,7 @@ define([], function() {
     var MIN_CAPACITY_INCREMENT = 12;
 
     function ArrayList(ArrayType, initialCapacity) {
-        if ("function" !== typeof(ArrayType)) {
+        if ("function" !== typeof(ArrayType) && "object" !== typeof(ArrayType)) {
             throw new Error("Invalid 'ArrayType' parameter specified: [" + ArrayType + "]");
         }
         this.ArrayType = ArrayType;
