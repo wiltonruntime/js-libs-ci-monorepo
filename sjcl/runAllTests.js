@@ -80,7 +80,9 @@ define([
     
     if (browser 
             || "jsc" === WILTON_requiresync("wilton/misc").wiltonConfig().defaultScriptEngine
-            || "chakra" === WILTON_requiresync("wilton/misc").wiltonConfig().defaultScriptEngine) {
+            || "chakra" === WILTON_requiresync("wilton/misc").wiltonConfig().defaultScriptEngine
+            || "chakracore" === WILTON_requiresync("wilton/misc").wiltonConfig().defaultScriptEngine
+            || "v8" === WILTON_requiresync("wilton/misc").wiltonConfig().defaultScriptEngine) {
 
         require(["sjcl/test/bn_test"], function(tests) {
             forEach(tests, function(ts) { ts.run(); });
