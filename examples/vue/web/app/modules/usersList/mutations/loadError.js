@@ -14,31 +14,14 @@
  * limitations under the License.
  */
 
-define(function(require) {
+define([
+    "vue",
+    "../usersListStates"
+], function(Vue, states) {
     "use strict";
 
-    return {
-        namespaced: true,
-
-        state: {
-
-            currentState: require("./usersListStates").INITIAL,
-
-            users: [],
-            count: 0,
-
-            error: ""
-
-        },
-
-        mutations: {
-            loadError: require("./mutations/loadError"),
-            startLoading: require("./mutations/startLoading"),
-            usersLoaded: require("./mutations/usersLoaded")
-        },
-
-        actions: {
-            loadUsers: require("./actions/loadUsers")
-        }
+    return function(state, err) {
+        Vue.set(state, "currentState", states.ERROR);
+        Vue.set(state, "error", "ERROR: " + err);
     };
 });

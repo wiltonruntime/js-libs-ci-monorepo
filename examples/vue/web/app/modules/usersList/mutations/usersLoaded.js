@@ -16,15 +16,26 @@
 
 define([
     "lodash/isArray",
-    "vue"
-], function(isArray, Vue) {
+    "lodash/isNumber",
+    "lodash/isObject",
+    "vue",
+    "../usersListStates"
+], function(isArray, isNumber, isObject, Vue, states) {
     "use strict";
 
-    return function(state, users) {
-        if (isArray(users)) {
-            Vue.set(state, "users", users);
+    return function(state, resp) {
+        if (isObject(resp) && isArray(resp.users) && isNumber(resp.count)) {
+            Vue.set(state, "count", resp.count);
+            if (resp.count > 0) {
+                state.users.splice(0);
+                Array.prototype.push.apply(state.users, resp.users);
+                Vue.set(state, "currentState", states.SUCCESS);
+            } else {
+                Vue.set(state, "currentState", states.NO_DATA);
+            }
         } else {
-            // error
+            Vue.set(state, "currentState", states.ERROR);
+            Vue.set(state, "error", "Invalid reponse from server");
         }
     };
 });
