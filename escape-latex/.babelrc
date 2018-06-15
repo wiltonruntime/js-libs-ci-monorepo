@@ -1,0 +1,13 @@
+{
+  "plugins": ["transform-object-assign"],
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "node": "4.0"
+        }
+      }
+    ]
+  ]
+}
