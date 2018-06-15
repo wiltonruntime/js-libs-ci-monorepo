@@ -1,4 +1,3 @@
-define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
 module.exports = {
   server: {
     options: {
@@ -8,5 +7,3 @@ module.exports = {
     }
   }
 };
-
-require = requireOrig;});

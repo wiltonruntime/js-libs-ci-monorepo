@@ -1,5 +1,4 @@
-define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
-var R = require('ramda/..');
+var R = require('../..');
 
 var gt10 = x => x > 10;
 var even = x => x % 2 === 0;
@@ -27,5 +26,3 @@ module.exports = {
     }
   }
 };
-
-require = requireOrig;});

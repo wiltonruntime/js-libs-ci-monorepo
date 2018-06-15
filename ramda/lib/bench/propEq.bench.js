@@ -1,5 +1,4 @@
-define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
-var propEq = require('ramda/..').propEq;
+var propEq = require('../..').propEq;
 
 module.exports = {
   name: 'propEq',
@@ -9,5 +8,3 @@ module.exports = {
     }
   }
 };
-
-require = requireOrig;});

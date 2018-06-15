@@ -79,15 +79,19 @@
   },
   "wilton": {
     "excludes": [
-      "dist",
       "lib",
       "scripts",
+      "src",
       "test",
       "BOOKMARKLET.md",
       "CHANGELOG.md",
       "CONTRIBUTING.md",
+      "index.js",
       "runAllTests.js",
       "testem.json"
+    ],
+    "preMinifiedFiles": [
+      "dist/ramda.js"
     ]
   }
 }

@@ -1,4 +1,3 @@
-define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
 module.exports = [
   {
     browserName: 'internet explorer',
@@ -36,5 +35,3 @@ module.exports = [
     platform: 'Windows 8.1'
   }
 ];
-
-require = requireOrig;});

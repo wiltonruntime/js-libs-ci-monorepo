@@ -1,4 +1,3 @@
-define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
 module.exports = [
   {
     browserName: 'safari',
@@ -21,5 +20,3 @@ module.exports = [
     platform: 'OS X 10.10'
   }
 ];
-
-require = requireOrig;});

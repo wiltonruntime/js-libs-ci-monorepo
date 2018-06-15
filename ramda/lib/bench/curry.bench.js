@@ -1,5 +1,4 @@
-define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
-var curry = require('ramda/..').curry;
+var curry = require('../..').curry;
 
 function mult(x, y) { return x * y; }
 var mult4 = curry(mult)(4);
@@ -21,5 +20,3 @@ module.exports = {
     }
   }
 };
-
-require = requireOrig;});

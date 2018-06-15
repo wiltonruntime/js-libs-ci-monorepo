@@ -1,4 +1,3 @@
-define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
 //  Ramda v0.24.1
 //  https://github.com/ramda/ramda
 //  (c) 2013-2017 Scott Sauyet, Michael Hurley, and David Chambers
@@ -9397,5 +9396,3 @@ define(function(localRequire, exports, module) { var requireOrig = require; requ
   }
 
 }.call(this));
-
-require = requireOrig;});

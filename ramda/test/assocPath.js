@@ -3,7 +3,7 @@ var assert = require('assert');
 
 var R = require('ramda');
 var eq = require('ramda/test/shared/eq');var describe = require("tape-compat").describe;var it = require("tape-compat").it;
-var assocPath = require('ramda/src/assocPath');
+var assocPath = R.assocPath;
 
 
 describe('assocPath', function() {

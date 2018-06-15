@@ -1,8 +1,8 @@
 define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
-var concat = require('ramda/src/concat');
-var equals = require('ramda/src/equals');
-var map = require('ramda/src/map');
-var toString = require('ramda/src/toString');
+var concat = require('ramda').concat;
+var equals = require('ramda').equals;
+var map = require('ramda').map;
+var toString = require('ramda').toString;
 
 
 //  Id :: a -> Id a

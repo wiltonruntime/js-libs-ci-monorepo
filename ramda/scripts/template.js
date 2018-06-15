@@ -1,4 +1,3 @@
-define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
 ;(function() {
 
   'use strict';
@@ -17,5 +16,3 @@ define(function(localRequire, exports, module) { var requireOrig = require; requ
   }
 
 }.call(this));
-
-require = requireOrig;});

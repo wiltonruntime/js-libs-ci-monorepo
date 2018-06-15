@@ -1,5 +1,4 @@
-define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
-var forEach = require('ramda/..').forEach;
+var forEach = require('../..').forEach;
 
 var nums = [8, 2, 85, 2, 34, 3, 23, 247, 57, 8, 0, 6, 5, 46, 54, 643];
 
@@ -20,5 +19,3 @@ module.exports = {
     }
   }
 };
-
-require = requireOrig;});

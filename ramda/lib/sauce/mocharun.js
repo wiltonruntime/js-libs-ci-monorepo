@@ -1,4 +1,3 @@
-define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
 /* eslint-env browser */
 (function() {
   function onload() {
@@ -43,5 +42,3 @@ define(function(localRequire, exports, module) { var requireOrig = require; requ
     }
   }
 }());
-
-require = requireOrig;});

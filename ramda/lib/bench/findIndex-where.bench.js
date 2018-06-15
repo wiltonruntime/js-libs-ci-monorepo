@@ -1,5 +1,4 @@
-define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
-var R = require('ramda/..');
+var R = require('../..');
 
 var objs = [
   {x: [1, 2], y: true}, {x: [1, 3], y: true}, {x: [], y: false}, {x: [2], y: false},
@@ -32,5 +31,3 @@ module.exports = {
     }
   }
 };
-
-require = requireOrig;});

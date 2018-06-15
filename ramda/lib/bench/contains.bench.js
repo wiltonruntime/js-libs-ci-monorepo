@@ -1,5 +1,4 @@
-define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
-var contains = require('ramda/..').contains;
+var contains = require('../..').contains;
 
 var alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
 
@@ -22,5 +21,3 @@ module.exports = {
     }
   }
 };
-
-require = requireOrig;});

@@ -1,5 +1,4 @@
-define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
-var R = require('ramda/..');
+var R = require('../..');
 
 var arr1 = R.times(function() {
   var n = (Math.random() * 100) >>> 0;
@@ -63,5 +62,3 @@ module.exports = {
     }
   }
 };
-
-require = requireOrig;});

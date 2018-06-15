@@ -1,4 +1,3 @@
-define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
 module.exports = [
   {
     browserName: 'android',
@@ -36,5 +35,3 @@ module.exports = [
     platform: 'Linux'
   }
 ];
-
-require = requireOrig;});

@@ -1,4 +1,3 @@
-define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
 /* eslint-env browser */
 /* global ramda:false */
 (function(window, document) {
@@ -36,5 +35,3 @@ define(function(localRequire, exports, module) { var requireOrig = require; requ
   }
 
 })(window, document);
-
-require = requireOrig;});

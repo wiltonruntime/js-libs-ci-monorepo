@@ -1,5 +1,4 @@
-define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
-var map = require('ramda/..').map;
+var map = require('../..').map;
 
 var nums = [8, 2, 85, 2, 34, 3, 23, 247, 57, 8, 0, 6, 5, 46, 54, 643];
 function sq(x) { return x * x; }
@@ -22,5 +21,3 @@ module.exports = {
     }
   }
 };
-
-require = requireOrig;});

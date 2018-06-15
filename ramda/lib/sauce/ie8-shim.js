@@ -1,4 +1,3 @@
-define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
 /* eslint-env browser */
 
 // redefine `require` since old IE is too dumb to handle shadowing the `R` variable in the required modules.
@@ -38,5 +37,3 @@ if (typeof document.getElementsByClassName !== 'function') {
     return result;
   };
 }
-
-require = requireOrig;});

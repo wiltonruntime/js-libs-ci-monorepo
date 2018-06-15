@@ -1,6 +1,5 @@
-define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
 var envvar = require('envvar');
-var browsers = require('ramda/browsers');
+var browsers = require('./browsers');
 module.exports = {
   all: {
     options: {
@@ -11,5 +10,3 @@ module.exports = {
     }
   }
 };
-
-require = requireOrig;});

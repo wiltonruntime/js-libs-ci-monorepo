@@ -1,6 +1,6 @@
 define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
-var equals = require('ramda/src/equals');
-var toString = require('ramda/src/toString');
+var equals = require('ramda').equals;
+var toString = require('ramda').toString;
 
 
 var sentinel = {};

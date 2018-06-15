@@ -1,5 +1,4 @@
-define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
-var R = require('ramda/..');
+var R = require('../..');
 var maxBy = R.maxBy;
 var computer = R.prop('val');
 var maxVal = maxBy(computer);
@@ -19,5 +18,3 @@ module.exports = {
     }
   }
 };
-
-require = requireOrig;});
