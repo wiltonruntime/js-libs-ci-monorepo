@@ -109,9 +109,9 @@
       "Gruntfile.js",
       "Moment.js.nuspec",
       "bower.json",
-      "component,json",
-      "composer,json",
-      "ender,json",
+      "component.json",
+      "composer.json",
+      "ender.js",
       "moment.d.ts",
       "package.js",
       "runAllTests.js"
