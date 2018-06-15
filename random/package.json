@@ -41,6 +41,9 @@
       "spec",
       "CHANGELOG.md",
       "karma.conf.js"
+    ],
+    "preMinifiedFiles": [
+      "lib/random.js"
     ]
   }
 }
