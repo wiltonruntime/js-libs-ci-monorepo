@@ -89,8 +89,10 @@
       "types",
       "bower.json",
       "yarn.lock",
-      "circle.yml",
-      "package-lock.json"
+      "circle.yml"
+    ],
+    "preMinifiedFiles": [
+        "dist/vuex.js"
     ]
   }
 }
