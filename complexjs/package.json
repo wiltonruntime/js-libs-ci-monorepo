@@ -38,7 +38,7 @@
     "wilton": {
         "excludes": [
             "examples",
-            "test"
+            "tests"
         ]
     }
 }
