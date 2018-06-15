@@ -90,8 +90,10 @@
       "types",
       "bower.json",
       "circle.yml",
-      "package-lock.json",
       "yarn.lock"
+    ],
+    "preMinifiedFiles": [
+        "dist/vue-router.js"
     ]
   }
 }
