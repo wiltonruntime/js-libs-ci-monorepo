@@ -38,5 +38,9 @@
     "underscore-min.js",
     "underscore-min.map",
     "LICENSE"
-    ]
+    ],
+  "wilton": {
+    "excludeModule": true,
+    "excludes": []
+  }
   }
