@@ -1,5 +1,3 @@
-define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
-
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  *
@@ -5799,5 +5797,3 @@ exports.updateIn = updateIn;
 Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
-
-require = requireOrig;});
