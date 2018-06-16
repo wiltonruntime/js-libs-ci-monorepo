@@ -8094,6 +8094,12 @@
         case '[object Undefined]':
             return 'undefined';
         default:
+            if ("undefined" === typeof(x)) {
+                return "undefined";
+            }
+            if (null === x) {
+                return "null";
+            }
             if (typeof x.toString === 'function') {
                 var repr = x.toString();
                 if (repr !== '[object Object]') {
