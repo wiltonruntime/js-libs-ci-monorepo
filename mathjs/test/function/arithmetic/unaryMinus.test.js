@@ -56,7 +56,7 @@ describe('unaryMinus', function() {
   });
 
   it('should perform element-wise unary minus on a matrix', function() {
-    a2 = math.matrix([[1,2],[3,4]]);
+    var a2 = math.matrix([[1,2],[3,4]]);
     var a7 = math.unaryMinus(a2);
     assert.ok(a7 instanceof math.type.Matrix);
     assert.deepEqual(a7.size(), [2,2]);

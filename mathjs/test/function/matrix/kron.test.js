@@ -84,8 +84,8 @@ describe('kron', function() {
     });
 
     it('should throw an error for invalid kronecker product of matrix', function() {
-      y = math.matrix([[[]]]);
-      x = math.matrix([[[1,1], [1,1]], [[1,1], [1,1]]]);
+      var y = math.matrix([[[]]]);
+      var x = math.matrix([[[1,1], [1,1]], [[1,1], [1,1]]]);
       assert.throws(function () { math.kron(y, x) });
     });
   });

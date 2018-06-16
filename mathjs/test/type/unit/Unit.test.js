@@ -86,11 +86,11 @@ describe('Unit', function() {
     });
 
   it('should flag unit as already simplified', function() {
-      unit1 = new Unit(9.81, "kg m/s^2");
+      var unit1 = new Unit(9.81, "kg m/s^2");
     assert.equal(unit1.isUnitListSimplified, true);
     assert.equal(unit1.toString(), "9.81 (kg m) / s^2");
 
-      unit1 = new Unit(null, "kg m/s^2");
+      var unit1 = new Unit(null, "kg m/s^2");
     assert.equal(unit1.isUnitListSimplified, true);
     assert.equal(unit1.toString(), "(kg m) / s^2");
   });
@@ -882,7 +882,7 @@ describe('Unit', function() {
     });
 
     it('should parse expressions with nested parentheses correctly', function() {
-      unit1 = Unit.parse('8.314 kg (m^2 / (s^2 / (K^-1 / mol)))');
+      var unit1 = Unit.parse('8.314 kg (m^2 / (s^2 / (K^-1 / mol)))');
       approx.equal(unit1.value, 8.314);
       assert.equal(unit1.units[0].unit.name, 'g');
       assert.equal(unit1.units[1].unit.name, 'm');
@@ -912,7 +912,7 @@ describe('Unit', function() {
       assert.equal(unit1.units[5].power, -1);
       assert.equal(unit1.units[6].power, -1);
 
-      unit2 = Unit.parse('1(m/(s/(kg mol)/(lbm/h)K))');
+      var unit2 = Unit.parse('1(m/(s/(kg mol)/(lbm/h)K))');
       assert.deepEqual(unit1, unit2);
     });
 

@@ -191,7 +191,7 @@ describe('format', function () {
 
 
     it('should format bignumbers in fixed notation with precision', function() {
-      options = {
+      var options = {
         notation: 'fixed',
         precision: 2
       };

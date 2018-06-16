@@ -88,7 +88,7 @@ describe('unaryPlus', function() {
   });
 
   it('should perform element-wise unary plus on a matrix', function() {
-    a2 = math.matrix([[1,2],[3,4]]);
+    var a2 = math.matrix([[1,2],[3,4]]);
     var a7 = math.unaryPlus(a2);
     assert.ok(a7 instanceof math.type.Matrix);
     assert.deepEqual(a7.size(), [2,2]);
