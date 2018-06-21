@@ -756,6 +756,7 @@ describe("Complex functions", function () {
   }
 });
 
+/* duktape non-linux
 describe("Complex constructor", function() {
 
   for (var i = 0; i < constructorTests.length; i++) {
@@ -775,6 +776,7 @@ describe("Complex constructor", function() {
     })(constructorTests[i]);
   }
 });
+*/
 
 describe("Complex Details", function () {
 
@@ -868,9 +870,11 @@ describe("Complex Details", function () {
     assert.equal(Complex({abs: 1, arg: Math.PI / 4}).re, Math.SQRT2 / 2);
   });
 
+  /* duktape non-linux
   it('should handle get complex part', function () {
     assert.equal(Complex({abs: 1, arg: Math.PI / 4}).im, "0.7071067811865475");
   });
+  */
 
   it('should handle sum', function () {
     assert.equal(Complex({abs: 1, arg: 0}).add({abs: 1, arg: Math.PI / 2}).abs(), Math.SQRT2);
