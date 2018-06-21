@@ -6,20 +6,16 @@ T = (function () {
 
   function T(name, tests) {
     var time;
-    write(' Testing ' + name + '...');
+    print('test: ' + name);
     passed = testNumber = 0;
     time = new Date();
     tests();
     time = new Date() - time;
     T.result = [passed, testNumber, time];
-    if (passed !== testNumber) write('\n');
-    write(' ' + passed + ' of ' + testNumber + ' tests passed in ' + time + ' ms\n');
   }
 
-  if (typeof window != 'undefined') {
-    write = function (str) {
-      document.body.innerHTML += str.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;');
-    };
+  if (typeof window !== 'undefined') {
+    Decimal = require('decimaljs');
   } else {
     Decimal = require('decimaljs');
     write = process.stdout.write.bind(process.stdout);
