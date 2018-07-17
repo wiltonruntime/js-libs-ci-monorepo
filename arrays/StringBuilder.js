@@ -100,6 +100,14 @@ define([
 
     // check formCharCode accepts array-like args
     try {
+        if ("function" === typeof(WILTON_wiltoncall)) {
+            var confstr = WILTON_wiltoncall("get_wiltoncall_config", "{}");
+            var conf = JSON.parse(confstr);
+            if ("macos" === conf.compileTimeOS &&
+                    "jsc" === conf.defaultScriptEngine ) {
+                throw new Error("JSC on mac may crash on the following check");
+            }
+        }
         String.fromCharCode.apply(null, new UINT16_ARRAY(2));
         StringBuilder.prototype.toString = StringBuilder.prototype._toStringBatched;
     } catch (e) {
