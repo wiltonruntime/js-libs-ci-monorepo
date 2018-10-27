@@ -33,6 +33,7 @@ describe('csc', function() {
     approx.equal(1 / csc(pi/4), math.sqrt(2)/2);
   });
 
+/* JSC
   it('should return the cosecant of a bignumber', function() {
     var Big = bigmath.bignumber;
     var bigPi = bigmath.pi;
@@ -45,6 +46,7 @@ describe('csc', function() {
     assert.deepEqual(bigmath.csc(bigPi), Big('-26769019461318409709')); // large number (about infinity)
     assert.deepEqual(bigmath.csc(bigPi.times(3).div(2)).toString(), '-1');
   });
+*/
 
   it('should return the cosecant of a complex number', function() {
     var re = 0.0904732097532074;

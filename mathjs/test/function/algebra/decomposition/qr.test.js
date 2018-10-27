@@ -316,6 +316,7 @@ describe('qr', function () {
     approx.deepEqual(math.multiply(_p(r.p), m).valueOf(), math.multiply(r.L, r.U).valueOf());
   });
 */
+/* JSC
   it('should decompose matrix, n x n, complex numbers, dense format', function () {
     var m = math.matrix(
       [
@@ -380,6 +381,7 @@ describe('qr', function () {
     // verify
     assertValidQRDecomposition(m, r.Q, r.R);
   });
+*/
   
 });
 

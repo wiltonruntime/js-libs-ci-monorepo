@@ -32,6 +32,7 @@ describe('cot', function() {
     approx.equal(1 / cot(pi*8/4), 0);
   });
 
+/* JSC
   it('should return the cotan of a bignumber', function() {
     var Big = bigmath.bignumber;
     var bigPi = bigmath.pi;
@@ -51,6 +52,7 @@ describe('cot', function() {
     assert.deepEqual(bigmath.cot(bigPi.div(2)), Big('-1.4142135623730950488e-15')); // about zero
     assert.deepEqual(bigmath.cot(bigPi), Big('26769019461318409709')); // about infinity
   });
+*/
 
   it('should return the cotan of a complex number', function() {
     var re = 0.00373971037633696;

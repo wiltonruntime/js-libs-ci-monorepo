@@ -30,6 +30,7 @@ describe('acsch', function() {
     approx.equal(acsch(pi), 0.3131658804508683758718693082657);
   });
 
+/* JSC
   it('should return the hyperbolic arccsc of a bignumber', function() {
     var arg = Big(-2);
     assert.deepEqual(acschBig(arg), Big('-0.4812118250596034475'));
@@ -42,6 +43,7 @@ describe('acsch', function() {
     //Make sure arg was not changed
     assert.deepEqual(arg, Big(-2));
   });
+*/
 
   it('should be the inverse function of hyperbolic csc', function() {
     approx.equal(acsch(csch(-1)), -1);

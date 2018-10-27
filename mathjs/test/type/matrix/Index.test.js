@@ -110,6 +110,7 @@ describe('Index', function () {
     assert.equal(new Index().isScalar(), true);
   });
 
+/* JSC
   it('should clone an Index', function () {
     var index1 = new Index(2, new Range(0, 4), new ImmutableDenseMatrix([0, 2]));
     var index2 = index1.clone(0);
@@ -120,6 +121,7 @@ describe('Index', function () {
     assert.notStrictEqual(index1._dimensions[1], index2._dimensions[1]);
     assert.notStrictEqual(index1._dimensions[2], index2._dimensions[2]);
   });
+*/
 
   it('should stringify an index', function () {
     assert.equal(new Index().toString(), '[]');

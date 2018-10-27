@@ -34,6 +34,7 @@ describe('cos', function() {
     approx.equal(cos(pi/4), Math.SQRT1_2);
   });
 
+/* JSC
   it('should return the cosine of a bignumber', function() {
     assert.deepEqual(bigmath.cos(biggermath.bignumber(0)).toString(), '1');
 
@@ -73,6 +74,7 @@ describe('cos', function() {
     assert.deepEqual(bigmath.cos(bigmath.tau).toString(), '1');
     assert.deepEqual(bigmath.cos(bigmath.tau.times(2)).toString(), '1');
   });
+*/
 
   it('should return the cosine of a complex number', function() {
     var re = 4.18962569096881,

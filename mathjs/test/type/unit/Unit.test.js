@@ -571,6 +571,7 @@ describe('Unit', function() {
       math.config(origConfig);
     })
 
+/* JSC
     it('should convert units to appropriate _numeric_ values when they cancel out with {predictable: false}', function() {
       var origConfig = math.config();
       math.config({predictable: false});
@@ -602,6 +603,7 @@ describe('Unit', function() {
 
       math.config(origConfig);
     });
+*/
 
     it('should simplify units according to chosen unit system', function() {
       var unit1 = new Unit(10, "N");

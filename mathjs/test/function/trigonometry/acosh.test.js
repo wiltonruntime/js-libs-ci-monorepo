@@ -41,6 +41,7 @@ describe('acosh', function() {
     assert(isNaN(predmath.acosh(-2)));
   });
 
+/* JSC
   it('should return the hyperbolic arccos of a bignumber', function() {
     var arg = Big(1);
     assert.deepEqual(acosh(arg), Big(0));
@@ -51,6 +52,7 @@ describe('acosh', function() {
     //Make sure arg was not changed
     assert.deepEqual(arg, Big(1));
   });
+*/
 
   it('should be the inverse function of hyperbolic cos', function() {
     approx.equal(acosh(cosh(-1)), 1);

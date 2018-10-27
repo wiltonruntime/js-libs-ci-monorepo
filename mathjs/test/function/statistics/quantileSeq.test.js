@@ -119,6 +119,7 @@ describe('quantileSeq', function() {
                      [1.75, 2.2, 2.45, 2.7, 2.9, 3.1, 3.2, 3.3, 3.5]);
   });
 
+/* JSC
   it('should return list quantiles for list of BigNumber probabilities', function() {
     var lst = [3.7, 2.7, 3.3, 1.3, 2.2, 3.1];
     assert.deepEqual(quantileSeq(lst, [bignumber(0.25), bignumber(0.5), bignumber(0.75)]),
@@ -127,6 +128,7 @@ describe('quantileSeq', function() {
                                    bignumber(0.5), bignumber(0.6), bignumber(0.7), bignumber(0.8),
                                    bignumber(0.9)]).toString(), '1.75,2.2,2.45,2.7,2.9,3.1,3.2,3.3,3.5');
   });
+*/
 
   it('should return list quantiles for list of number and BigNumber probabilities', function() {
     var lst = [3.7, 2.7, 3.3, 1.3, 2.2, 3.1];
@@ -141,11 +143,13 @@ describe('quantileSeq', function() {
     approx.deepEqual(quantileSeq(lst, 9), [1.75, 2.2, 2.45, 2.7, 2.9, 3.1, 3.2, 3.3, 3.5]);
   });
 
+/* JSC
   it('should return the evenly BigNumber spaced quantiles of an array', function() {
     var lst = [3.7, 2.7, 3.3, 1.3, 2.2, 3.1];
     assert.deepEqual(quantileSeq(lst, bignumber(3)), [bignumber(2.325), bignumber(2.9), bignumber(3.25)]);
     assert.equal(quantileSeq(lst, bignumber(9)).toString(), "1.75,2.2,2.45,2.7,2.9,3.1,3.2,3.3,3.5");
   });
+*/
 
   it('should throw an error if called with invalid number of arguments', function() {
     assert.throws(function() {quantileSeq()}, SyntaxError);

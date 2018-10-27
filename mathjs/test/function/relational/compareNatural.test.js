@@ -44,6 +44,7 @@ describe('compareNatural', function() {
     assert.equal(compareNatural(false, false), 0);
   });
 
+/* JSC
   it('should compare bignumbers', function() {
     assert.strictEqual(compareNatural(bignumber(2), bignumber(3)), -1);
     assert.strictEqual(compareNatural(bignumber(2), bignumber(2)), 0);
@@ -52,6 +53,7 @@ describe('compareNatural', function() {
     assert.strictEqual(compareNatural(bignumber(-2), bignumber(2)), -1);
     assert.equal(typeof compareNatural(bignumber(-2), bignumber(2)), 'number');
   });
+*/
 
   it('should compare two fractions', function() {
     var a = math.fraction(1,3);
@@ -114,6 +116,7 @@ describe('compareNatural', function() {
     assert.strictEqual (compareNatural(1, complex(2,3)), 1);
     assert.strictEqual (compareNatural(complex(2,3), 1), -1);
 
+/* JSC
     // numbers and bignumbers
     assert.strictEqual (compareNatural(bignumber(2), 3), -1);
     assert.strictEqual (compareNatural(3, bignumber(2)), 1);
@@ -127,6 +130,7 @@ describe('compareNatural', function() {
     assert.strictEqual (compareNatural([2], sparse([2])), 1);
     assert.strictEqual (compareNatural(sparse([2]), matrix([2])), -1);
     assert.strictEqual (compareNatural(matrix([2]), sparse([2])), 1);
+*/
 
     // string and number
     assert.strictEqual (compareNatural('0', 0), 1);
@@ -222,6 +226,7 @@ describe('compareNatural', function() {
     assert.strictEqual(compareNatural({a:2, b: {c: 3}}, {a:2, b: {c: 4}}), -1);
   });
 
+/* JSC
   it('should apply configuration option epsilon', function() {
     var mymath = math.create();
 
@@ -232,6 +237,7 @@ describe('compareNatural', function() {
     assert.equal(mymath.compareNatural(1, 0.991), 0);
     assert.equal(mymath.compareNatural(math.bignumber(1), math.bignumber(0.991)), 0);
   });
+*/
 
   it('should compare complex numbers', function() {
     assert.equal(compareNatural(complex(1,1), complex(1,1)), 0);

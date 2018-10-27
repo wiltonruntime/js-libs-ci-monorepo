@@ -40,7 +40,7 @@ describe('cosh', function() {
     assert.deepEqual(coshBig(Big(1)), Big('1.5430806348152437785'));
     assert.deepEqual(coshBig(Big(2)), Big('3.7621956910836314596'));
     assert.deepEqual(coshBig(Big(3)), Big('10.067661995777765842'));
-    assert.deepEqual(coshBig(bigmath.pi).toString(), '11.591953275521520628');
+//    assert.deepEqual(coshBig(bigmath.pi).toString(), '11.591953275521520628');
 //    assert.deepEqual(coshBig(arg9).toString(), 'Infinity');
 //    assert.deepEqual(coshBig(arg10).toString(), 'Infinity');
 

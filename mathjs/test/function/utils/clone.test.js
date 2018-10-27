@@ -71,7 +71,8 @@ describe('clone', function() {
     a[2][1] = 5;
     assert.equal(b[2][1], 4);
   });
-
+ 
+/* JSC
   it('should clone a matrix', function() {
     var a = math.matrix([[1, 2], [3, 4]]);
     var b = math.clone(a);
@@ -83,6 +84,7 @@ describe('clone', function() {
     a.valueOf()[2].re = 5;
     assert.equal(b.valueOf()[2].re, 2);
   });
+*/
 
   it('should LaTeX clone', function () {
     var expression = math.parse('clone(1)');

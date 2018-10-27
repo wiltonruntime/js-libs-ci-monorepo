@@ -15,11 +15,13 @@ describe('fraction', function () {
     equalFraction(math.fraction(null), new Fraction(0));
   });
 
+/* JSC
   it('should create a fraction from a BigNumber', function () {
     var b = math.bignumber(2).div(3);
     var f = math.fraction(b);
     equalFraction(f, new Fraction('0.6666666666666666666666666666666666666666666666666666666666666667'));
   });
+*/
 
   it('should clone a fraction', function () {
     var a = math.fraction(1,3);
@@ -37,6 +39,7 @@ describe('fraction', function () {
     equalFraction(arr[2], new Fraction(1, 8));
   });
 
+/* JSC
   it('should create a fraction for all elements in a Matrix', function () {
     var mat = math.fraction(math.matrix([0.2, 0.25, 0.125]));
     assert.strictEqual(math.type.isMatrix(mat), true);
@@ -46,6 +49,7 @@ describe('fraction', function () {
     equalFraction(arr[1], new Fraction(1, 4));
     equalFraction(arr[2], new Fraction(1, 8));
   });
+*/
 
   it('should throw an error in case of NaN or Infinity', function () {
     assert.throws(function () {math.fraction(Infinity)}, /Error: Infinity cannot be represented as a fraction/);

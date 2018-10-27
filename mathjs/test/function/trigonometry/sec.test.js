@@ -41,6 +41,7 @@ describe('sec', function() {
     approx.equal(sec(-2*pi), 1);
   });
 
+/* JSC
   it('should return the secant of a bignumber', function() {
     var Big = bigmath.bignumber;
     var bigPi = bigmath.pi;
@@ -54,12 +55,13 @@ describe('sec', function() {
     assert.deepEqual(bigmath.sec(bigmath.tau).toString(), '1');
     assert.deepEqual(bigmath.sec(bigmath.tau.times(-2)).toString(), '1');
 
-    /* Pass in one more digit of pi. */
+    /* Pass in one more digit of pi. * /
     bigPi = biggermath.pi;
     assert.deepEqual(bigmath.sec(bigPi.div(2)), Big('756606132568153667460')); // (large number, about infinity)
     assert.deepEqual(bigmath.sec(bigPi.times(3).div(4)).toString(), '-'+sqrt2);
     assert.deepEqual(bigmath.sec(bigPi.times(5).div(4)).toString(), '-'+sqrt2);
   });
+*/
 
   it('should return the secant of a complex number', function() {
     var re = 0.0416749644111443,

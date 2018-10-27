@@ -20,12 +20,14 @@ describe('replacer', function () {
     assert.deepEqual(JSON.stringify(c), json);
   });
 
+/* JSC
   it('should stringify a BigNumber', function () {
     var b = new math.type.BigNumber(5);
     var json = '{"mathjs":"BigNumber","value":"5"}';
 
     assert.deepEqual(JSON.stringify(b), json);
   });
+*/
 
   it('should stringify a Fraction', function () {
     var b = new math.type.Fraction(0.375);

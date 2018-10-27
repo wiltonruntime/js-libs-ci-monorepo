@@ -97,6 +97,7 @@ describe('det', function() {
     assert.equal(c2.re, 2);
   });
 
+/* JSC
   it('should calculate the determinant for a 1x1 matrix',function() {
     var c1 = new Complex(2, 3);
     var c2 = det([[c1]]);
@@ -138,6 +139,7 @@ describe('det', function() {
       [new BigNumber(3), 4]
     ]), new math.type.BigNumber(-2));
   });
+*/
 
   it('should not change the value of the initial matrix', function() {
     var m_test = [[1,2,3],[4,5,6],[7,8,9]];

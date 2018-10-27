@@ -61,6 +61,7 @@ describe ('object', function () {
       assert.notEqual(d1, d2);
     });
 
+/* JSC
     it('should (deep) clone arrays', function () {
       var d = new Date(2014,0,1);
       var arr = [1, 2, d, {a: 3}]
@@ -78,6 +79,7 @@ describe ('object', function () {
       assert.equal(clone[2].valueOf(), new Date(2014,0,1).valueOf());
       assert.equal(clone[3].a, 3);
     });
+*/
 
     it('should throw an error in case of an unsupported type', function () {
       assert.throws(function () {object.clone(/a regexp/)}, /Cannot clone/);

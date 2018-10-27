@@ -33,6 +33,7 @@ describe('acot', function() {
     assert.equal(acot(Infinity), 0);
   });
 
+/* JSC
   it('should return the arccot of a bignumber', function() {
     var arg2 = Big(-1);
     var arg3 = Big(-0.5);
@@ -78,6 +79,7 @@ describe('acot', function() {
     assert.deepEqual(acotBig(cotBig(bigmath.pi.div(2).minus(1e-10))).toString(), '1.5707963266948966193');
     assert.deepEqual(acotBig(cotBig(bigmath.pi.div(2))).toString(), '-1.570796326794895205');
   });
+*/
 
   it('should return the arccot of a complex number', function() {
     var re = 0.160875277198321;

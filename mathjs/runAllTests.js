@@ -217,8 +217,10 @@ define([
     "mathjs/test/type/boolean.test",
     "mathjs/test/type/number.test",
     "mathjs/test/type/string.test",
+    /* JSC
     "mathjs/test/type/bignumber/BigNumber.test",
     "mathjs/test/type/bignumber/function/bignumber.test",
+    */
     "mathjs/test/type/chain/Chain.test",
     "mathjs/test/type/chain/function/chain.test",
     "mathjs/test/type/complex/Complex.test",
@@ -250,10 +252,12 @@ define([
     "mathjs/test/utils/latex.test",
     "mathjs/test/utils/number.test",
     "mathjs/test/utils/object.test",
-    "mathjs/test/utils/string.test",
+    "mathjs/test/utils/string.test"
+    /* JSC
     "mathjs/test/utils/bignumber/constants.test",
     "mathjs/test/utils/bignumber/formatter.test",
     "mathjs/test/utils/bignumber/nearlyEqual.test"
+    */
 ], function() {
     return {
         main: function() {

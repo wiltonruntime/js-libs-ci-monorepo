@@ -187,6 +187,7 @@ describe('lup', function () {
     approx.deepEqual(math.multiply(_p(r.p), m).valueOf(), math.multiply(r.L, r.U).valueOf());
   });
 
+/* JSC
   it('should decompose matrix, 3 x 2, complex numbers, dense format', function () {
     var m = math.matrix(
       [
@@ -216,6 +217,7 @@ describe('lup', function () {
     // verify
     approx.deepEqual(math.multiply(_p(r.p), m).valueOf(), math.multiply(r.L, r.U).valueOf());
   });
+*/
   
   it('should decompose matrix, m x n, m < n, no permutations, sparse', function () {
     var m = math.matrix(

@@ -31,6 +31,7 @@ describe('asinh', function() {
     approx.equal(asinh(pi), 1.8622957433108482198883613251826);
   });
 
+/* JSC
   it('should return the hyperbolic arcsin of a bignumber', function() {
     var arg = Big(-2);
     assert.deepEqual(asinhBig(arg), Big('-1.4436354751788103425'));
@@ -43,6 +44,7 @@ describe('asinh', function() {
     //Make sure arg was not changed
     assert.deepEqual(arg, Big(-2));
   });
+*/
 
   it('should be the inverse function of hyperbolic sin', function() {
     approx.equal(asinh(sinh(-1)), -1);
