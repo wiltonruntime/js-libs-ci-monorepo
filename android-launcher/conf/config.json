@@ -1,0 +1,37 @@
+{
+    "appname": "launcher",
+
+    "server": {
+        "ipAddress": "127.0.0.1",
+        "tcpPort": 26100,
+        "cacheMaxAgeSeconds": 0,
+        "stdlibFileName": "std.wlib"
+    },
+
+    "web": {
+        "wsUrl": "ws://127.0.0.1:26100/android-launcher/server/views/websocket",
+        "wsTimeoutMillis": 30000,
+        "appPort": 8080
+    },
+
+    "git": {
+        "TODO": "FIXME",
+        "sshPrivateKeyPath": "/sdcard/Android/data/wilton.android/files/ssh/id_rsa",
+        "sshPublicKeyPath": "/sdcard/Android/data/wilton.android/files/ssh/id_rsa.pub",
+        "branch": "master"
+    },
+
+    "logging": {
+        "appenders": [
+            {
+            "appenderType": "CONSOLE",
+            "thresholdLevel": "INFO"
+            }
+        ],
+        "loggers": {
+            "staticlib": "WARN",
+            "wilton": "INFO",
+            "launcher": "INFO"
+        }
+    }
+}
