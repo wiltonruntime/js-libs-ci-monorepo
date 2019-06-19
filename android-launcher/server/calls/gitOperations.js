@@ -21,8 +21,9 @@ define([
     "wilton/fs",
     "wilton/git",
     "wilton/Logger",
-    "wilton/misc"
-], function(module, buffer, isObject, fs, git, Logger, misc) {
+    "wilton/misc",
+    "wilton/utils"
+], function(module, buffer, isObject, fs, git, Logger, misc, utils) {
     "use strict";
     var logger = new Logger(module.id);
 
@@ -35,28 +36,43 @@ define([
     }
 
     return {
-        cloneOrPull: function(url, username, password, branch) {
+        cloneOrPull: function(opts) {
+            utils.checkProperties(opts, ["gitUrl", "username", "password", "gitBranch", "skipUpdate", "deleteApp"]);
             var appsDir = prepareAppsDir();
-            var parts = url.split("/");
+            var parts = opts.gitUrl.split("/");
             var name = parts[parts.length - 1].replace(/\.git$/, "");
             var repoPath = appsDir + name + "/";
+            var pwd = buffer.Buffer.from(opts.password, "base64").toString("utf8");
 
             if (!fs.exists(repoPath)) {
-                logger.info("Cloning Git repository on url: [" + url + "] ...");
-                git.clone(url, repoPath, {
-                    username: username,
-                    password: Buffer.from(password, "base64").toString("utf8"),
-                    branch: branch
+                logger.info("Cloning Git repository on url: [" + opts.url + "] ...");
+                git.clone(opts.gitUrl, repoPath, {
+                    username: opts.username,
+                    password: pwd,
+                    branch: opts.gitBranch
                 });
                 logger.info("Clone perfomed successfully");
+            } else if (!opts.skipUpdate) {
+                if (opts.deleteApp) {
+                    fs.rmdir(repoPath);
+                    logger.info("Cloning fresh Git repository on url: [" + opts.url + "] ...");
+                    git.clone(opts.gitUrl, repoPath, {
+                        username: opts.username,
+                        password: pwd,
+                        branch: opts.gitBranch
+                    });
+                    logger.info("Clone perfomed successfully");
+                } else {
+                    logger.info("Pulling Git repository on url: [" + opts.gitUrl + "] ...");
+                    git.pull(repoPath, {
+                        username: opts.username,
+                        password: pwd,
+                        branch: opts.gitBranch
+                    });
+                    logger.info("Pull perfomed successfully");
+                }
             } else {
-                logger.info("Pulling Git repository on url: [" + url + "] ...");
-                git.pull(repoPath, {
-                    username: username,
-                    password: buffer.Buffer.from(password, "base64").toString("utf8"),
-                    branch: branch
-                });
-                logger.info("Pull perfomed successfully");
+                // git update skipped
             }
 
             var confFile = repoPath + "conf/config.json";
@@ -65,7 +81,7 @@ define([
             var lopts = ac.launcher;
             if (!isObject(lopts)) {
                 throw new Error("Cannot load launcher options from app config," +
-                        " url: [" + url + "]");
+                        " url: [" + opts.gitUrl + "]");
             }
 
             return {

@@ -35,7 +35,13 @@ define([
                     this.username = state(module).username;
                     this.password = buffer.Buffer.from(state(module).password, "base64").toString("utf8");
                     this.gitBranch = state(module).gitBranch;
-                    this.loading = false;
+                    this.skipUpdate = String(state(module).skipUpdate);
+                    this.deleteApp = String(state(module).deleteApp);
+
+                    this.infoCss["alert-primary"] = false;
+                    this.infoCss["alert-light"] = true;
+                    this.infoText = "Ready to launch!";
+                    this.enabled = true;
                 }, this));
             }, this));
         },
@@ -46,19 +52,60 @@ define([
                 username: "",
                 password: "",
                 gitBranch: "",
-                loading: true
+                skipUpdate: false,
+                deleteApp: false,
+
+                enabled: false,
+
+                infoCss: {
+                    "alert": true,
+                    "alert-primary": true,
+                    "alert-light": false,
+                    "alert-danger": false
+                },
+                infoText: "Loading ..."
             };
         },
 
         methods: {
             launch: function() {
+                this.infoCss["alert-light"] = false;
+                this.infoCss["alert-danger"] = false;
+                this.infoCss["alert-primary"] = true;
+                this.infoText = "Launching ...";
                 commit("landing/updateGitUrl", this.gitUrl);
                 commit("landing/updateUsername", this.username);
                 commit("landing/updatePassword", buffer.Buffer.from(this.password).toString("base64"));
                 commit("landing/updateGitBranch", this.gitBranch);
-                dispatch("saveAppState", function() {
-                    dispatch("landing/cloneOrPullGitRepo");
-                });
+                commit("landing/updateSkipUpdate", "true" === this.skipUpdate);
+                commit("landing/updateDeleteApp", "true" === this.deleteApp);
+                dispatch("saveAppState", bind(function() {
+                    dispatch("landing/cloneOrPullGitRepo", bind(function(err, res) {
+                        if (null !== err) {
+                            console.error(err);
+                            this.infoCss["alert-primary"] = false;
+                            this.infoCss["alert-danger"] = true;
+                            this.infoText = err.replace(/\n/g, "\n<br>");
+                            this.enabled = true;
+                        } else {
+                            dispatch("landing/startApplication", {
+                                repoPath: res.repoPath,
+                                options: res.options,
+                                cb: bind(function(err) {
+                                    if (null !== err) {
+                                        console.error(err);
+                                        this.infoCss["alert-primary"] = false;
+                                        this.infoCss["alert-danger"] = true;
+                                        this.infoText = err.replace(/\n/g, "\n<br>");
+                                        this.enabled = true;
+                                    } else {
+                                        window.location.href = "http://127.0.0.1:" + res.options.tcpPort;
+                                    }
+                                }, this)
+                            });
+                        }
+                    }, this));
+                }, this));
             }
         }
     };

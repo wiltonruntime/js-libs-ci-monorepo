@@ -15,19 +15,14 @@
  */
 
 define([
-    "vue-require/store/checkActionError",
-    "vue-require/websocket/backendcall",
-    "json!/android-launcher/server/views/config"
-], function(checkActionError, backendcall, conf) {
+    "vue-require/websocket/backendcall"
+], function(backendcall) {
     "use strict";
 
     return function(context, params) {
         backendcall({
             module: "android-launcher/server/calls/startApplication",
             args: [params.repoPath, params.options]
-        }, function(err) {
-            if (checkActionError(err)) return;
-            window.location.href = "http://127.0.0.1:" + params.options.tcpPort;
-        });
+        }, params.cb);
     };
 });

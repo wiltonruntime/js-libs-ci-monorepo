@@ -31,15 +31,18 @@ define(function(require) {
             updateGitUrl: function(state, gitUrl) { Vue.set(state, "gitUrl", gitUrl); },
             updateUsername: function(state, username) { Vue.set(state, "username", username); },
             updatePassword: function(state, password) { Vue.set(state, "password", password); },
-            updateGitBranch: function(state, gitBranch) { Vue.set(state, "gitBranch", gitBranch); }
+            updateGitBranch: function(state, gitBranch) { Vue.set(state, "gitBranch", gitBranch); },
+            updateSkipUpdate: function(state, skipUpdate) { Vue.set(state, "skipUpdate", skipUpdate); },
+            updateDeleteApp: function(state, deleteApp) { Vue.set(state, "deleteApp", deleteApp); }
         },
 
         state: {
-            //gitUrl: "git+ssh://username@hostname/path/to/repo",
-            gitUrl: "git+ssh://alex@192.168.1.1/home/alex/projects/wilton_other/launcher_apps/vueapp",
+            gitUrl: "git+ssh://hostname/path/to/repo",
             username: "",
             password: "",
-            gitBranch: "master"
+            gitBranch: "master",
+            skipUpdate: false,
+            deleteApp: false
         }
 
     };

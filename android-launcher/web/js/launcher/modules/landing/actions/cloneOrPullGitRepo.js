@@ -15,23 +15,26 @@
  */
 
 define([
-    "vue-require/store/checkActionError",
-    "vue-require/store/dispatch",
     "vue-require/store/state",
     "vue-require/websocket/backendcall"
-], function(checkActionError, dispatch, state, backendcall) {
+], function(state, backendcall) {
     "use strict";
     var module = "landing";
 
-    return function(context) {
+    return function(context, cb) {
         backendcall({
             module: "android-launcher/server/calls/gitOperations",
             func: "cloneOrPull",
-            args: [state(module).gitUrl, state(module).username,
-                state(module).password, state(module).gitBranch]
-        }, function(err, res) {
-            if (checkActionError(err)) return;
-            dispatch("landing/startApplication", res);
-        });
+            args: [
+                {
+                    gitUrl: state(module).gitUrl,
+                    username: state(module).username,
+                    password: state(module).password,
+                    gitBranch: state(module).gitBranch,
+                    skipUpdate: state(module).skipUpdate,
+                    deleteApp: state(module).deleteApp
+                }
+            ]
+        }, cb);
     };
 });

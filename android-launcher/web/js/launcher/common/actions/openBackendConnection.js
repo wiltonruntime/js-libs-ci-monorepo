@@ -17,16 +17,17 @@
 define([
     "vue-require/websocket/socketHolder",
     "wilton/web/wsClient",
+    "wilton/utils",
     "json!/android-launcher/server/views/config"
-], function(socketHolder, wsClient, conf) {
+], function(socketHolder, wsClient, utils, conf) {
     "use strict";
 
     function onError(obj) {
         var msg = obj;
         if ("object" === typeof(msg) &&
                 "undefined" !== msg.stack && "undefined" !== msg.message) {
-            msg = formatError(msg);
-        } else if (cf.wsConsoleStringify) {
+            msg = utils.formatError(msg);
+        } else {
             msg = JSON.stringify(obj, null, 4);
             if (isEmptyObject(JSON.parse(msg))) {
                 msg = String(obj);
