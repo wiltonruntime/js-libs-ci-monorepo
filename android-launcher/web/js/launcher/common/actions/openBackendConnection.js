@@ -21,16 +21,40 @@ define([
 ], function(socketHolder, wsClient, conf) {
     "use strict";
 
-    return function(context) {
+    function onError(obj) {
+        var msg = obj;
+        if ("object" === typeof(msg) &&
+                "undefined" !== msg.stack && "undefined" !== msg.message) {
+            msg = formatError(msg);
+        } else if (cf.wsConsoleStringify) {
+            msg = JSON.stringify(obj, null, 4);
+            if (isEmptyObject(JSON.parse(msg))) {
+                msg = String(obj);
+            }
+        }
+        console.error(msg);
+    }
+
+    function logger(obj) {
+        var msg = JSON.stringify(obj, null, 4);
+        console.log(msg);
+    }
+
+    return function(context, cb) {
 
         wsClient.open(conf.wsUrl, {
+            onError: onError,
+            logger: logger,
             timeoutMillis: conf.wsTimeoutMillis
         }, function(err, sock) {
             if (err) {
                console.error(err);
-            } else {
-                // race condition here should be negligible
-                socketHolder.set(sock);
+               return;
+            }
+            // race condition here should be negligible
+            socketHolder.set(sock);
+            if ("function" === typeof(cb)) {
+                cb();
             }
         });
     };

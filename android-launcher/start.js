@@ -31,6 +31,8 @@ define([
 
         // share conf for other threads
         new Channel("android-launcher/server/conf", 1).send(conf);
+        // lock for appState file
+        new Channel("android-launcher/server/calls/appState", 1);
 
         // server
         logger.info("Starting server on port: [" + conf.server.tcpPort + "]");

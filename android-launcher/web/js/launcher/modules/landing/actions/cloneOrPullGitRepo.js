@@ -15,25 +15,23 @@
  */
 
 define([
-    "vue",
+    "vue-require/store/checkActionError",
     "vue-require/store/dispatch",
-    "text!./app.html"
-], function(Vue, dispatch, template) {
+    "vue-require/store/state",
+    "vue-require/websocket/backendcall"
+], function(checkActionError, dispatch, state, backendcall) {
     "use strict";
+    var module = "landing";
 
-    return Vue.component("App", {
-        template: template,
-
-        components: {
-        },
-
-        created: function() {
-        },
-
-        methods: {
-            top: function() {
-                window.scrollTo(0, 0);
-            }
-        }
-    });
+    return function(context) {
+        backendcall({
+            module: "android-launcher/server/calls/gitOperations",
+            func: "cloneOrPull",
+            args: [state(module).gitUrl, state(module).username,
+                state(module).password, state(module).gitBranch]
+        }, function(err, res) {
+            if (checkActionError(err)) return;
+            dispatch("landing/startApplication", res);
+        });
+    };
 });

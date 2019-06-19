@@ -16,27 +16,62 @@
 
 define([
     "module",
+    "buffer",
+    "lodash/isObject",
     "wilton/fs",
     "wilton/git",
     "wilton/Logger",
-    "wilton/misc",
-    "../conf"
-], function(module, fs, git, Logger, misc, conf) {
+    "wilton/misc"
+], function(module, buffer, isObject, fs, git, Logger, misc) {
     "use strict";
     var logger = new Logger(module.id);
 
+    function prepareAppsDir() {
+        var appsDir = misc.wiltonConfig().wiltonHome + "apps/";
+        if (!fs.exists(appsDir)) {
+            fs.mkdir(appsDir);
+        }
+        return appsDir;
+    }
+
     return {
-        clone: function(url) {
-            logger.info("Cloning Git repository on url: [" + url + "] ...");
-            var repo = misc.wiltonConfig().wiltonHome + "app";
-            if (fs.exists(repo)) {
-                fs.rmdir(repo);
+        cloneOrPull: function(url, username, password, branch) {
+            var appsDir = prepareAppsDir();
+            var parts = url.split("/");
+            var name = parts[parts.length - 1].replace(/\.git$/, "");
+            var repoPath = appsDir + name + "/";
+
+            if (!fs.exists(repoPath)) {
+                logger.info("Cloning Git repository on url: [" + url + "] ...");
+                git.clone(url, repoPath, {
+                    username: username,
+                    password: Buffer.from(password, "base64").toString("utf8"),
+                    branch: branch
+                });
+                logger.info("Clone perfomed successfully");
+            } else {
+                logger.info("Pulling Git repository on url: [" + url + "] ...");
+                git.pull(repoPath, {
+                    username: username,
+                    password: buffer.Buffer.from(password, "base64").toString("utf8"),
+                    branch: branch
+                });
+                logger.info("Pull perfomed successfully");
             }
-            git.clone(url, repo, {
-                sshPublicKeyPath: conf.git.sshPublicKeyPath,
-                sshPrivateKeyPath: conf.git.sshPrivateKeyPath
-            });
-            logger.info("Clone perfomed successfully");
+
+            var confFile = repoPath + "conf/config.json";
+            var confStr = fs.readFile(confFile);
+            var ac = JSON.parse(confStr);
+            var lopts = ac.launcher;
+            if (!isObject(lopts)) {
+                throw new Error("Cannot load launcher options from app config," +
+                        " url: [" + url + "]");
+            }
+
+            return {
+                repoPath: repoPath,
+                options: lopts
+            };
         }
     };
 });

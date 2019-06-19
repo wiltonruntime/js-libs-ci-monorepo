@@ -27,15 +27,17 @@ define(function(require) {
         strict: true,
 
         actions: {
-            cloneGitRepo: require("./common/actions/cloneGitRepo"),
+            loadAppState: require("./common/actions/loadAppState"),
             openBackendConnection: require("./common/actions/openBackendConnection"),
-            startApplication: require("./common/actions/startApplication")
+            saveAppState: require("./common/actions/saveAppState")
         },
 
         modules: {
+            landing: require("./modules/landing/landingStore")
         },
 
         mutations: {
+            updateStateFromSaved: require("./common/mutations/updateStateFromSaved")
         },
 
         state: {

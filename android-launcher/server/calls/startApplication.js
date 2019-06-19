@@ -20,23 +20,25 @@ define([
     "wilton/Logger",
     "wilton/misc",
     "wilton/net",
+    "wilton/utils",
     "../conf"
-], function(module, runOnRhinoThread, Logger, misc, net, conf) {
+], function(module, runOnRhinoThread, Logger, misc, net, utils, conf) {
     "use strict";
     var logger = new Logger(module.id);
 
-    return function(name) {
-        var path = misc.wiltonConfig().wiltonHome + "app/index.js";
-        logger.info("Is due to start application on path: [" + path + "]");
+    return function(repoPath, launchOpts) {
+        utils.hasProperties(launchOpts, ["tcpPort", "rootModuleName", "startupModule"]);
+        logger.info("Is due to start application on path: [" + repoPath + "]");
 
         runOnRhinoThread({
-            "module": "android-launcher/server/rhino/startAppActivity"
+            module: "android-launcher/server/rhino/startAppService",
+            args: [repoPath, launchOpts]
         });
 
         logger.info("Application spawned, waiting for initialization ...");
         net.waitForTcpConnection({
             ipAddress: "127.0.0.1",
-            tcpPort: conf.web.appPort,
+            tcpPort: launchOpts.tcpPort,
             timeoutMillis: 10000 
         });
         logger.info("Application initialization complete");

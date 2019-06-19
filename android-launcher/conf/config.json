@@ -14,24 +14,17 @@
         "appPort": 8080
     },
 
-    "git": {
-        "TODO": "FIXME",
-        "sshPrivateKeyPath": "/sdcard/Android/data/wilton.android/files/ssh/id_rsa",
-        "sshPublicKeyPath": "/sdcard/Android/data/wilton.android/files/ssh/id_rsa.pub",
-        "branch": "master"
-    },
-
     "logging": {
         "appenders": [
             {
-            "appenderType": "CONSOLE",
-            "thresholdLevel": "INFO"
+                "appenderType": "CONSOLE",
+                "thresholdLevel": "INFO"
             }
         ],
         "loggers": {
             "staticlib": "WARN",
             "wilton": "INFO",
-            "launcher": "INFO"
+            "launcher": "DEBUG"
         }
     }
 }

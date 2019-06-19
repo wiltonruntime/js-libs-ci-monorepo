@@ -16,24 +16,49 @@
 
 define([
     "module",
+    "buffer",
+    "lodash/bind",
+    "vue-require/store/commit",
     "vue-require/store/dispatch",
+    "vue-require/store/state",
     "text!./landing.html"
-], function (module, dispatch, template) {
+], function (module, buffer, bind, commit, dispatch, state, template) {
     "use strict";
 
     return {
         template: template,
 
+        created() {
+            dispatch("openBackendConnection", bind(function() {
+                dispatch("loadAppState", bind(function() {
+                    this.gitUrl = state(module).gitUrl;
+                    this.username = state(module).username;
+                    this.password = buffer.Buffer.from(state(module).password, "base64").toString("utf8");
+                    this.gitBranch = state(module).gitBranch;
+                    this.loading = false;
+                }, this));
+            }, this));
+        },
+
         data: function() {
             return {
-//                gitUrl: "git+ssh://username@hostname/path/to/repo"
-                gitUrl: "git+ssh://alex@192.168.1.1/home/alex/projects/wilton_other/launcher_apps/vueapp"
+                gitUrl: "",
+                username: "",
+                password: "",
+                gitBranch: "",
+                loading: true
             };
         },
 
         methods: {
             launch: function() {
-                dispatch("cloneGitRepo", this.gitUrl);
+                commit("landing/updateGitUrl", this.gitUrl);
+                commit("landing/updateUsername", this.username);
+                commit("landing/updatePassword", buffer.Buffer.from(this.password).toString("base64"));
+                commit("landing/updateGitBranch", this.gitBranch);
+                dispatch("saveAppState", function() {
+                    dispatch("landing/cloneOrPullGitRepo");
+                });
             }
         }
     };

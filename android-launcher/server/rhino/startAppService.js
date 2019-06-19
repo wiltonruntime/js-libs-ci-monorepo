@@ -15,25 +15,19 @@
  */
 
 define([
-    "vue",
-    "vue-require/store/dispatch",
-    "text!./app.html"
-], function(Vue, dispatch, template) {
+], function() {
     "use strict";
 
-    return Vue.component("App", {
-        template: template,
+    var AppService = Packages.wilton.android.AppService;
+    var Intent = Packages.android.content.Intent;
 
-        components: {
-        },
+    var mainActivity = Packages.wilton.android.MainActivity.INSTANCE;
 
-        created: function() {
-        },
-
-        methods: {
-            top: function() {
-                window.scrollTo(0, 0);
-            }
-        }
-    });
+    return function(repoPath, launchOpts) {
+        var intent = new Intent(mainActivity, AppService);
+        intent.putExtra("wilton_repoPath", repoPath);
+        intent.putExtra("wilton_rootModuleName", launchOpts.rootModuleName);
+        intent.putExtra("wilton_startupModule", launchOpts.startupModule);
+        mainActivity.startService(intent);
+    };
 });

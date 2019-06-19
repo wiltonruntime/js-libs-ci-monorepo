@@ -15,25 +15,21 @@
  */
 
 define([
-    "vue",
-    "vue-require/store/dispatch",
-    "text!./app.html"
-], function(Vue, dispatch, template) {
+    "vue-require/store/checkActionError",
+    "vue-require/websocket/backendcall"
+], function(checkActionError, backendcall) {
     "use strict";
 
-    return Vue.component("App", {
-        template: template,
-
-        components: {
-        },
-
-        created: function() {
-        },
-
-        methods: {
-            top: function() {
-                window.scrollTo(0, 0);
+    return function(context, cb) {
+        backendcall({
+            module: "android-launcher/server/calls/appState",
+            func: "save",
+            args: [context.state]
+        }, function(err) {
+            if (checkActionError(err)) return;
+            if ("function" === typeof(cb)) {
+                cb();
             }
-        }
-    });
+        });
+    };
 });
