@@ -53,7 +53,7 @@ define([
             utils.checkProperties(opts, ["gitUrl", "username", "password", "gitBranch", "skipUpdate", "deleteApp"]);
             var appsDir = prepareAppsDir();
             var parts = opts.gitUrl.split("/");
-            var name = parts[parts.length - 1].replace(/\.git$/, "");
+            var name = parts[parts.length - 1].replace(/\.git$/, "").replace(/\.js$/, "");
             var repoPath = appsDir + name + "/";
             var pwd = buffer.Buffer.from(opts.password, "base64").toString("utf8");
 

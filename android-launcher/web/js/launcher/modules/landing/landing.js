@@ -28,7 +28,7 @@ define([
     return {
         template: template,
 
-        created() {
+        created: function() {
             dispatch("openBackendConnection", bind(function() {
                 dispatch("loadAppState", bind(function() {
                     this.gitUrl = state(module).gitUrl;
