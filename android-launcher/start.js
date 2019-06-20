@@ -41,6 +41,7 @@ define([
             tcpPort: conf.server.tcpPort,
             views: [
                 "android-launcher/server/views/config",
+                "android-launcher/server/views/runOnRhino",
                 "android-launcher/server/views/websocket"
             ],
             rootRedirectLocation: "/web/index.html",

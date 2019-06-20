@@ -23,11 +23,12 @@ define([
 
     var mainActivity = Packages.wilton.android.MainActivity.INSTANCE;
 
-    return function(repoPath, launchOpts) {
+    return function(repoPath, launchOpts, runOnRhinoUrl) {
         var intent = new Intent(mainActivity, AppService);
         intent.putExtra("wilton_repoPath", repoPath);
         intent.putExtra("wilton_rootModuleName", launchOpts.rootModuleName);
         intent.putExtra("wilton_startupModule", launchOpts.startupModule);
+        intent.putExtra("wilton_runOnRhinoUrl", runOnRhinoUrl);
         mainActivity.startService(intent);
     };
 });

@@ -73,6 +73,7 @@ define([
                 this.infoCss["alert-danger"] = false;
                 this.infoCss["alert-primary"] = true;
                 this.infoText = "Launching ...";
+                this.enabled = false;
                 commit("landing/updateGitUrl", this.gitUrl);
                 commit("landing/updateUsername", this.username);
                 commit("landing/updatePassword", buffer.Buffer.from(this.password).toString("base64"));

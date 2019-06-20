@@ -35,6 +35,19 @@ define([
         return appsDir;
     }
 
+    function prepareOpts(username, password, branch) {
+        var res = {
+            branch: branch
+        };
+        if (username.length > 0) {
+            res.username = username;
+        }
+        if (password.length > 0) {
+            res.password = password;
+        }
+        return res;
+    }
+
     return {
         cloneOrPull: function(opts) {
             utils.checkProperties(opts, ["gitUrl", "username", "password", "gitBranch", "skipUpdate", "deleteApp"]);
@@ -46,29 +59,17 @@ define([
 
             if (!fs.exists(repoPath)) {
                 logger.info("Cloning Git repository on url: [" + opts.url + "] ...");
-                git.clone(opts.gitUrl, repoPath, {
-                    username: opts.username,
-                    password: pwd,
-                    branch: opts.gitBranch
-                });
+                git.clone(opts.gitUrl, repoPath, prepareOpts(opts.username, pwd, opts.gitBranch));
                 logger.info("Clone perfomed successfully");
             } else if (!opts.skipUpdate) {
                 if (opts.deleteApp) {
                     fs.rmdir(repoPath);
                     logger.info("Cloning fresh Git repository on url: [" + opts.url + "] ...");
-                    git.clone(opts.gitUrl, repoPath, {
-                        username: opts.username,
-                        password: pwd,
-                        branch: opts.gitBranch
-                    });
+                    git.clone(opts.gitUrl, repoPath, prepareOpts(opts.username, pwd, opts.gitBranch));
                     logger.info("Clone perfomed successfully");
                 } else {
                     logger.info("Pulling Git repository on url: [" + opts.gitUrl + "] ...");
-                    git.pull(repoPath, {
-                        username: opts.username,
-                        password: pwd,
-                        branch: opts.gitBranch
-                    });
+                    git.pull(repoPath, prepareOpts(opts.username, pwd, opts.gitBranch));
                     logger.info("Pull perfomed successfully");
                 }
             } else {

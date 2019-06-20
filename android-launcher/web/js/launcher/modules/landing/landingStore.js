@@ -37,7 +37,7 @@ define(function(require) {
         },
 
         state: {
-            gitUrl: "git+ssh://hostname/path/to/repo",
+            gitUrl: "https://github.com/wilton-iot/example_vueapp.git",
             username: "",
             password: "",
             gitBranch: "master",
