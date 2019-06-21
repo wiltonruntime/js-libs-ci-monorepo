@@ -29,6 +29,11 @@ define([
         utils.hasProperties(launchOpts, ["tcpPort", "rootModuleName", "startupModule"]);
         logger.info("Is due to start application on path: [" + repoPath + "]");
 
+        // strip ending slash
+        if (utils.endsWith(repoPath, "/")) {
+            repoPath = repoPath.substring(0, repoPath.length - 1);
+        }
+
         var rorUrl = "http://127.0.0.1:" + conf.server.tcpPort + "/android-launcher/server/views/runOnRhino";
         runOnRhinoThread({
             module: "android-launcher/server/rhino/startAppService",
