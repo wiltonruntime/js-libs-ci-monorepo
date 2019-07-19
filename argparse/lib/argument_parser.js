@@ -1169,7 +1169,7 @@ ArgumentParser.prototype.exit = function (status, message) {
 ArgumentParser.prototype.error = function (err) {
   var message;
   if (err instanceof Error) {
-    if (this.debug === true) {
+    if (true || this.debug === true) {
       throw err;
     }
     message = err.message;
@@ -1178,7 +1178,7 @@ ArgumentParser.prototype.error = function (err) {
   }
   var msg = format('%s: error: %s', this.prog, message) + c.EOL;
 
-  if (this.debug === true) {
+  if (true || this.debug === true) {
     throw new Error(msg);
   }
 
