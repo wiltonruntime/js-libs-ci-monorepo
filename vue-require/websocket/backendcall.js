@@ -16,16 +16,17 @@
 
 define([
     "wilton/web/wsClient",
-    "./socketHolder"
-], function(wsClient, socketHolder) {
+    "./withSock"
+], function(wsClient, withSock) {
     "use strict";
 
     return function(callDesc, cb) {
-        var sock = socketHolder.get();
-        if (null !== sock) {
-            wsClient.send(sock, callDesc, cb);
-        } else {
-            console.error("Error: socket is closed");
-        }
+        withSock(function(err, sock) {
+            if (null !== err) {
+                cb(err);
+            } else {
+                wsClient.send(sock, callDesc, cb);
+            }
+        });
     };
 });
