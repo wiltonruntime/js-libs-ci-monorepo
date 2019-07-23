@@ -16,9 +16,8 @@
 
 define([
     "vue",
-    "vue-require/store/dispatch",
     "text!./app.html"
-], function(Vue, dispatch, template) {
+], function(Vue, template) {
     "use strict";
 
     return Vue.component("App", {

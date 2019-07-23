@@ -15,11 +15,10 @@
  */
 
 define([
-    "vue-require/websocket/socketHolder",
-    "wilton/web/wsClient",
+    "vue-require/websocket/withSock",
     "wilton/utils",
     "json!/android-launcher/server/views/config"
-], function(socketHolder, wsClient, utils, conf) {
+], function(withSock, utils, conf) {
     "use strict";
 
     function onError(obj) {
@@ -42,21 +41,15 @@ define([
     }
 
     return function(context, cb) {
-
-        wsClient.open(conf.wsUrl, {
+        // sync call, no networking, only sets options
+        withSock(null, {
+            url: conf.wsUrl,
             onError: onError,
             logger: logger,
             timeoutMillis: conf.wsTimeoutMillis
-        }, function(err, sock) {
-            if (err) {
-               console.error(err);
-               return;
-            }
-            // race condition here should be negligible
-            socketHolder.set(sock);
-            if ("function" === typeof(cb)) {
-                cb();
-            }
+            // other possible options are forwarded to wsClient
+            // https://wilton-iot.github.io/wilton/docs/html/namespaceweb__wsClient.html#a9a7f2f55ba84b066190bb357f45a7d36
         });
+        cb();
     };
 });
