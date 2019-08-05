@@ -36,7 +36,7 @@ define([
 
         var rorUrl = "http://127.0.0.1:" + conf.server.tcpPort + "/android-launcher/server/views/runOnRhino";
         runOnRhinoThread({
-            module: "android-launcher/server/rhino/startAppService",
+            module: "wilton/android/startAppService",
             args: [repoPath, launchOpts, rorUrl]
         });
 

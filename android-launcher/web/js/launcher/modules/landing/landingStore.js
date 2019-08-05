@@ -33,7 +33,8 @@ define(function(require) {
             updatePassword: function(state, password) { Vue.set(state, "password", password); },
             updateGitBranch: function(state, gitBranch) { Vue.set(state, "gitBranch", gitBranch); },
             updateSkipUpdate: function(state, skipUpdate) { Vue.set(state, "skipUpdate", skipUpdate); },
-            updateDeleteApp: function(state, deleteApp) { Vue.set(state, "deleteApp", deleteApp); }
+            updateDeleteApp: function(state, deleteApp) { Vue.set(state, "deleteApp", deleteApp); },
+            updateAutoLaunch: function(state, autoLaunch) { Vue.set(state, "autoLaunch", autoLaunch); }
         },
 
         state: {
@@ -42,7 +43,8 @@ define(function(require) {
             password: "",
             gitBranch: "master",
             skipUpdate: false,
-            deleteApp: false
+            deleteApp: false,
+            autoLaunch: false
         }
 
     };

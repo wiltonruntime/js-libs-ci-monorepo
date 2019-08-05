@@ -38,115 +38,143 @@
             <hr/>
         </div>
 
-        <div class="form-group row">
+        <div
+            class="row"
+            v-show="settingsVisible">
             <div class="col">
-                <label class="font-weight-bold" for="url">
-                    Git URL
-                </label>
-                <input
-                    type="text"
-                    id="url"
-                    name="url"
-                    class="form-control form-control-lg"
-                    v-bind:disabled="!enabled"
-                    v-model="gitUrl">
-                <small class="form-text text-muted">
-                    SSH URL to the Git repository which contains Wilton application
-                </small>
-            </div>
-        </div>
 
-        <div class="form-group row">
-            <div class="col">
-                <label class="font-weight-bold" for="username">
-                    Username
-                </label>
-                <input
-                    type="text"
-                    id="username"
-                    name="username"
-                    class="form-control form-control-lg"
-                    v-bind:disabled="!enabled"
-                    v-model="username">
-                <small class="form-text text-muted">
-                    User name for SSH or HTTPS authentication
-                </small>
-            </div>
-        </div>
+                <div class="form-group row">
+                    <div class="col">
+                        <label class="font-weight-bold" for="url">
+                            Git URL
+                        </label>
+                        <input
+                            type="text"
+                            id="url"
+                            name="url"
+                            class="form-control form-control-lg"
+                            v-bind:disabled="!enabled"
+                            v-model="gitUrl">
+                        <small class="form-text text-muted">
+                            SSH URL to the Git repository which contains Wilton application
+                        </small>
+                    </div>
+                </div>
 
-        <div class="form-group row">
-            <div class="col">
-                <label class="font-weight-bold" for="password">
-                    Password
-                </label>
-                <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    class="form-control form-control-lg"
-                    v-bind:disabled="!enabled"
-                    v-model="password">
-                <small class="form-text text-muted">
-                    Password for SSH or HTTPS authentication
-                </small>
-            </div>
-        </div>
+                <div class="form-group row">
+                    <div class="col">
+                        <label class="font-weight-bold" for="username">
+                            Username
+                        </label>
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            class="form-control form-control-lg"
+                            v-bind:disabled="!enabled"
+                            v-model="username">
+                        <small class="form-text text-muted">
+                            User name for SSH or HTTPS authentication
+                        </small>
+                    </div>
+                </div>
 
-        <div class="form-group row">
-            <div class="col">
-                <label class="font-weight-bold" for="branch">
-                    Branch
-                </label>
-                <input
-                    type="text"
-                    id="branch"
-                    name="branch"
-                    class="form-control form-control-lg"
-                    v-bind:disabled="!enabled"
-                    v-model="gitBranch">
-                <small class="form-text text-muted">
-                    Git branch name to checkout
-                </small>
-            </div>
-        </div>
+                <div class="form-group row">
+                    <div class="col">
+                        <label class="font-weight-bold" for="password">
+                            Password
+                        </label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            class="form-control form-control-lg"
+                            v-bind:disabled="!enabled"
+                            v-model="password">
+                        <small class="form-text text-muted">
+                            Password for SSH or HTTPS authentication
+                        </small>
+                    </div>
+                </div>
 
-        <div class="form-group row">
-            <div class="col">
-                <label class="font-weight-bold" for="skip">
-                    Skip update
-                </label>
-                <select
-                    id="skip"
-                    name="skip"
-                    class="form-control form-control-lg"
-                    v-bind:disabled="!enabled"
-                    v-model="skipUpdate">
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
-                </select>
-                <small class="form-text text-muted">
-                    Do not update from Git - just launch the existing application
-                </small>
-            </div>
-        </div>
+                <div class="form-group row">
+                    <div class="col">
+                        <label class="font-weight-bold" for="branch">
+                            Branch
+                        </label>
+                        <input
+                            type="text"
+                            id="branch"
+                            name="branch"
+                            class="form-control form-control-lg"
+                            v-bind:disabled="!enabled"
+                            v-model="gitBranch">
+                        <small class="form-text text-muted">
+                            Git branch name to checkout
+                        </small>
+                    </div>
+                </div>
 
-        <div class="form-group row">
-            <div class="col">
-                <label class="font-weight-bold" for="delete">
-                    Delete before update
-                </label>
-                <select
-                    id="delete"
-                    name="delete"
-                    class="form-control form-control-lg"
-                    v-bind:disabled="!enabled"
-                    v-model="deleteApp">
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
-                </select>
-                <small class="form-text text-muted">
-                    Delete the local copy of application and do a fresh clone
-                </small>
+                <div class="form-group row">
+                    <div class="col">
+                        <label class="font-weight-bold" for="skip">
+                            Skip update
+                        </label>
+                        <select
+                            id="skip"
+                            name="skip"
+                            class="form-control form-control-lg"
+                            v-bind:disabled="!enabled"
+                            v-model="skipUpdate">
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
+                        <small class="form-text text-muted">
+                            Do not update from Git - just launch the existing application
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col">
+                        <label class="font-weight-bold" for="delete">
+                            Delete before update
+                        </label>
+                        <select
+                            id="delete"
+                            name="delete"
+                            class="form-control form-control-lg"
+                            v-bind:disabled="!enabled"
+                            v-model="deleteApp">
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
+                        <small class="form-text text-muted">
+                            Delete the local copy of application and do a fresh clone
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col">
+                        <label class="font-weight-bold" for="autoLaunch">
+                            Launch automatically
+                        </label>
+                        <select
+                            id="autoLaunch"
+                            name="autoLaunch"
+                            class="form-control form-control-lg"
+                            v-bind:disabled="!enabled"
+                            v-model="autoLaunch">
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
+                        <small class="form-text text-muted">
+                            Launch application automatically, press 'Stop' to prevent the launch
+                        </small>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -156,14 +184,25 @@
             v-html="infoText">
         </div>
 
-        <div class="row mb-5">
+        <div
+            class="row mb-5"
+            v-show="appStateLoaded">
             <div class="col text-center">
                 <button
                     type="button"
                     class="btn btn-lg btn-primary btn-block"
+                    v-show="!stopButtonVisible"
                     v-bind:disabled="!enabled"
-                    v-on:click.stop.prevent="launch()">
+                    v-on:click.stop.prevent="saveAndLaunch()">
                     Launch
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-lg btn-danger btn-block"
+                    v-show="stopButtonVisible"
+                    v-bind:disabled="!stopButtonEnabled"
+                    v-on:click.stop.prevent="stopLaunch()">
+                    Stop
                 </button>
             </div>
         </div>
