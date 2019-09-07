@@ -97,6 +97,8 @@ define([
     "validator/lib/isAlphanumeric",
     "wilton/Server",
     "weak-map",
+    "windows-1251",
+    "windows-1252",
     "xml-js",
     "xml-writer",
     "xregexp"

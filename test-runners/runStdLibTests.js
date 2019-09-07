@@ -151,7 +151,9 @@ define([
     "escape-latex/src/index.test",
     "decimaljs/test/test",
     "complexjs/tests/complex.test",
-    "mathjs/runAllTests"
+    "mathjs/runAllTests",
+    "windows-1251/tests/tests.js",
+    "windows-1252/tests/tests.js"
 ], function() {
     return {
         main: function() { }
