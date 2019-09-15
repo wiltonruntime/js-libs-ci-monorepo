@@ -16,8 +16,9 @@ define([
         require([
             "{{projectname}}/server/db",
             "{{projectname}}/server/models/schema",
-            "{{projectname}}/server/models/user"
-        ], function(db, schema, user) {
+            "{{projectname}}/server/models/auth",
+            "{{projectname}}/server/models/note"
+        ], function(db, schema, auth, note) {
             // prepare lock for sqlite access
             new Channel(conf.database.url, 1);
 
@@ -25,7 +26,8 @@ define([
                 schema.create();
 
                 db.doInSyncTransaction(conf.database.url, function() {
-                    user.insertDummyRecords();
+                    auth.insertDummyRecords();
+                    note.insertDummyRecords();
                 });
             }
 
