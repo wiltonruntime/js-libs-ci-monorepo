@@ -7,4 +7,11 @@ selenium-debug.log
 dist/*.gz
 dist/*.map
 explorations
-docs/_book
+docs/.vuepress/dist
+yarn-error.log
+.idea
+.vscode/settings.json
+.env
+selenium-server.log
+local.log
+browserstack.err

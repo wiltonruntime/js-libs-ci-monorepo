@@ -33,8 +33,8 @@ const Foo = () => import('./Foo.vue')
 // nested route in the same async chunk, you can use a special comment
 // to indicate a chunk name for the imported module. (note this requires
 // webpack 2.4.0+)
-const Bar = () => import(/* webpackChunkName: "/bar" */ './Bar.vue')
-const Baz = () => import(/* webpackChunkName: "/bar" */ './Baz.vue')
+const Bar = () => import(/* webpackChunkName: "bar" */ './Bar.vue')
+const Baz = () => import(/* webpackChunkName: "bar" */ './Baz.vue')
 
 const router = new VueRouter({
   mode: 'history',
@@ -43,6 +43,18 @@ const router = new VueRouter({
     { path: '/', component: Home },
     // Just use them normally in the route config
     { path: '/foo', component: Foo },
+    // multiple parameters, `/` should not be encoded. The name is also important
+    // https://github.com/vuejs/vue-router/issues/2719
+    { path: '/a/:tags*', name: 'tagged', component: () => new Promise(resolve => {
+      setTimeout(() => {
+        resolve({
+          template: `<div>
+            <h2>Lazy with params</h2>
+            <pre id="tagged-path">{{ $route.path }}</pre>
+          </div>`
+        })
+      }, 200)
+    }) },
     // Bar and Baz belong to the same root route
     // and grouped in the same async chunk.
     { path: '/bar', component: Bar,
@@ -63,6 +75,7 @@ new Vue({
         <li><router-link to="/foo">/foo</router-link></li>
         <li><router-link to="/bar">/bar</router-link></li>
         <li><router-link to="/bar/baz">/bar/baz</router-link></li>
+        <li><router-link to="/a/b/c">/a/b/c</router-link></li>
       </ul>
       <router-view class="view"></router-view>
     </div>

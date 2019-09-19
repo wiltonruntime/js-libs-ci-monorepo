@@ -1,6 +1,6 @@
 # Installation
 
-### Téléchargement direct / CDN
+## Téléchargement direct / CDN
 
 [https://unpkg.com/vue-router/dist/vue-router.js](https://unpkg.com/vue-router/dist/vue-router.js)
 
@@ -15,7 +15,7 @@ Incluez `vue-router` après Vue et l'installation sera automatique :
 <script src="/path/to/vue-router.js"></script>
 ```
 
-### npm
+## npm
 
 ``` bash
 npm install vue-router
@@ -32,7 +32,7 @@ Vue.use(VueRouter)
 
 Vous n'avez pas besoin de faire cela lors de l'utilisation des balises de script globales (`<script>`).
 
-### Build de développement
+## Build de développement
 
 Vous aurez besoin de cloner directement `vue-router` depuis GitHub et le compiler vous-même si vous souhaitez utiliser le dernier build de développement.
 

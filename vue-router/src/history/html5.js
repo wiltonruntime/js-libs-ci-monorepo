@@ -5,15 +5,16 @@ import { History } from './base'
 import { cleanPath } from '../util/path'
 import { START } from '../util/route'
 import { setupScroll, handleScroll } from '../util/scroll'
-import { pushState, replaceState } from '../util/push-state'
+import { pushState, replaceState, supportsPushState } from '../util/push-state'
 
 export class HTML5History extends History {
   constructor (router: Router, base: ?string) {
     super(router, base)
 
     const expectScroll = router.options.scrollBehavior
+    const supportsScroll = supportsPushState && expectScroll
 
-    if (expectScroll) {
+    if (supportsScroll) {
       setupScroll()
     }
 
@@ -29,7 +30,7 @@ export class HTML5History extends History {
       }
 
       this.transitionTo(location, route => {
-        if (expectScroll) {
+        if (supportsScroll) {
           handleScroll(router, route, current, true)
         }
       })
@@ -71,7 +72,7 @@ export class HTML5History extends History {
 }
 
 export function getLocation (base: string): string {
-  let path = window.location.pathname
+  let path = decodeURI(window.location.pathname)
   if (base && path.indexOf(base) === 0) {
     path = path.slice(base.length)
   }

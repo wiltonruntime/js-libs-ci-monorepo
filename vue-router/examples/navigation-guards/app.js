@@ -8,7 +8,7 @@ const Foo = { template: '<div>foo</div>' }
 const Bar = { template: '<div>bar</div>' }
 
 /**
- * Signatre of all route guards:
+ * Signature of all route guards:
  * @param {Route} to
  * @param {Route} from
  * @param {Function} next
@@ -33,12 +33,15 @@ const Baz = {
   },
   template: `
     <div>
-      <p>baz ({{ saved ? 'saved' : 'not saved' }})<p>
+      <p>baz ({{ saved ? 'saved' : 'not saved' }})</p>
       <button @click="saved = true">save</button>
     </div>
   `,
   beforeRouteLeave (to, from, next) {
-    if (this.saved || window.confirm('Not saved, are you sure you want to navigate away?')) {
+    if (
+      this.saved ||
+      window.confirm('Not saved, are you sure you want to navigate away?')
+    ) {
       next()
     } else {
       next(false)
@@ -46,7 +49,7 @@ const Baz = {
   }
 }
 
-// Baz implements an in-component beforeRouteEnter hook
+// Qux implements an in-component beforeRouteEnter hook
 const Qux = {
   data () {
     return {
@@ -87,6 +90,43 @@ const Quux = {
   }
 }
 
+const NestedParent = {
+  template: `<div id="nested-parent">Nested Parent <hr>
+  <router-link to="/parent/child/1">/parent/child/1</router-link>
+  <router-link to="/parent/child/2">/parent/child/2</router-link>
+  <hr>
+  <p id="bre-order">
+    <span v-for="log in logs">{{ log }} </span>
+  </p>
+
+  <router-view/></div>`,
+  data: () => ({ logs: [] }),
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      vm.logs.push('parent')
+    })
+  }
+}
+
+const GuardMixin = {
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      vm.$parent.logs.push('mixin')
+    })
+  }
+}
+
+const NestedChild = {
+  props: ['n'],
+  template: `<div>Child {{ n }}</div>`,
+  mixins: [GuardMixin],
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      vm.$parent.logs.push('child ' + vm.n)
+    })
+  }
+}
+
 const router = new VueRouter({
   mode: 'history',
   base: __dirname,
@@ -106,15 +146,26 @@ const router = new VueRouter({
     // Qux implements an in-component beforeRouteEnter hook
     { path: '/qux', component: Qux },
 
-   // in-component beforeRouteEnter hook for async components
-    { path: '/qux-async', component: resolve => {
-      setTimeout(() => {
-        resolve(Qux)
-      }, 0)
-    } },
+    // in-component beforeRouteEnter hook for async components
+    {
+      path: '/qux-async',
+      component: resolve => {
+        setTimeout(() => {
+          resolve(Qux)
+        }, 0)
+      }
+    },
 
     // in-component beforeRouteUpdate hook
-    { path: '/quux/:id', component: Quux }
+    { path: '/quux/:id', component: Quux },
+    {
+      path: '/parent',
+      component: NestedParent,
+      children: [
+        { path: 'child/1', component: NestedChild, props: { n: 1 }},
+        { path: 'child/2', component: NestedChild, props: { n: 2 }}
+      ]
+    }
   ]
 })
 
@@ -140,6 +191,7 @@ new Vue({
         <li><router-link to="/qux-async">/qux-async</router-link></li>
         <li><router-link to="/quux/1">/quux/1</router-link></li>
         <li><router-link to="/quux/2">/quux/2</router-link></li>
+        <li><router-link to="/parent/child/2">/parent/child/2</router-link></li>
       </ul>
       <router-view class="view"></router-view>
     </div>

@@ -9,9 +9,10 @@ const Bar = {
   template: `
     <div class="bar">
       bar
-      <div style="height:500px"></div>
+      <div style="height:1500px"></div>
       <p id="anchor" style="height:500px">Anchor</p>
-      <p id="anchor2">Anchor2</p>
+      <p id="anchor2" style="height:500px">Anchor2</p>
+      <p id="1number">with number</p>
     </div>
   `
 }
@@ -25,23 +26,28 @@ const scrollBehavior = function (to, from, savedPosition) {
     // savedPosition is only available for popstate navigations.
     return savedPosition
   } else {
-    return new Promise(resolve => {
-      const position = {}
-      let delay = 500
-      // new navigation.
-      // scroll to anchor by returning the selector
-      if (to.hash) {
-        position.selector = to.hash
+    const position = {}
 
-        // specify offset of the element
-        if (to.hash === '#anchor2') {
-          position.offset = { y: 100 }
-        }
+    // scroll to anchor by returning the selector
+    if (to.hash) {
+      position.selector = to.hash
 
-        if (document.querySelector(to.hash)) {
-          delay = 0
-        }
+      // specify offset of the element
+      if (to.hash === '#anchor2') {
+        position.offset = { y: 100 }
       }
+
+      // bypass #1number check
+      if (/^#\d/.test(to.hash) || document.querySelector(to.hash)) {
+        return position
+      }
+
+      // if the returned position is falsy or an empty object,
+      // will retain current scroll position.
+      return false
+    }
+
+    return new Promise(resolve => {
       // check if any matched route config has meta that requires scrolling to top
       if (to.matched.some(m => m.meta.scrollToTop)) {
         // coords will be used if no selector is provided,
@@ -49,12 +55,13 @@ const scrollBehavior = function (to, from, savedPosition) {
         position.x = 0
         position.y = 0
       }
+
       // wait for the out transition to complete (if necessary)
-      setTimeout(() => {
-        // if the returned position is falsy or an empty object,
+      this.app.$root.$once('triggerScroll', () => {
+        // if the resolved position is falsy or an empty object,
         // will retain current scroll position.
         resolve(position)
-      }, delay)
+      })
     })
   }
 }
@@ -81,10 +88,16 @@ new Vue({
         <li><router-link to="/bar">/bar</router-link></li>
         <li><router-link to="/bar#anchor">/bar#anchor</router-link></li>
         <li><router-link to="/bar#anchor2">/bar#anchor2</router-link></li>
+        <li><router-link to="/bar#1number">/bar#1number</router-link></li>
       </ul>
-      <transition name="fade" mode="out-in">
+      <transition name="fade" mode="out-in" @after-leave="afterLeave">
         <router-view class="view"></router-view>
       </transition>
     </div>
-  `
+  `,
+  methods: {
+    afterLeave () {
+      this.$root.$emit('triggerScroll')
+    }
+  }
 }).$mount('#app')
