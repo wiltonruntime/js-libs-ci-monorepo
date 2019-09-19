@@ -1,4 +1,4 @@
-import Vue = require("vue");
+import Vue from "vue";
 
 import {
   mapState,
@@ -41,7 +41,10 @@ new Vue({
       k: "k"
     }),
     helpers.mapState({
-      k: (state: any, getters: any) => state.k + getters.k
+      k: (state: any, getters: any) => state.k + getters.k,
+      useThis(state: any, getters: any) {
+        return state.k + getters.k + this.whatever
+      }
     }),
 
     helpers.mapGetters(["l"]),
