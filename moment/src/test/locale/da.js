@@ -1,4 +1,5 @@
-import {localeModule, test} from '../qunit';
+import {test} from '../qunit';
+import {localeModule} from '../qunit-locale';
 import moment from '../../moment';
 localeModule('da');
 
@@ -37,11 +38,11 @@ test('format', function (assert) {
             ['a A',                                'pm PM'],
             ['[den] DDDo [dag på året]',           'den 45. dag på året'],
             ['LTS',                                '15:25:50'],
-            ['L',                                  '14/02/2010'],
+            ['L',                                  '14.02.2010'],
             ['LL',                                 '14. februar 2010'],
             ['LLL',                                '14. februar 2010 15:25'],
             ['LLLL',                               'søndag d. 14. februar 2010 kl. 15:25'],
-            ['l',                                  '14/2/2010'],
+            ['l',                                  '14.2.2010'],
             ['ll',                                 '14. feb 2010'],
             ['lll',                                '14. feb 2010 15:25'],
             ['llll',                               'søn d. 14. feb 2010 kl. 15:25']

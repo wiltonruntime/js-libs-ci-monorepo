@@ -1,4 +1,5 @@
-import {localeModule, test} from '../qunit';
+import {test} from '../qunit';
+import {localeModule} from '../qunit-locale';
 import moment from '../../moment';
 localeModule('it');
 
@@ -40,11 +41,11 @@ test('format', function (assert) {
             ['L',                                  '14/02/2010'],
             ['LL',                                 '14 febbraio 2010'],
             ['LLL',                                '14 febbraio 2010 15:25'],
-            ['LLLL',                               'domenica, 14 febbraio 2010 15:25'],
+            ['LLLL',                               'domenica 14 febbraio 2010 15:25'],
             ['l',                                  '14/2/2010'],
             ['ll',                                 '14 feb 2010'],
             ['lll',                                '14 feb 2010 15:25'],
-            ['llll',                               'dom, 14 feb 2010 15:25']
+            ['llll',                               'dom 14 feb 2010 15:25']
         ],
         b = moment(new Date(2010, 1, 14, 15, 25, 50, 125)),
         i;

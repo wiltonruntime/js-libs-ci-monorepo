@@ -227,7 +227,7 @@ test('is between year', function (assert) {
     assert.equal(m.isBetween(
                 moment(new Date(2010, 5, 6, 7, 8, 9, 10)),
                 moment(new Date(2011, 5, 6, 7, 8, 9, 10)), 'year'), false, 'year is later');
-    assert.equal(m.isBetween(m, 'year'), false, 'same moments are not between the same year');
+    assert.equal(m.isBetween(m, m, 'year'), false, 'same moments are not between the same year');
     assert.equal(+m, +mCopy, 'isBetween year should not change moment');
 });
 
@@ -248,7 +248,7 @@ test('is between month', function (assert) {
     assert.equal(m.isBetween(
                 moment(new Date(2011, 11, 6, 7, 8, 9, 10)),
                 moment(new Date(2011, 1, 6, 7, 8, 9, 10)), 'month'), false, 'month is later');
-    assert.equal(m.isBetween(m, 'month'), false, 'same moments are not between the same month');
+    assert.equal(m.isBetween(m, m, 'month'), false, 'same moments are not between the same month');
     assert.equal(+m, +mCopy, 'isBetween month should not change moment');
 });
 
@@ -269,7 +269,7 @@ test('is between day', function (assert) {
     assert.equal(m.isBetween(
                 moment(new Date(2011, 1, 1, 7, 8, 9, 10)),
                 moment(new Date(2011, 1, 2, 7, 8, 9, 10)), 'day'), false, 'day is later');
-    assert.equal(m.isBetween(m, 'day'), false, 'same moments are not between the same day');
+    assert.equal(m.isBetween(m, m, 'day'), false, 'same moments are not between the same day');
     assert.equal(+m, +mCopy, 'isBetween day should not change moment');
 });
 
@@ -290,7 +290,7 @@ test('is between hour', function (assert) {
     assert.equal(m.isBetween(
                 moment(new Date(2011, 1, 2, 7, 8, 9, 10)),
                 moment(new Date(2011, 1, 2, 7, 8, 9, 10)), 'hour'), false, 'hour is later');
-    assert.equal(m.isBetween(m, 'hour'), false, 'same moments are not between the same hour');
+    assert.equal(m.isBetween(m, m, 'hour'), false, 'same moments are not between the same hour');
     assert.equal(+m, +mCopy, 'isBetween hour should not change moment');
 });
 
@@ -311,7 +311,7 @@ test('is between minute', function (assert) {
     assert.equal(m.isBetween(
                 moment(new Date(2011, 1, 2, 3, 2, 9, 10)),
                 moment(new Date(2011, 1, 2, 3, 3, 59, 999)), 'minute'), false, 'minute is later');
-    assert.equal(m.isBetween(m, 'minute'), false, 'same moments are not between the same minute');
+    assert.equal(m.isBetween(m, m, 'minute'), false, 'same moments are not between the same minute');
     assert.equal(+m, +mCopy, 'isBetween minute should not change moment');
 });
 
@@ -332,7 +332,7 @@ test('is between second', function (assert) {
     assert.equal(m.isBetween(
                 moment(new Date(2011, 1, 2, 3, 4, 3, 10)),
                 moment(new Date(2011, 1, 2, 3, 4, 4, 999)), 'second'), false, 'second is later');
-    assert.equal(m.isBetween(m, 'second'), false, 'same moments are not between the same second');
+    assert.equal(m.isBetween(m, m, 'second'), false, 'same moments are not between the same second');
     assert.equal(+m, +mCopy, 'isBetween second should not change moment');
 });
 
@@ -353,8 +353,32 @@ test('is between millisecond', function (assert) {
     assert.equal(m.isBetween(
                 moment(new Date(2011, 1, 2, 3, 4, 5, 4)),
                 moment(new Date(2011, 1, 2, 3, 4, 5, 6)), 'millisecond'), false, 'millisecond is later');
-    assert.equal(m.isBetween(m, 'millisecond'), false, 'same moments are not between the same millisecond');
+    assert.equal(m.isBetween(m, m, 'millisecond'), false, 'same moments are not between the same millisecond');
     assert.equal(+m, +mCopy, 'isBetween millisecond should not change moment');
+});
+
+test('is between invalid', function (assert) {
+    var invalid = moment(NaN),
+        valid = moment(new Date(2011, 1, 2, 3, 4, 5, 6)),
+        validFrom = moment(new Date(2010, 1, 2, 3, 4, 5, 6)),
+        validTo = moment(new Date(2012, 1, 2, 3, 4, 5, 6));
+    assert.equal(invalid.isBetween(validFrom, validTo), false, 'this instance invalid');
+    assert.equal(invalid.isBetween(validFrom, validTo, '[]'), false, 'this instance invalid []');
+    assert.equal(invalid.isBetween(validFrom, validTo, '[)'), false, 'this instance invalid [)');
+    assert.equal(invalid.isBetween(validFrom, validTo, '(]'), false, 'this instance invalid (]');
+    assert.equal(invalid.isBetween(validFrom, validTo, '()'), false, 'this instance invalid ()');
+
+    assert.equal(valid.isBetween(invalid, validTo), false, 'from invalid moment');
+    assert.equal(valid.isBetween(invalid, validTo, '[]'), false, 'from invalid moment []');
+    assert.equal(valid.isBetween(invalid, validTo, '[)'), false, 'from invalid moment [)');
+    assert.equal(valid.isBetween(invalid, validTo, '(]'), false, 'from invalid moment (]');
+    assert.equal(valid.isBetween(invalid, validTo, '()'), false, 'from invalid moment ()');
+
+    assert.equal(valid.isBetween(validFrom, invalid), false, 'to invalid moment');
+    assert.equal(valid.isBetween(validFrom, invalid, '[]'), false, 'to invalid moment []');
+    assert.equal(valid.isBetween(validFrom, invalid, '[)'), false, 'to invalid moment [)');
+    assert.equal(valid.isBetween(validFrom, invalid, '(]'), false, 'to invalid moment (]');
+    assert.equal(valid.isBetween(validFrom, invalid, '()'), false, 'to invalid moment ()');
 });
 
 require = requireOrig;});

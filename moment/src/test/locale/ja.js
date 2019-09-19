@@ -1,4 +1,5 @@
-import {localeModule, test} from '../qunit';
+import {test} from '../qunit';
+import {localeModule} from '../qunit-locale';
 import moment from '../../moment';
 localeModule('ja');
 
@@ -22,9 +23,9 @@ test('parse', function (assert) {
 
 test('format', function (assert) {
     var a = [
-            ['dddd, MMMM Do YYYY, a h:mm:ss',      '日曜日, 2月 14日 2010, 午後 3:25:50'],
+            ['dddd, MMMM Do YYYY, a h:mm:ss',      '日曜日, 二月 14日 2010, 午後 3:25:50'],
             ['ddd, Ah',                            '日, 午後3'],
-            ['M Mo MM MMMM MMM',                   '2 2 02 2月 2月'],
+            ['M Mo MM MMMM MMM',                   '2 2 02 二月 2月'],
             ['YYYY YY',                            '2010 10'],
             ['D Do DD',                            '14 14日 14'],
             ['d do dddd ddd dd',                   '0 0日 日曜日 日 日'],
@@ -40,11 +41,11 @@ test('format', function (assert) {
             ['L',                                  '2010/02/14'],
             ['LL',                                 '2010年2月14日'],
             ['LLL',                                '2010年2月14日 15:25'],
-            ['LLLL',                               '2010年2月14日 15:25 日曜日'],
+            ['LLLL',                               '2010年2月14日 日曜日 15:25'],
             ['l',                                  '2010/02/14'],
             ['ll',                                 '2010年2月14日'],
             ['lll',                                '2010年2月14日 15:25'],
-            ['llll',                               '2010年2月14日 15:25 日曜日']
+            ['llll',                               '2010年2月14日(日) 15:25']
         ],
         b = moment(new Date(2010, 1, 14, 15, 25, 50, 125)),
         i;
@@ -54,7 +55,7 @@ test('format', function (assert) {
 });
 
 test('format month', function (assert) {
-    var expected = '1月 1月_2月 2月_3月 3月_4月 4月_5月 5月_6月 6月_7月 7月_8月 8月_9月 9月_10月 10月_11月 11月_12月 12月'.split('_'), i;
+    var expected = '一月 1月_二月 2月_三月 3月_四月 4月_五月 5月_六月 6月_七月 7月_八月 8月_九月 9月_十月 10月_十一月 11月_十二月 12月'.split('_'), i;
     for (i = 0; i < expected.length; i++) {
         assert.equal(moment([2011, i, 1]).format('MMMM MMM'), expected[i], expected[i]);
     }
@@ -126,25 +127,43 @@ test('calendar day', function (assert) {
 
 test('calendar next week', function (assert) {
     var i, m;
+    var dow = moment().day();
     for (i = 2; i < 7; i++) {
         m = moment().add({d: i});
-        assert.equal(m.calendar(),       m.format('[来週]dddd LT'),  'Today + ' + i + ' days current time');
-        m.hours(0).minutes(0).seconds(0).milliseconds(0);
-        assert.equal(m.calendar(),       m.format('[来週]dddd LT'),  'Today + ' + i + ' days beginning of day');
-        m.hours(23).minutes(59).seconds(59).milliseconds(999);
-        assert.equal(m.calendar(),       m.format('[来週]dddd LT'),  'Today + ' + i + ' days end of day');
+        if (dow + i < 7) {
+            assert.equal(m.calendar(),       m.format('dddd LT'),  'Today + ' + i + ' days current time');
+            m.hours(0).minutes(0).seconds(0).milliseconds(0);
+            assert.equal(m.calendar(),       m.format('dddd LT'),  'Today + ' + i + ' days beginning of day');
+            m.hours(23).minutes(59).seconds(59).milliseconds(999);
+            assert.equal(m.calendar(),       m.format('dddd LT'),  'Today + ' + i + ' days end of day');
+        } else {
+            assert.equal(m.calendar(),       m.format('[来週]dddd LT'),  'Today + ' + i + ' days current time');
+            m.hours(0).minutes(0).seconds(0).milliseconds(0);
+            assert.equal(m.calendar(),       m.format('[来週]dddd LT'),  'Today + ' + i + ' days beginning of day');
+            m.hours(23).minutes(59).seconds(59).milliseconds(999);
+            assert.equal(m.calendar(),       m.format('[来週]dddd LT'),  'Today + ' + i + ' days end of day');
+        }
     }
 });
 
 test('calendar last week', function (assert) {
     var i, m;
+    var dow = moment().day();
     for (i = 2; i < 7; i++) {
         m = moment().subtract({d: i});
-        assert.equal(m.calendar(),       m.format('[前週]dddd LT'),  'Today - ' + i + ' days current time');
-        m.hours(0).minutes(0).seconds(0).milliseconds(0);
-        assert.equal(m.calendar(),       m.format('[前週]dddd LT'),  'Today - ' + i + ' days beginning of day');
-        m.hours(23).minutes(59).seconds(59).milliseconds(999);
-        assert.equal(m.calendar(),       m.format('[前週]dddd LT'),  'Today - ' + i + ' days end of day');
+        if (dow < i) {
+            assert.equal(m.calendar(),       m.format('[先週]dddd LT'),  'Today - ' + i + ' days current time');
+            m.hours(0).minutes(0).seconds(0).milliseconds(0);
+            assert.equal(m.calendar(),       m.format('[先週]dddd LT'),  'Today - ' + i + ' days beginning of day');
+            m.hours(23).minutes(59).seconds(59).milliseconds(999);
+            assert.equal(m.calendar(),       m.format('[先週]dddd LT'),  'Today - ' + i + ' days end of day');
+        } else {
+            assert.equal(m.calendar(),       m.format('dddd LT'),  'Today - ' + i + ' days current time');
+            m.hours(0).minutes(0).seconds(0).milliseconds(0);
+            assert.equal(m.calendar(),       m.format('dddd LT'),  'Today - ' + i + ' days beginning of day');
+            m.hours(23).minutes(59).seconds(59).milliseconds(999);
+            assert.equal(m.calendar(),       m.format('dddd LT'),  'Today - ' + i + ' days end of day');
+        }
     }
 });
 
@@ -170,3 +189,6 @@ test('weeks year starting sunday format', function (assert) {
     assert.equal(moment([2012, 0, 15]).format('w ww wo'), '3 03 3', 'Jan 15 2012 should be week 3');
 });
 
+test('parse with japanese parentheses', function (assert) {
+    assert.ok(moment('2016年5月18日（水）', 'YYYY年M月D日（dd）', true).isValid(), 'parse with japanese parentheses');
+});

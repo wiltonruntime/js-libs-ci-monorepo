@@ -1,4 +1,5 @@
-import {localeModule, test} from '../qunit';
+import {test} from '../qunit';
+import {localeModule} from '../qunit-locale';
 import moment from '../../moment';
 localeModule('ka');
 
@@ -7,7 +8,7 @@ test('parse', function (assert) {
         tests = 'იანვარი იან_თებერვალი თებ_მარტი მარ_აპრილი აპრ_მაისი მაი_ივნისი ივნ_ივლისი ივლ_აგვისტო აგვ_სექტემბერი სექ_ოქტომბერი ოქტ_ნოემბერი ნოე_დეკემბერი დეკ'.split('_');
 
     function equalTest(input, mmm, i) {
-        assert.equal(moment(input, mmm).month(), i, input + ' უნდა იყოს თვე ' + (i + 1));
+        assert.equal(moment(input, mmm).month(), i, input + ' should be month ' + (i + 1));
     }
 
     for (i = 0; i < 12; i++) {
@@ -18,8 +19,9 @@ test('parse', function (assert) {
         equalTest(tests[i][1], 'MMMM', i);
         equalTest(tests[i][0].toLocaleLowerCase(), 'MMMM', i);
         equalTest(tests[i][1].toLocaleLowerCase(), 'MMMM', i);
-        equalTest(tests[i][0].toLocaleUpperCase(), 'MMMM', i);
-        equalTest(tests[i][1].toLocaleUpperCase(), 'MMMM', i);
+        // the last two are broken until https://github.com/nodejs/node/issues/22518 is fixed
+        // equalTest(tests[i][0].toLocaleUpperCase(), 'MMMM', i);
+        // equalTest(tests[i][1].toLocaleUpperCase(), 'MMMM', i);
     }
 });
 
@@ -151,11 +153,11 @@ test('from', function (assert) {
 
 test('suffix', function (assert) {
     assert.equal(moment(30000).from(0), 'რამდენიმე წამში',     'ში სუფიქსი');
-    assert.equal(moment(0).from(30000), 'რამდენიმე წამის უკან', 'უკან სუფიქსი');
+    assert.equal(moment(0).from(30000), 'რამდენიმე წამის წინ', 'წინ სუფიქსი');
 });
 
 test('now from now', function (assert) {
-    assert.equal(moment().fromNow(), 'რამდენიმე წამის უკან', 'უნდა აჩვენოს როგორც წარსული');
+    assert.equal(moment().fromNow(), 'რამდენიმე წამის წინ', 'უნდა აჩვენოს როგორც წარსული');
 });
 
 test('fromNow', function (assert) {
@@ -202,7 +204,7 @@ test('calendar all else', function (assert) {
     var weeksAgo = moment().subtract({w: 1}),
         weeksFromNow = moment().add({w: 1});
 
-    assert.equal(weeksAgo.calendar(),       weeksAgo.format('L'),  '1 კვირის უკან');
+    assert.equal(weeksAgo.calendar(),       weeksAgo.format('L'),  '1 კვირის წინ');
     assert.equal(weeksFromNow.calendar(),   weeksFromNow.format('L'),  '1 კვირაში');
 
     weeksAgo = moment().subtract({w: 2});

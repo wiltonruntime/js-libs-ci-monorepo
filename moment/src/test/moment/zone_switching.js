@@ -53,7 +53,7 @@ test('local to zone, keepLocalTime = false', function (assert) {
 test('utc to local, keepLocalTime = true', function (assert) {
     // Don't test near the spring DST transition
     if (isNearSpringDST()) {
-        // expect(0);
+        // assert.expect(0);
         return;
     }
 
@@ -72,7 +72,7 @@ test('utc to local, keepLocalTime = false', function (assert) {
 test('zone to local, keepLocalTime = true', function (assert) {
     // Don't test near the spring DST transition
     if (isNearSpringDST()) {
-        // expect(0);
+        // assert.expect(0);
         return;
     }
 

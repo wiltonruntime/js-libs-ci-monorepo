@@ -1,4 +1,5 @@
-import {localeModule, test} from '../qunit';
+import {test} from '../qunit';
+import {localeModule} from '../qunit-locale';
 import moment from '../../moment';
 localeModule('ar-ly');
 
@@ -239,4 +240,13 @@ test('no leading zeros in long date formats', function (assert) {
             assert.equal(longDateStr, shortDateStr, 'should not have leading zeros in month or day');
         }
     }
+});
+
+// locale-specific
+test('ar-ly strict mode parsing works', function (assert) {
+    var m, formattedDate;
+    m = moment().locale('ar-ly');
+    formattedDate = m.format('l');
+    assert.equal(moment.utc(formattedDate, 'l', 'ar-ly', false).isValid(), true, 'Non-strict parsing works');
+    assert.equal(moment.utc(formattedDate, 'l', 'ar-ly', true).isValid(), true,'Strict parsing must work');
 });

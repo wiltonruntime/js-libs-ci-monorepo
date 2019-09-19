@@ -1,4 +1,5 @@
-import {localeModule, test} from '../qunit';
+import {test} from '../qunit';
+import {localeModule} from '../qunit-locale';
 import moment from '../../moment';
 localeModule('zh-cn');
 
@@ -39,11 +40,11 @@ test('format', function (assert) {
             ['a A',                                '下午 下午'],
             ['[这年的第] DDDo',                    '这年的第 45日'],
             ['LTS',                                '15:25:50'],
-            ['L',                                  '2010年2月14日'],
+            ['L',                                  '2010/02/14'],
             ['LL',                                 '2010年2月14日'],
             ['LLL',                                '2010年2月14日下午3点25分'],
             ['LLLL',                               '2010年2月14日星期日下午3点25分'],
-            ['l',                                  '2010年2月14日'],
+            ['l',                                  '2010/2/14'],
             ['ll',                                 '2010年2月14日'],
             ['lll',                                '2010年2月14日 15:25'],
             ['llll',                               '2010年2月14日星期日 15:25']
@@ -181,5 +182,3 @@ test('weeks year starting sunday format', function (assert) {
     assert.equal(moment([2012, 0,  7]).format('w ww wo'), '1 01 1周', 'Jan  7 2012 应该是第 1周');
     assert.equal(moment([2012, 0, 14]).format('w ww wo'), '2 02 2周', 'Jan 14 2012 应该是第 2周');
 });
-
-

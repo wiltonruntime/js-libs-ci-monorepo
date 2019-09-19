@@ -35,7 +35,7 @@ test('toJSON', function (assert) {
         assert.deepEqual(moment(expected).toJSON(), expected, 'toJSON invalid');
     } else {
         // IE8
-        expect(0);
+        assert.expect(0);
     }
 });
 
@@ -49,7 +49,7 @@ test('toJSON works when moment is frozen', function (assert) {
         assert.deepEqual(m.toJSON(), expected, 'toJSON when frozen invalid');
     } else {
         // IE8
-        expect(0);
+        assert.expect(0);
     }
 });
 
