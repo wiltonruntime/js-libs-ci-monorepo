@@ -97,6 +97,7 @@ define([
     "url",
     "validator/lib/isAlphanumeric",
     "wilton/Server",
+    "wilton-mobile/dev/jsWorkerLoop",
     "weak-map",
     "windows-1251",
     "windows-1252",

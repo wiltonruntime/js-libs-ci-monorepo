@@ -154,7 +154,8 @@ define([
     "windows-1251/tests/tests",
     "windows-1252/tests/tests",
     "stringmap/examples",
-    "buckets/runAllTests"
+    "buckets/runAllTests",
+    "wilton-mobile/test"
 ], function() {
     return {
         main: function() { }
