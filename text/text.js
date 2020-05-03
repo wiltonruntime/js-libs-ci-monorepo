@@ -7,7 +7,7 @@
   define, window, process, Packages,
   java, location, Components, FileUtils */
 
-define(['module'], function (module) {
+define(['require', 'module'], function (require, module) {
     'use strict';
 
     var text, fs, Cc, Ci, xpcIsWindows,
@@ -179,10 +179,12 @@ define(['module'], function (module) {
             
             // in wilton env: load and return
             if ("function" === typeof(WILTON_wiltoncall)) {
-                 var wiltonLoader = WILTON_requiresync("wilton/loader");
-                 var wiltonText = wiltonLoader.loadModuleResource(name);
-                 onLoad(wiltonText);
-                 return;
+                var url = require.toUrl(name);
+                var wiltonText = WILTON_wiltoncall("load_module_resource", JSON.stringify({
+                    url: url
+                }, null, 4));
+                onLoad(wiltonText);
+                return;
             }
 
             // Do not bother with the work if a build and text will
