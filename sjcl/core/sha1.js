@@ -1,4 +1,4 @@
-define(["sjcl/core/sjcl"], function(sjcl) {
+define(["sjcl/core/sjcl", "sjcl/core/bitArray", "sjcl/core/codecString"], function(sjcl) {
 
 /** @fileOverview Javascript SHA-1 implementation.
  *

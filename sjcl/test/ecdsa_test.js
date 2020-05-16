@@ -1,4 +1,4 @@
-define(["sjcl", "sjcl/test/ecc_vectors"], function(sjcl) { var res = [];
+define(["sjcl", "sjcl/test/test", "sjcl/test/ecc_vectors"], function(sjcl) { var res = [];
 
 res.push(
 new sjcl.test.TestCase("ECDSA test", function (cb) {

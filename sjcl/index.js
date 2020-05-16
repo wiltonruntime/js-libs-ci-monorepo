@@ -28,7 +28,7 @@ define([
     "sjcl/core/random",
     "sjcl/core/ripemd160",
     "sjcl/core/scrypt",
-    "sjcl/core/srp",
+    "sjcl/core/srp"
 ], function(sjcl) {
     return sjcl;
 });

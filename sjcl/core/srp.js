@@ -1,4 +1,4 @@
-define(["sjcl/core/sjcl"], function(sjcl) {
+define(["sjcl/core/sjcl", "sjcl/core/bitArray", "sjcl/core/bn", "sjcl/core/sha1"], function(sjcl) {
 
 /** @fileOverview Javascript SRP implementation.
  *

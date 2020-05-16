@@ -1,4 +1,4 @@
-define(["sjcl"], function(sjcl) {
+define(["sjcl", "sjcl/test/test"], function(sjcl) {
 
 // RFC 5869 Appendix A. Test Vectors
 

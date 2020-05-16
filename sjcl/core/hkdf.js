@@ -1,4 +1,4 @@
-define(["sjcl/core/sjcl"], function(sjcl) {
+define(["sjcl/core/sjcl", "sjcl/core/bitArray", "sjcl/core/codecString", "sjcl/core/hmac", "sjcl/core/sha256"], function(sjcl) {
 
 /** @fileOverview HKDF implementation.
  *

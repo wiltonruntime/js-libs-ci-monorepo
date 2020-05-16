@@ -1,4 +1,4 @@
-define(["sjcl/core/sjcl"], function(sjcl) {
+define(["sjcl/core/sjcl", "sjcl/core/bitArray"], function(sjcl) {
 
 /** @fileOverview Bit array codec implementations.
  *
@@ -56,7 +56,7 @@ sjcl.codec.arrayBuffer = {
 
     return out.buffer;
   },
-
+  /** Convert from an ArrayBuffer to a bitArray. */
   toBits: function (buffer) {
     var i, out=[], len, inView, tmp;
 

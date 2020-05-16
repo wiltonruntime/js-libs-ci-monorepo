@@ -1,4 +1,4 @@
-define(["sjcl", "sjcl/test/aes_vectors"], function(sjcl) { var res = [];
+define(["sjcl", "sjcl/test/test", "sjcl/test/aes_vectors"], function(sjcl) { var res = [];
     
 res.push(
 new sjcl.test.TestCase("AES official known-answer tests", function (cb) {

@@ -1,4 +1,4 @@
-define(["sjcl"], function(sjcl) {
+define(["sjcl", "sjcl/test/test"], function(sjcl) {
 
 /* same tests as sha256_vectors.js
    correct results determined by OpenSSL in Node.js  */

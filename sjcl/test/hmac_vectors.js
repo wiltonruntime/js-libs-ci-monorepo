@@ -1,4 +1,4 @@
-define(["sjcl"], function(sjcl) {
+define(["sjcl", "sjcl/test/test"], function(sjcl) {
 
 /* Official HMAC test vectors. */
 //Nilos: http://tools.ietf.org/html/draft-nystrom-smime-hmac-sha-02 for

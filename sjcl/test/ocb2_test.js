@@ -1,4 +1,4 @@
-define(["sjcl", "sjcl/browserTest/browserUtil", "sjcl/test/ocb2_vectors"], function(sjcl, browserUtil) { var res = [];
+define(["sjcl", "sjcl/browserTest/browserUtil", "sjcl/test/test", "sjcl/test/ocb2_vectors"], function(sjcl, browserUtil) { var res = [];
 
 res.push(
 new sjcl.test.TestCase("OCB 2.0 mode tests", function (cb) {

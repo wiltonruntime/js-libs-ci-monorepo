@@ -1,6 +1,9 @@
-define(["sjcl/core/sjcl"], function(sjcl) {
+define(["sjcl/core/sjcl", "sjcl/core/cbc", "sjcl/core/ccm",
+        "sjcl/core/ccmArrayBuffer", "sjcl/core/codecBase64",
+        "sjcl/core/codecString", "sjcl/core/ctr", "sjcl/core/ecc", "sjcl/core/gcm",
+        "sjcl/core/ocb2", "sjcl/core/ocb2progressive", "sjcl/core/random"], function(sjcl) {
 
-/** @fileOverview Convenince functions centered around JSON encapsulation.
+/** @fileOverview Convenience functions centered around JSON encapsulation.
  *
  * @author Emily Stark
  * @author Mike Hamburg

@@ -1,4 +1,4 @@
-define(["sjcl", "sjcl/test/bitArray_vectors"], function(sjcl) { var res = [];
+define(["sjcl", "sjcl/test/test", "sjcl/test/bitArray_vectors"], function(sjcl) { var res = [];
 
 (function() {
 

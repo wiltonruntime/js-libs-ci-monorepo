@@ -1,4 +1,4 @@
-define(["sjcl/core/sjcl"], function(sjcl) {
+define(["sjcl/core/sjcl", "sjcl/core/bitArray", "sjcl/core/ccm", "sjcl/core/codecArrayBuffer"], function(sjcl) {
 
 /** @fileOverview Really fast & small implementation of CCM using JS' array buffers
  *

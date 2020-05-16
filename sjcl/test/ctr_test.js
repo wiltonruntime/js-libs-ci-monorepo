@@ -1,4 +1,4 @@
-define(["sjcl", "sjcl/browserTest/browserUtil", "sjcl/test/ctr_vectors"], function(sjcl, browserUtil) { var res = [];
+define(["sjcl", "sjcl/browserTest/browserUtil", "sjcl/test/test", "sjcl/test/ctr_vectors"], function(sjcl, browserUtil) { var res = [];
 
 res.push(
 new sjcl.test.TestCase("CTR mode tests", function (cb) {

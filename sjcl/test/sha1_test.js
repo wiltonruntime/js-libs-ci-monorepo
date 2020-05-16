@@ -1,4 +1,4 @@
-define(["sjcl", "sjcl/test/sha1_vectors"], function(sjcl) { var res = [];
+define(["sjcl", "sjcl/test/test", "sjcl/test/sha1_vectors"], function(sjcl) { var res = [];
 
 res.push(
 new sjcl.test.TestCase("SHA-1 from sha1sum", function (cb) {

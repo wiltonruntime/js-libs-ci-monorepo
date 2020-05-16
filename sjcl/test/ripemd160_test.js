@@ -1,4 +1,4 @@
-define(["sjcl", "sjcl/test/ripemd160_vectors"], function(sjcl) { var res = [];
+define(["sjcl", "sjcl/test/test", "sjcl/test/ripemd160_vectors"], function(sjcl) { var res = [];
 
 res.push(
 new sjcl.test.TestCase("RIPEMD-160", function (cb) {

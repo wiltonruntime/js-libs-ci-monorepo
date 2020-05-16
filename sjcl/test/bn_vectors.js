@@ -1,4 +1,4 @@
-define(["sjcl"], function(sjcl) {
+define(["sjcl", "sjcl/test/test"], function(sjcl) {
 
 // Verify with Mathematica:
 //   BaseForm[Mod[16^^a, 16^^N], 16]

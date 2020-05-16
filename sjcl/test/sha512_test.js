@@ -1,4 +1,4 @@
-define(["sjcl", "sjcl/test/sha512_vectors"], function(sjcl) { var res = [];
+define(["sjcl", "sjcl/test/test", "sjcl/test/sha512_vectors"], function(sjcl) { var res = [];
 
 res.push(
 new sjcl.test.TestCase("SHA-512 from catameringue", function (cb) {

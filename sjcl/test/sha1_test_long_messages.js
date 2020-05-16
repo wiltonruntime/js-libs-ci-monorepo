@@ -1,4 +1,4 @@
-define(["sjcl", "sjcl/test/sha1_vectors_long_messages"], function(sjcl) { var res = [];
+define(["sjcl", "sjcl/test/test", "sjcl/test/sha1_vectors_long_messages"], function(sjcl) { var res = [];
 
 res.push(
 new sjcl.test.TestCase("SHA-1 long messages", function (cb) {

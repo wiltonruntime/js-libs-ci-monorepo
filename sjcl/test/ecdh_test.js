@@ -1,4 +1,4 @@
-define(["sjcl"], function(sjcl) { var res = [];
+define(["sjcl", "sjcl/test/test"], function(sjcl) { var res = [];
 
 res.push(
 new sjcl.test.TestCase("ECDH test", function (cb) {

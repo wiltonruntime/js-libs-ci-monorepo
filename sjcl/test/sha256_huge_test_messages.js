@@ -1,3 +1,5 @@
+define(["sjcl", "sjcl/test/test"], function(sjcl) {
+
 // dd if=/dev/zero bs=1024 count=$((327155712/1024)) | shasum -a 256
 sjcl.test.vector.sha256huge =
 {
@@ -9,3 +11,5 @@ sjcl.test.vector.sha256huge =
   268435456: "a6d72ac7690f53be6ae46ba88506bd97302a093f7108472bd9efc3cefda06484", // 256 MB
   327155712: "365bb7e64d36c629580c71cc026715f4456825db5dbb63ab65688a1fc8613b38"  // 312 MB
 };
+
+});

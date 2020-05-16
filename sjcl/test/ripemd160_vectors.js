@@ -1,4 +1,4 @@
-define(["sjcl"], function(sjcl) {
+define(["sjcl", "sjcl/test/test"], function(sjcl) {
 
 /* conventional test vectors */
 sjcl.test.vector.ripemd160 = 

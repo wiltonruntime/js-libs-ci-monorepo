@@ -1,4 +1,4 @@
-define(["sjcl/core/sjcl"], function(sjcl) {
+define(["sjcl/core/sjcl", "sjcl/core/sha256"], function(sjcl) {
 
 /** @fileOverview HMAC implementation.
  *

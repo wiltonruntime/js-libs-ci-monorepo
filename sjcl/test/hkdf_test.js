@@ -1,4 +1,4 @@
-define(["sjcl", "sjcl/test/hkdf_vectors"], function(sjcl) { var res = [];
+define(["sjcl", "sjcl/test/test", "sjcl/test/hkdf_vectors"], function(sjcl) { var res = [];
 
 res.push(
 new sjcl.test.TestCase("HKDF official test vectors", function (cb) {

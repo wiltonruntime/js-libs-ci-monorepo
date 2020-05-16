@@ -1,4 +1,4 @@
-define(["sjcl", "sjcl/test/hmac_vectors"], function(sjcl) { var res = [];
+define(["sjcl", "sjcl/test/test", "sjcl/test/hmac_vectors"], function(sjcl) { var res = [];
 
 res.push(
 new sjcl.test.TestCase("HMAC official test vectors", function (cb) {

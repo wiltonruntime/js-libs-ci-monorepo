@@ -1,4 +1,4 @@
-define(["sjcl"], function(sjcl) {
+define(["sjcl", "sjcl/test/test"], function(sjcl) {
 
 // dd if=/dev/zero bs=1024 count=$((327155712/1024)) | shasum
 sjcl.test.vector.sha1huge =

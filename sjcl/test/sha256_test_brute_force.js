@@ -1,3 +1,5 @@
+define(["sjcl", "sjcl/browserTest/browserUtil", "sjcl/test/test"], function(sjcl, browserUtil) { var res = [];
+
 /**
  * Test SHA-256 using an ad-hoc iterative technique.
  * This uses a string buffer which has n characters on the nth iteration.
@@ -10,6 +12,7 @@
  * This is compared against a final hash which was computed with SSL.
  */
 
+res.push(
 new sjcl.test.TestCase("SHA-256 iterative", function (cb) {
   if (!sjcl.hash.sha256) {
     this.unimplemented();
@@ -31,4 +34,6 @@ new sjcl.test.TestCase("SHA-256 iterative", function (cb) {
     thiz.require(hash === "f305c76d5d457ddf04f1927166f5e13429407049a5c5f29021916321fcdcd8b4");
     cb && cb();
   });
-});
+}));
+
+return res;});

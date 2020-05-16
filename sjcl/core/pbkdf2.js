@@ -1,4 +1,4 @@
-define(["sjcl/core/sjcl"], function(sjcl) {
+define(["sjcl/core/sjcl", "sjcl/core/bitArray", "sjcl/core/codecString", "sjcl/core/hmac"], function(sjcl) {
 
 /** @fileOverview Password-based key-derivation function, version 2.0.
  *

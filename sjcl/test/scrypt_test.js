@@ -1,4 +1,4 @@
-define(["sjcl", "sjcl/test/scrypt_vectors"], function(sjcl) { var res = [];
+define(["sjcl", "sjcl/test/test", "sjcl/test/scrypt_vectors"], function(sjcl) { var res = [];
 
 res.push(
 new sjcl.test.TestCase("scrypt", function (cb) {

@@ -1,4 +1,4 @@
-define(["sjcl", "sjcl/test/srp_vectors"], function(sjcl) { var res = [];
+define(["sjcl", "sjcl/test/test", "sjcl/test/srp_vectors"], function(sjcl) { var res = [];
 
 res.push(
 new sjcl.test.TestCase("SRP known-answer (RFC 5054) tests", function (cb) {

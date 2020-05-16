@@ -1,4 +1,4 @@
-define(["sjcl/core/sjcl"], function(sjcl) {
+define(["sjcl/core/sjcl", "sjcl/core/bitArray"], function(sjcl) {
 
 /** @fileOverview Bit array codec implementations.
  *

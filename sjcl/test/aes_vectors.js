@@ -1,4 +1,4 @@
-define(["sjcl"], function(sjcl) {
+define(["sjcl", "sjcl/test/test"], function(sjcl) {
 
 sjcl.test.vector.aes = [ 
   { key: [0x00000000,0x00000000,0x00000000,0x00000000],

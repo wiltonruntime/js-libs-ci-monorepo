@@ -1,4 +1,4 @@
-define(["sjcl"], function(sjcl) { var res = [];
+define(["sjcl", "sjcl/test/test"], function(sjcl) { var res = [];
 
 /* From http://www.cryptosys.net/manapi/api_PBE_Kdf2.html */
 

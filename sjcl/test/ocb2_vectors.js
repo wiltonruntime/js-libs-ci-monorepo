@@ -1,4 +1,4 @@
-define(["sjcl"], function(sjcl) {
+define(["sjcl", "sjcl/test/test"], function(sjcl) {
 
 sjcl.test.vector.ocb2 = [
 /* Official OCB-mode test vectors */

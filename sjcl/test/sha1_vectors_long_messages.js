@@ -1,4 +1,4 @@
-define(["sjcl"], function(sjcl) {
+define(["sjcl", "sjcl/test/test"], function(sjcl) {
 
 // generated with: printf 'a123456%.0s' {1..99999} | sha1sum
 sjcl.test.vector.sha1long = 

@@ -1,3 +1,6 @@
+define(["sjcl", "sjcl/test/test", "sjcl/test/sha512_vectors_long_messages"], function(sjcl) { var res = [];
+
+res.push(
 new sjcl.test.TestCase("SHA-512 long messages", function (cb) {
   if (!sjcl.hash.sha512) {
     this.unimplemented();
@@ -11,4 +14,6 @@ new sjcl.test.TestCase("SHA-512 long messages", function (cb) {
     this.require(sjcl.codec.hex.fromBits(out) == kat[i][1], i);
   }
   cb && cb();
-});
+}));
+
+return res;});

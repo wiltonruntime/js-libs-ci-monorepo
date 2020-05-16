@@ -1,4 +1,4 @@
-define(["sjcl", "sjcl/test/sha1_huge_test_messages"], function(sjcl) { var res = [];
+define(["sjcl", "sjcl/test/test", "sjcl/test/sha1_huge_test_messages"], function(sjcl) { var res = [];
 
 res.push(
 new sjcl.test.TestCase("SHA1 huge zero vector test", function (cb) {

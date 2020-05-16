@@ -1,3 +1,5 @@
+define(["sjcl", "sjcl/browserTest/browserUtil", "sjcl/test/test"], function(sjcl, browserUtil) { var res = [];
+
 /**
  * Test SHA-512 using an ad-hoc iterative technique.
  * This uses a string buffer which has n characters on the nth iteration.
@@ -10,6 +12,7 @@
  * This is compared against a final hash which was computed with OpenSSL/Node.js.
  */
 
+res.push(
 new sjcl.test.TestCase("SHA-512 iterative", function (cb) {
   if (!sjcl.hash.sha512) {
     this.unimplemented();
@@ -31,4 +34,6 @@ new sjcl.test.TestCase("SHA-512 iterative", function (cb) {
     thiz.require(hash === "602923787640dd6d77a99b101c379577a4054df2d61f39c74172cafa2d9f5b26a11b40b7ba4cdc87e84a4ab91b85391cb3e1c0200f3e3d5e317486aae7bebbf3");
     cb && cb();
   });
-});
+}));
+
+return res;});

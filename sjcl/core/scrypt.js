@@ -1,4 +1,4 @@
-define(["sjcl/core/sjcl"], function(sjcl) {
+define(["sjcl/core/sjcl", "sjcl/core/pbkdf2"], function(sjcl) {
 
 /** scrypt Password-Based Key-Derivation Function.
  *

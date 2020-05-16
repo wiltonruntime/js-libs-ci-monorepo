@@ -1,4 +1,4 @@
-define(["sjcl"], function(sjcl) { var res = [];
+define(["sjcl", "sjcl/test/test"], function(sjcl) { var res = [];
 
 /*
  * Asserts that an object can be encoded to an expected string.
