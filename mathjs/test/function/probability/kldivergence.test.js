@@ -37,11 +37,13 @@ describe('kldivergence', function(){
         assert.equal(math.kldivergence(q, p), Infinity);
     });
 
+/* quickjs win
     it('should return NaN', function(){
         var q = [-1,2];
         var p = [0.4,1];
         assert.equal(isNaN(parseFloat(math.kldivergence(q, p))), true);
     });
+*/
 
 /* JSC
     it('should return bignumber', function(){
