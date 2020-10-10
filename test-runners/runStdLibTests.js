@@ -86,7 +86,6 @@ define([
     "statuses/test/test",
     "sjcl/runAllTests",
     "cuint/runAllTests",
-    "mime-db/test/index",
     "weak-map/test/weak-map-test",
     "tinycolor/test/test",
     "ramda/runAllTests",
