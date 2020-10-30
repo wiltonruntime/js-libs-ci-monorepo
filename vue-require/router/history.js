@@ -15,8 +15,9 @@
  */
 
 define([
-    "../store/commit"
-], function(commit) {
+    "../store/commit",
+    "../store/storeHolder"
+], function(commit, storeHolder) {
     "use strict";
 
     // manual history tracing is required to 
@@ -85,8 +86,13 @@ define([
         },
 
         updateState: function() {
-            commit("updateCanGoBack", canGoBack());
-            commit("updateCanGoForward", canGoForward());
+            // todo: revisit me
+            var store = storeHolder.get();
+            if (store && store._mutations.updateCanGoForward && 
+                    store._mutations.updateCanGoBack) {
+                commit("updateCanGoBack", canGoBack());
+                commit("updateCanGoForward", canGoForward());
+            }
         },
 
         dump: function() {
