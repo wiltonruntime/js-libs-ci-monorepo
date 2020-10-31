@@ -15,19 +15,17 @@
  */
 
 define([
-    "../utils/shortModuleId",
+    "../utils/moduleName",
     "./storeHolder"
-], function(shortModuleId, storeHolder) {
+], function(moduleName, storeHolder) {
     "use strict";
 
-    return function(mod) {
-        var mid = "";
-        if ("string" === typeof(mod)) {
-            mid = mod;
-        } else {
-            mid = shortModuleId(mod);
-        }
+    return function(module) {
+        var modname = moduleName(module);
         var store = storeHolder.get();
-        return store.state[mid];
+        if (null === modname) {
+            return store.state;
+        }
+        return store.state[modname];
     };
 });

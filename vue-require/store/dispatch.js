@@ -15,12 +15,21 @@
  */
 
 define([
+    "../utils/moduleName",
     "./storeHolder"
-], function(storeHolder) {
+], function(moduleName, storeHolder) {
     "use strict";
 
-    return function(action, params) {
+    return function(module, action, params) {
+        if ("undefined" === typeof(action)) {
+            throw new Error("Required parameter 'action' not specified");
+        }
+        var name = action;
+        var modname = moduleName(module);
+        if (null !== modname) {
+            name = modname + "/" + name;
+        }
         var store = storeHolder.get();
-        store.dispatch(action, params);
+        store.dispatch(name, params);
     };
 });

@@ -15,24 +15,22 @@
  */
 
 define([
-    "../utils/shortModuleId",
+    "../utils/moduleName",
     "./storeHolder"
-], function(shortModuleId, storeHolder) {
+], function(moduleName, storeHolder) {
     "use strict";
 
-    return function(mod) {
-        var mid = "";
-        if ("string" === typeof(mod)) {
-            mid = mod;
-        } else {
-            mid = shortModuleId(mod);
-        }
+    return function(module) {
+        var modname = moduleName(module);
         var store = storeHolder.get();
         var getters = store.getters;
+        if (null === modname) {
+            return getters;
+        }
         var res = {};
         for (var gt in getters) {
-            if (0 === gt.lastIndexOf(mid + "/", 0)) {
-                var prop = gt.substring(mid.length + 1);
+            if (0 === gt.lastIndexOf(modname + "/", 0)) {
+                var prop = gt.substring(modname.length + 1);
                 res[prop] = getters[gt];
             }
         }

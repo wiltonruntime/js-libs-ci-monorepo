@@ -1,5 +1,5 @@
 /*
- * Copyright 2018, alex at staticlibs.net
+ * Copyright 2020, alex at staticlibs.net
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,21 +15,17 @@
  */
 
 define([
-    "../utils/moduleName",
-    "./storeHolder"
-], function(moduleName, storeHolder) {
+    "./shortModuleId"
+], function(shortModuleId) {
     "use strict";
 
-    return function(module, mutation, params) {
-        if ("undefined" === typeof(mutation)) {
-            throw new Error("Required parameter 'mutation' not specified");
+    return function(mod) {
+        if ("undefined" === typeof(mod) || null === mod) {
+            return null;
+        } else if ("string" === typeof(mod)) {
+            return mod;
+        } else {
+            return shortModuleId(mod);
         }
-        var name = mutation;
-        var modname = moduleName(module);
-        if (null !== modname) {
-            name = modname + "/" + name;
-        }
-        var store = storeHolder.get();
-        return store.commit(name, params);
     };
 });
