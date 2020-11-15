@@ -1,5 +1,5 @@
 define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
-var test = require('tape')
+var test = require('tape-compat')
 var b64 = require('base64-js')
 
 test('convert big data to base64', function (t) {
@@ -11,6 +11,7 @@ test('convert big data to base64', function (t) {
   b64str = b64.fromByteArray(big)
   arr = b64.toByteArray(b64str)
   t.ok(equal(arr, big))
+  t.equal(b64.byteLength(b64str), arr.length)
   t.end()
 })
 

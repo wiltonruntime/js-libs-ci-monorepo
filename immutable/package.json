@@ -1,6 +1,6 @@
 {
   "name": "immutable",
-  "version": "4.0.0-rc.9",
+  "version": "4.0.0-rc.12",
   "description": "Immutable Data Collections",
   "license": "MIT",
   "homepage": "https://facebook.github.com/immutable-js",
@@ -46,10 +46,9 @@
         "dist/immutable-nonambient.d.ts",
         "dist/immutable.d.ts",
         "dist/immutable.es.js",
-        "dist/immutable.js.flow"
-      ],
-      "preMinifiedFiles": [
-          "dist/immutable.js"
+        "dist/immutable.js.flow",
+        "dist/immutable.min.js",
+        "test.js"
       ]
   }
 }

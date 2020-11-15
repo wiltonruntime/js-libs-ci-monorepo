@@ -78,7 +78,8 @@
     "excludes": [
       "bin",
       "perf",
-      "test"
+      "test",
+      "test.js"
     ]
   }
 }

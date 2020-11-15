@@ -18,14 +18,15 @@ function validateOptions(userOptions) {
   helper.ensureFlagExists('ignoreCdata', options);
   helper.ensureFlagExists('ignoreDoctype', options);
   helper.ensureFlagExists('compact', options);
-  helper.ensureFlagExists('alwaysArray', options);
   helper.ensureFlagExists('alwaysChildren', options);
   helper.ensureFlagExists('addParent', options);
   helper.ensureFlagExists('trim', options);
   helper.ensureFlagExists('nativeType', options);
+  helper.ensureFlagExists('nativeTypeAttributes', options);
   helper.ensureFlagExists('sanitize', options);
   helper.ensureFlagExists('instructionHasAttributes', options);
   helper.ensureFlagExists('captureSpacesBetweenElements', options);
+  helper.ensureAlwaysArrayExists(options);
   helper.ensureKeyExists('declaration', options);
   helper.ensureKeyExists('instruction', options);
   helper.ensureKeyExists('attributes', options);
@@ -67,7 +68,10 @@ function nativeType(value) {
 function addField(type, value) {
   var key;
   if (options.compact) {
-    if (!currentElement[options[type + 'Key']] && options.alwaysArray) {
+    if (
+      !currentElement[options[type + 'Key']] &&
+      (isArray(options.alwaysArray) ? options.alwaysArray.indexOf(options[type + 'Key']) !== -1 : options.alwaysArray)
+    ) {
       currentElement[options[type + 'Key']] = [];
     }
     if (currentElement[options[type + 'Key']] && !isArray(currentElement[options[type + 'Key']])) {
@@ -135,11 +139,14 @@ function manipulateAttributes(attributes) {
   if ('attributesFn' in options && attributes) {
     attributes = options.attributesFn(attributes, currentElement);
   }
-  if ((options.trim || 'attributeValueFn' in options || 'attributeNameFn' in options) && attributes) {
+  if ((options.trim || 'attributeValueFn' in options || 'attributeNameFn' in options || options.nativeTypeAttributes) && attributes) {
     var key;
     for (key in attributes) {
       if (attributes.hasOwnProperty(key)) {
         if (options.trim) attributes[key] = attributes[key].trim();
+        if (options.nativeTypeAttributes) {
+          attributes[key] = nativeType(attributes[key]);
+        }
         if ('attributeValueFn' in options) attributes[key] = options.attributeValueFn(attributes[key], key, currentElement);
         if ('attributeNameFn' in options) {
           var temp = attributes[key];
@@ -212,7 +219,10 @@ function onStartElement(name, attributes) {
         }
       }
     }
-    if (!(name in currentElement) && options.alwaysArray) {
+    if (
+      !(name in currentElement) &&
+      (isArray(options.alwaysArray) ? options.alwaysArray.indexOf(name) !== -1 : options.alwaysArray)
+    ) {
       currentElement[name] = [];
     }
     if (currentElement[name] && !isArray(currentElement[name])) {

@@ -1,5 +1,5 @@
 define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
-var S = require('sanctuary');
+var S = require('sanctuary').sanctuary;
 
 var R = require('ramda');
 var Id = require('ramda/test/shared/Id');

@@ -238,6 +238,7 @@ describe('construction', function() {
       });
     }, /Error: Unknown type "array". Did you mean "Array"?/);
 
+/*
     assert.throws(function () {
       var fn = typed({
         'function': function (value) {
@@ -245,6 +246,7 @@ describe('construction', function() {
         }
       });
     }, /Error: Unknown type "function". Did you mean "Function"?/);
+*/
   });
 
   it('should attach signatures to the created typed-function', function() {

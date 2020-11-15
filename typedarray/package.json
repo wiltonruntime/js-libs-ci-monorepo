@@ -56,7 +56,8 @@
     "excludes": [
       "example",
       "test",
-      "readme.markdown"
+      "readme.markdown",
+      "test.js"
     ]
   }
 }

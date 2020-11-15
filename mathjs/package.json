@@ -176,7 +176,7 @@
       "tools",
       "NOTICE",
       "gulpfile.js",
-      "runAllTests.js"
+      "test.js"
     ]
   }
 }

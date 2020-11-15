@@ -11,7 +11,7 @@ define(function(localRequire, exports, module) { var requireOrig = require; requ
  * line. The keyword arguments to the Action constructor are also all attributes
  * of Action instances.
  *
- * #####Alowed keywords:
+ * ##### Allowed keywords:
  *
  * - `store`
  * - `storeConstant`

@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
-set -e
+set -euf -o pipefail
 
-rm -f README.md
-make
-sed -i '' "s/var version = '.*';/var version = '$VERSION';/" index.js
-git add LICENSE README.md index.js
+node_modules/.bin/sanctuary-prepublish "$@"
+
+rm -rf node_modules
+npm install
+mkdir -p -- dist
+scripts/bundle >dist/bundle.js
+git add -- dist/bundle.js

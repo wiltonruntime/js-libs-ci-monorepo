@@ -50,7 +50,7 @@ describe("properties that throws", function () {
     }
 
     assert(err);
-    assert(/foo/.test(err));
+    assert((/foo/).test(err));
   });
 
   it("throwed exception message is in assert exception", function () {
@@ -64,7 +64,7 @@ describe("properties that throws", function () {
     }
 
     assert(err);
-    assert(/foo/.test(err));
+    assert((/foo/).test(err));
   });
 });
 

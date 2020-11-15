@@ -4,7 +4,8 @@ var describe = require("tape-compat").describe;
 var expect = require("tape-compat").expect;
 var it = require("tape-compat").it;
 
-/*global describe,it,expect*/
+/*eslint quotes: 0*/  // --> turn off error of strings surrounded by double quotes
+/*global describe,xdescribe,it,expect*/
 
 describe('Testing xml2js.js:', function () {
 
@@ -373,6 +374,28 @@ describe('Testing xml2js.js:', function () {
         expect(convert.js2xml(js, {compact: true, attributeValueFn: function(value) {
           return value.replace(/</g, '&lt;').replace(/>/g, '&gt;');
         }})).toEqual(xml);
+      });
+
+    });
+
+    describe('case by SergeyAlexsandrovich', function () {
+      // see https://github.com/nashwaan/xml-js/issues/44
+      var xml = '<material><font size="14"/></material><material><font size="14"/></material>';
+      var js = {
+        "material": [{
+          "font": {
+            "_attributes": {"size":"14"}
+          }
+        }, {
+          "font": {
+            "_attributes": {"size":"14"}
+          }
+        }]
+      };
+      it('should json to xml and back to json', function () {
+        // console.log(convert.xml2json(xml, {compact: true}));
+        // expect(convert.js2xml(js, {compact: true})).toEqual(xml);
+        expect(convert.xml2json(xml, {compact: true})).toEqual(JSON.stringify(js));
       });
 
     });

@@ -1,17 +1,15 @@
 'use strict';
 
-var S = require('..');
+const S = require ('..');
 
-var eq = require('./internal/eq');
+const eq = require ('./internal/eq');
 
 
-test('not', function() {
+test ('not', () => {
 
-  eq(typeof S.not, 'function');
-  eq(S.not.length, 1);
-  eq(S.not.toString(), 'not :: Boolean -> Boolean');
+  eq (S.show (S.not)) ('not :: Boolean -> Boolean');
 
-  eq(S.not(false), true);
-  eq(S.not(true), false);
+  eq (S.not (false)) (true);
+  eq (S.not (true)) (false);
 
 });

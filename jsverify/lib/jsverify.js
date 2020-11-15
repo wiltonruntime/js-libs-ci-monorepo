@@ -82,7 +82,7 @@ define(function(localRequire, exports, module) { var requireOrig = require; requ
 
   ### Usage with [jasmine](https://jasmine.github.io/)
 
-  Check [jasmineHelpers.js](helpers/jasmineHelpers.js) and [jasmineHelpers2.js](helpers/jasmineHelpers2.js) for jasmine 1.3 and 2.0 respectively.
+  Check [jasmineHelpers2.js](helpers/jasmineHelpers2.js) for jasmine 2.0.
 
   ## API Reference
 

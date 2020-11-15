@@ -29,7 +29,7 @@
       "AUTHORS",
       "CONTRIBUTING.md",
       "package-lock.json",
-      "runAllTests.js"
+      "test.js"
     ]
   }
 }

@@ -40,7 +40,8 @@
     "excludes": [
       "tests",
       "Gruntfile.js",
-      "component.json"
+      "component.json",
+      "test.js"
     ]
   }
 }

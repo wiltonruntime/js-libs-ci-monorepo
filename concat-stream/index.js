@@ -1,6 +1,7 @@
 define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
 var Writable = require('readable-stream').Writable
 var inherits = require('inherits')
+var bufferFrom = require('buffer-from')
 
 if (typeof Uint8Array === 'undefined') {
   var U8 = require('typedarray').Uint8Array
@@ -88,9 +89,9 @@ function stringConcat (parts) {
     } else if (Buffer.isBuffer(p)) {
       strings.push(p)
     } else if (isBufferish(p)) {
-      strings.push(new Buffer(p))
+      strings.push(bufferFrom(p))
     } else {
-      strings.push(new Buffer(String(p)))
+      strings.push(bufferFrom(String(p)))
     }
   }
   if (Buffer.isBuffer(parts[0])) {
@@ -109,9 +110,9 @@ function bufferConcat (parts) {
     if (Buffer.isBuffer(p)) {
       bufs.push(p)
     } else if (isBufferish(p)) {
-      bufs.push(new Buffer(p))
+      bufs.push(bufferFrom(p))
     } else {
-      bufs.push(new Buffer(String(p)))
+      bufs.push(bufferFrom(String(p)))
     }
   }
   return Buffer.concat(bufs)
@@ -129,7 +130,7 @@ function u8Concat (parts) {
   var len = 0
   for (var i = 0; i < parts.length; i++) {
     if (typeof parts[i] === 'string') {
-      parts[i] = new Buffer(parts[i])
+      parts[i] = bufferFrom(parts[i])
     }
     len += parts[i].length
   }

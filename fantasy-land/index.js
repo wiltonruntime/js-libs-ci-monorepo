@@ -1,10 +1,6 @@
 define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
-(function() {
 
   'use strict';
-
-  /* eslint comma-dangle: ["off"], no-var: ["off"], strict: ["error", "function"] */
-  /* global self */
 
   var mapping = {
     equals: 'fantasy-land/equals',
@@ -14,6 +10,7 @@ define(function(localRequire, exports, module) { var requireOrig = require; requ
     concat: 'fantasy-land/concat',
     empty: 'fantasy-land/empty',
     invert: 'fantasy-land/invert',
+    filter: 'fantasy-land/filter',
     map: 'fantasy-land/map',
     contramap: 'fantasy-land/contramap',
     ap: 'fantasy-land/ap',
@@ -30,12 +27,11 @@ define(function(localRequire, exports, module) { var requireOrig = require; requ
     promap: 'fantasy-land/promap'
   };
 
+  /* istanbul ignore else */
   if (typeof module === 'object' && typeof module.exports === 'object') {
     module.exports = mapping;
   } else {
     self.FantasyLand = mapping;
   }
-
-}());
 
 require = requireOrig;});

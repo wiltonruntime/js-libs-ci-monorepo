@@ -1,17 +1,16 @@
 'use strict';
 
-var S = require('./internal/sanctuary');
+const Identity = require ('sanctuary-identity');
 
-var Identity = require('./internal/Identity');
-var eq = require('./internal/eq');
+const S = require ('./internal/sanctuary');
+
+const eq = require ('./internal/eq');
 
 
-test('extract', function() {
+test ('extract', () => {
 
-  eq(typeof S.extract, 'function');
-  eq(S.extract.length, 1);
-  eq(S.extract.toString(), 'extract :: Comonad w => w a -> a');
+  eq (S.show (S.extract)) ('extract :: Comonad w => w a -> a');
 
-  eq(S.extract(Identity(42)), 42);
+  eq (S.extract (Identity (42))) (42);
 
 });

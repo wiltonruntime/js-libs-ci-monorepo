@@ -38,7 +38,8 @@
         "test",
         "bench.js",
         "sync",
-        "sync.patch"
+        "sync.patch",
+        "test.js"
     ]
   }
 }

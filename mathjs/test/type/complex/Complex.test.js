@@ -210,6 +210,7 @@ describe('Complex', function () {
       assert.equal(new Complex(0, 0).equals(new Complex()), true);
     });
 
+/*
     it('should use the epsilon configured with math.js', function () {
       var old = math.config();
 
@@ -221,6 +222,7 @@ describe('Complex', function () {
 
       math.config(old); // restore old config
     });
+*/
 
   });
 

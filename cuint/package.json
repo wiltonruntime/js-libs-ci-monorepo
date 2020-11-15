@@ -35,7 +35,7 @@
       "test",
       "History.md",
       "build.js",
-      "runAllTests.js"
+      "test.js"
     ]
   }
 }

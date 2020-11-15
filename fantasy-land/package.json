@@ -1,7 +1,7 @@
 {
   "name": "fantasy-land",
   "author": "Brian McKenna",
-  "version": "3.4.0",
+  "version": "4.1.0",
   "description": "Specification for interoperability of common algebraic structures in JavaScript",
   "license": "MIT",
   "homepage": "https://github.com/fantasyland/fantasy-land",
@@ -18,42 +18,43 @@
   "issues": {
     "url": "https://github.com/fantasyland/fantasy-land/issues"
   },
-  "dependencies": {
-    "daggy": "0.0.x",
-    "fantasy-combinators": "0.0.x"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "eslint": "3.8.x",
-    "nodeunit": "0.9.x",
-    "sanctuary-style": "0.2.x",
-    "xyz": "2.0.x"
+    "sanctuary-scripts": "2.x.x"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/fantasyland/fantasy-land.git"
+    "url": "git://github.com/fantasyland/fantasy-land.git"
   },
   "files": [
-    "index.js",
-    "internal/*.js",
-    "laws/*.js"
+    "/LICENSE",
+    "/README.md",
+    "/index.d.ts",
+    "/index.js",
+    "/index.mjs",
+    "/package.json"
   ],
   "main": "index.js",
+  "types": "index.d.ts",
+  "module": "index.mjs",
   "scripts": {
-    "lint": "eslint --config node_modules/sanctuary-style/eslint-es6.json --env es6 --env node --rule 'max-len: [off]' -- *.js laws/*.js internal/*.js",
-    "unit": "nodeunit test.js",
-    "test": "npm run-script lint && npm run-script unit",
-    "release-major": "xyz --repo git@github.com:fantasyland/fantasy-land.git --increment major",
-    "release-minor": "xyz --repo git@github.com:fantasyland/fantasy-land.git --increment minor",
-    "release-patch": "xyz --repo git@github.com:fantasyland/fantasy-land.git --increment patch"
+    "doctest": "sanctuary-doctest",
+    "generate-es": "scripts/generate-es",
+    "generate-js": "scripts/generate-js",
+    "generate-ts": "scripts/generate-ts",
+    "lint": "sanctuary-lint",
+    "release": "sanctuary-release",
+    "test": "npm run lint && sanctuary-test && npm run doctest"
   },
   "wilton": {
     "excludes": [
       "figures",
-      "internal",
-      "laws",
-      "bower.json",
-      "implementations.md",
+      "scripts",
+      "test",
+      "index.d.ts",
+      "index.mjs",
       "logo.png",
+      "names",
       "test.js"
     ]
   }

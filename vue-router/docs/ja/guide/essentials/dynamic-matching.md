@@ -1,5 +1,7 @@
 # 動的ルートマッチング
 
+<div class="vueschool"><a href="https://vueschool.io/courses/vue-router-for-everyone?friend=vuejs" target="_blank" rel="sponsored noopener" title="Learn how to build powerful Single Page Applications with the Vue Router on Vue School">Watch a free video course about Vue Router on Vue School</a></div>
+
 パターンを使って同じコンポーネントにルートをマップする必要がしばしばあるでしょう。例えば、 `User` コンポーネントは全てのユーザーに対して描画されるべきであるが、それぞれ異なるユーザー ID を持つ場合などです。`vue-router` ではパスの中の動的なセグメントを使用して実現できます。
 
 ``` js
@@ -46,7 +48,7 @@ const User = {
 const User = {
   template: '...',
   watch: {
-    '$route' (to, from) {
+    $route (to, from) {
       // ルートの変更の検知...
     }
   }
@@ -96,7 +98,7 @@ this.$route.params.pathMatch // '/non-existing'
 
 ## 高度なマッチングパターン
 
-`vue-router` はパスのマッチングエンジンとして [path-to-regexp](https://github.com/pillarjs/path-to-regexp) を使っています。これは Optional による動的なセグメント、Zero or more / One or more に対する要求、また、カスタム正規表現パターンまでもサポートしています。 これらの高度なパターンについてはこちらの [ドキュメンテーション](https://github.com/pillarjs/path-to-regexp#parameters) または、 `vue-router` の中でそれらを使っている [こちらの例](https://github.com/vuejs/vue-router/blob/dev/examples/route-matching/app.js) をご参照ください。
+`vue-router` はパスのマッチングエンジンとして [path-to-regexp](https://github.com/pillarjs/path-to-regexp/tree/v1.7.0) を使っています。これは Optional による動的なセグメント、Zero or more / One or more に対する要求、また、カスタム正規表現パターンまでもサポートしています。 これらの高度なパターンについてはこちらの [ドキュメンテーション](https://github.com/pillarjs/path-to-regexp/tree/v1.7.0#parameters) または、 `vue-router` の中でそれらを使っている [こちらの例](https://github.com/vuejs/vue-router/blob/dev/examples/route-matching/app.js) をご参照ください。
 
 ## マッチングの優先度
 

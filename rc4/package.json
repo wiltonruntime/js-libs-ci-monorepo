@@ -38,9 +38,10 @@
   },
   "wilton": {
     "excludes": [
-        "test",
-        "Makefile",
-        "synopsis.js"
+      "test",
+      "Makefile",
+      "synopsis.js",
+      "test.js"
     ]
   }
 }

@@ -56,7 +56,7 @@
       "test",
       "Gruntfile.js",
       "bower.json",
-      "runAllTests.js"
+      "test.js"
     ],
     "preMinifiedFiles": [
         "dist/buckets.js"

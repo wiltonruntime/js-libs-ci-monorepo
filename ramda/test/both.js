@@ -1,5 +1,5 @@
 define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
-var S = require('sanctuary');
+var S = require('sanctuary').sanctuary;
 
 var R = require('ramda');
 var eq = require('ramda/test/shared/eq');var describe = require("tape-compat").describe;var it = require("tape-compat").it;
@@ -42,6 +42,7 @@ describe('both', function() {
   });
 
   it('accepts fantasy-land applicative functors', function() {
+    print(JSON.stringify(Object.keys(S)));
     var Just = S.Just;
     var Nothing = function() {
         return S.Nothing;

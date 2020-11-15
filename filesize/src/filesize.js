@@ -9,23 +9,26 @@
 	function filesize (arg, descriptor = {}) {
 		let result = [],
 			val = 0,
-			e, base, bits, ceil, full, fullforms, neg, num, output, round, unix, spacer, standard, symbols;
+			e, base, bits, ceil, full, fullforms, locale, localeOptions, neg, num, output, round, unix, separator, spacer, standard, symbols;
 
 		if (isNaN(arg)) {
-			throw new Error("Invalid arguments");
+			throw new TypeError("Invalid number");
 		}
 
 		bits = descriptor.bits === true;
 		unix = descriptor.unix === true;
 		base = descriptor.base || 2;
-		round = descriptor.round !== undefined ? descriptor.round : unix ? 1 : 2;
-		spacer = descriptor.spacer !== undefined ? descriptor.spacer : unix ? "" : " ";
-		symbols = descriptor.symbols || descriptor.suffixes || {};
+		round = descriptor.round !== void 0 ? descriptor.round : unix ? 1 : 2;
+		locale = descriptor.locale !== void 0 ? descriptor.locale : "";
+		localeOptions = descriptor.localeOptions || {};
+		separator = descriptor.separator !== void 0 ? descriptor.separator : "";
+		spacer = descriptor.spacer !== void 0 ? descriptor.spacer : unix ? "" : " ";
+		symbols = descriptor.symbols || {};
 		standard = base === 2 ? descriptor.standard || "jedec" : "jedec";
 		output = descriptor.output || "string";
 		full = descriptor.fullform === true;
 		fullforms = descriptor.fullforms instanceof Array ? descriptor.fullforms : [];
-		e = descriptor.exponent !== undefined ? descriptor.exponent : -1;
+		e = descriptor.exponent !== void 0 ? descriptor.exponent : -1;
 		num = Number(arg);
 		neg = num < 0;
 		ceil = base > 2 ? 1000 : 1024;
@@ -49,6 +52,10 @@
 			e = 8;
 		}
 
+		if (output === "exponent") {
+			return e;
+		}
+
 		// Zero is now a special case because bytes divide by 1
 		if (num === 0) {
 			result[0] = 0;
@@ -66,6 +73,12 @@
 			}
 
 			result[0] = Number(val.toFixed(e > 0 ? round : 0));
+
+			if (result[0] === ceil && e < 8 && descriptor.exponent === void 0) {
+				result[0] = 1;
+				e++;
+			}
+
 			result[1] = base === 10 && e === 1 ? bits ? "kb" : "kB" : symbol[standard][bits ? "bits" : "bytes"][e];
 
 			if (unix) {
@@ -86,21 +99,25 @@
 		// Applying custom symbol
 		result[1] = symbols[result[1]] || result[1];
 
+		if (locale === true) {
+			result[0] = result[0].toLocaleString();
+		} else if (locale.length > 0) {
+			result[0] = result[0].toLocaleString(locale, localeOptions);
+		} else if (separator.length > 0) {
+			result[0] = result[0].toString().replace(".", separator);
+		}
+
 		// Returning Array, Object, or String (default)
 		if (output === "array") {
 			return result;
 		}
 
-		if (output === "exponent") {
-			return e;
+		if (full) {
+			result[1] = fullforms[e] ? fullforms[e] : fullform[standard][e] + (bits ? "bit" : "byte") + (result[0] === 1 ? "" : "s");
 		}
 
 		if (output === "object") {
-			return {value: result[0], suffix: result[1], symbol: result[1]};
-		}
-
-		if (full) {
-			result[1] = fullforms[e] ? fullforms[e] : fullform[standard][e] + (bits ? "bit" : "byte") + (result[0] === 1 ? "" : "s");
+			return {value: result[0], symbol: result[1], exponent: e};
 		}
 
 		return result.join(spacer);

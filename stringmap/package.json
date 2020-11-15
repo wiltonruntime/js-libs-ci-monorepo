@@ -19,7 +19,8 @@
   "license": "MIT",
   "wilton": {
     "excludes": [
-       "examples.js"
+       "examples.js",
+       "test.js"
     ]
   }
 }

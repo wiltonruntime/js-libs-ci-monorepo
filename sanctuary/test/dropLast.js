@@ -1,33 +1,31 @@
 'use strict';
 
-var S = require('..');
+const S = require ('./internal/sanctuary');
 
-var eq = require('./internal/eq');
+const {Nil, Cons} = require ('./internal/List');
+const eq = require ('./internal/eq');
 
 
-test('dropLast', function() {
+test ('dropLast', () => {
 
-  eq(typeof S.dropLast, 'function');
-  eq(S.dropLast.length, 2);
-  eq(S.dropLast.toString(), 'dropLast :: Integer -> List a -> Maybe (List a)');
+  eq (S.show (S.dropLast)) ('dropLast :: (Applicative f, Foldable f, Monoid f) => Integer -> f a -> Maybe (f a)');
 
-  eq(S.dropLast(0, [1, 2, 3, 4, 5]), S.Just([1, 2, 3, 4, 5]));
-  eq(S.dropLast(1, [1, 2, 3, 4, 5]), S.Just([1, 2, 3, 4]));
-  eq(S.dropLast(2, [1, 2, 3, 4, 5]), S.Just([1, 2, 3]));
-  eq(S.dropLast(3, [1, 2, 3, 4, 5]), S.Just([1, 2]));
-  eq(S.dropLast(4, [1, 2, 3, 4, 5]), S.Just([1]));
-  eq(S.dropLast(5, [1, 2, 3, 4, 5]), S.Just([]));
-  eq(S.dropLast(6, [1, 2, 3, 4, 5]), S.Nothing);
+  eq (S.dropLast (0) ([1, 2, 3, 4, 5])) (S.Just ([1, 2, 3, 4, 5]));
+  eq (S.dropLast (1) ([1, 2, 3, 4, 5])) (S.Just ([1, 2, 3, 4]));
+  eq (S.dropLast (2) ([1, 2, 3, 4, 5])) (S.Just ([1, 2, 3]));
+  eq (S.dropLast (3) ([1, 2, 3, 4, 5])) (S.Just ([1, 2]));
+  eq (S.dropLast (4) ([1, 2, 3, 4, 5])) (S.Just ([1]));
+  eq (S.dropLast (5) ([1, 2, 3, 4, 5])) (S.Just ([]));
+  eq (S.dropLast (6) ([1, 2, 3, 4, 5])) (S.Nothing);
 
-  eq(S.dropLast(0, '12345'), S.Just('12345'));
-  eq(S.dropLast(1, '12345'), S.Just('1234'));
-  eq(S.dropLast(2, '12345'), S.Just('123'));
-  eq(S.dropLast(3, '12345'), S.Just('12'));
-  eq(S.dropLast(4, '12345'), S.Just('1'));
-  eq(S.dropLast(5, '12345'), S.Just(''));
-  eq(S.dropLast(6, '12345'), S.Nothing);
+  eq (S.dropLast (-1) ([1, 2, 3, 4, 5])) (S.Nothing);
 
-  eq(S.dropLast(-1, [1, 2, 3, 4, 5]), S.Nothing);
-  eq(S.dropLast(-0, [1, 2, 3, 4, 5]), S.Nothing);
+  eq (S.dropLast (0) (Cons (1) (Cons (2) (Cons (3) (Nil))))) (S.Just (Cons (1) (Cons (2) (Cons (3) (Nil)))));
+  eq (S.dropLast (1) (Cons (1) (Cons (2) (Cons (3) (Nil))))) (S.Just (Cons (1) (Cons (2) (Nil))));
+  eq (S.dropLast (2) (Cons (1) (Cons (2) (Cons (3) (Nil))))) (S.Just (Cons (1) (Nil)));
+  eq (S.dropLast (3) (Cons (1) (Cons (2) (Cons (3) (Nil))))) (S.Just (Nil));
+  eq (S.dropLast (4) (Cons (1) (Cons (2) (Cons (3) (Nil))))) (S.Nothing);
+
+  eq (S.dropLast (-1) (Cons (1) (Cons (2) (Cons (3) (Nil))))) (S.Nothing);
 
 });

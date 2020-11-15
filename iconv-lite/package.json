@@ -54,7 +54,8 @@
   "wilton": {
     "excludes": [
       "generation",
-      "test"
+      "test",
+      "test.js"
     ]
   }
 }

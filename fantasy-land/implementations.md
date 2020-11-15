@@ -16,7 +16,7 @@ Here are a list of implementations that live in Fantasy Land:
   implements Monad and Functor for Promise
 * [Fantasy Sorcery](https://github.com/pufuwozu/fantasy-sorcery)
   provides common functions that work for Fantasy Land structures
-* ECMAScript 5 provides a Semigroup and Functor for Array
+* ECMAScript 5 provides a Semigroup, Functor, and Foldable for Array
 * [lz](https://github.com/goatslacker/lz) implements Semigroup, Monoid, Functor, and Monad for lazy Array and String
 * [Pacta](https://github.com/mudge/pacta) is an algebraic implementation of
   Promises that implements Semigroup, Monoid, Functor, Applicative, Chain and
@@ -30,6 +30,10 @@ Here are a list of implementations that live in Fantasy Land:
 * [Sanctuary](https://github.com/plaid/sanctuary) is a refuge from unsafe JavaScript. It provides FL-compatible Either and Maybe types.
 * [Fluture](https://github.com/Avaq/Fluture) is a high-performance monadic alternative to Promises.
 * [Ramda Adjunct](https://github.com/char0n/ramda-adjunct) is a community-maintained extension of Ramda
+* [Folktale](https://folktale.origamitower.com/) implements Maybe, Result, Validation, Task and Future as FL-compatible types.
+* [Monastic](https://github.com/wearereasonablepeople/monastic) implements a Fantasy Land 3 compliant State Monad.
+* [SodiumFRP](https://github.com/sodiumFRP/sodium-typescript) implements Functor and Monoid for Streams, as well as Monad and Comonad for Cells.
+* [Zion](https://github.com/osstotalsoft/jsbb/tree/master/packages/zion) provides FL-compatible types like Maybe, List, Map, Reader, Step and polymorphic fns.
 
 Conforming implementations are encouraged to promote the Fantasy Land logo:
 

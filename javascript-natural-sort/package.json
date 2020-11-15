@@ -29,7 +29,8 @@
       "index.html",
       "speed-tests.html",
       "unit-tests.html",
-      "unit-test.js"
+      "unit-test.js",
+      "test.js"
     ]
   }
 }

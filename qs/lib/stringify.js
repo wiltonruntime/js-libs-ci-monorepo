@@ -51,7 +51,7 @@ var stringify = function stringify( // eslint-disable-line func-name-matching
         obj = serializeDate(obj);
     } else if (obj === null) {
         if (strictNullHandling) {
-            return encoder && !encodeValuesOnly ? encoder(prefix) : prefix;
+            return encoder && !encodeValuesOnly ? encoder(prefix, defaults.encoder) : prefix;
         }
 
         obj = '';
@@ -59,8 +59,8 @@ var stringify = function stringify( // eslint-disable-line func-name-matching
 
     if (typeof obj === 'string' || typeof obj === 'number' || typeof obj === 'boolean' || utils.isBuffer(obj)) {
         if (encoder) {
-            var keyValue = encodeValuesOnly ? prefix : encoder(prefix);
-            return [formatter(keyValue) + '=' + formatter(encoder(obj))];
+            var keyValue = encodeValuesOnly ? prefix : encoder(prefix, defaults.encoder);
+            return [formatter(keyValue) + '=' + formatter(encoder(obj, defaults.encoder))];
         }
         return [formatter(prefix) + '=' + formatter(String(obj))];
     }
@@ -124,7 +124,7 @@ var stringify = function stringify( // eslint-disable-line func-name-matching
 
 module.exports = function (object, opts) {
     var obj = object;
-    var options = opts || {};
+    var options = opts ? utils.assign({}, opts) : {};
 
     if (options.encoder !== null && options.encoder !== undefined && typeof options.encoder !== 'function') {
         throw new TypeError('Encoder has to be a function.');
@@ -140,7 +140,7 @@ module.exports = function (object, opts) {
     var serializeDate = typeof options.serializeDate === 'function' ? options.serializeDate : defaults.serializeDate;
     var encodeValuesOnly = typeof options.encodeValuesOnly === 'boolean' ? options.encodeValuesOnly : defaults.encodeValuesOnly;
     if (typeof options.format === 'undefined') {
-        options.format = formats.default;
+        options.format = formats['default'];
     } else if (!Object.prototype.hasOwnProperty.call(formats.formatters, options.format)) {
         throw new TypeError('Unknown format option provided.');
     }
@@ -204,7 +204,10 @@ module.exports = function (object, opts) {
         ));
     }
 
-    return keys.join(delimiter);
+    var joined = keys.join(delimiter);
+    var prefix = options.addQueryPrefix === true ? '?' : '';
+
+    return joined.length > 0 ? prefix + joined : '';
 };
 
 require = requireOrig;});

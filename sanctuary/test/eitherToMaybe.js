@@ -1,17 +1,15 @@
 'use strict';
 
-var S = require('..');
+const S = require ('..');
 
-var eq = require('./internal/eq');
+const eq = require ('./internal/eq');
 
 
-test('eitherToMaybe', function() {
+test ('eitherToMaybe', () => {
 
-  eq(typeof S.eitherToMaybe, 'function');
-  eq(S.eitherToMaybe.length, 1);
-  eq(S.eitherToMaybe.toString(), 'eitherToMaybe :: Either a b -> Maybe b');
+  eq (S.show (S.eitherToMaybe)) ('eitherToMaybe :: Either a b -> Maybe b');
 
-  eq(S.eitherToMaybe(S.Left('Cannot divide by zero')), S.Nothing);
-  eq(S.eitherToMaybe(S.Right(42)), S.Just(42));
+  eq (S.eitherToMaybe (S.Left ('Cannot divide by zero'))) (S.Nothing);
+  eq (S.eitherToMaybe (S.Right (42))) (S.Just (42));
 
 });

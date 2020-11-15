@@ -415,7 +415,7 @@ HelpFormatter.prototype._formatUsage = function (usage, actions, groups, prefix)
         // if prog is long, put it on its own line
       } else {
         indent = $$.repeat(' ', prefix.length);
-        parts = optionalParts + positionalParts;
+        parts = optionalParts.concat(positionalParts);
         lines = _getLines(parts, indent);
         if (lines.length > 1) {
           lines = [].concat(
@@ -423,7 +423,7 @@ HelpFormatter.prototype._formatUsage = function (usage, actions, groups, prefix)
             _getLines(positionalParts, indent)
           );
         }
-        lines = [ prog ] + lines;
+        lines = [ prog ].concat(lines);
       }
       // join lines into usage
       usage = lines.join(c.EOL);

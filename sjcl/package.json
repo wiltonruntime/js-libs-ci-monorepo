@@ -44,7 +44,8 @@
         "configure",
         "jsdoc.conf.json",
         "runAllTests.js",
-        "sjcl.js"
+        "sjcl.js",
+        "test.js"
     ]
   }
 }

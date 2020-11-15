@@ -1,33 +1,17 @@
 'use strict';
 
-var $ = require('sanctuary-def');
-var type = require('sanctuary-type-identifiers');
+const $ = require ('sanctuary-def');
 
-var S = require('../..');
+const S = require ('../..');
+
+const List = require ('./List');
+const Sum = require ('./Sum');
 
 
-//  UnaryType :: String -> Type
-function UnaryType(typeIdent) {
-  return $.UnaryType(
-    typeIdent,
-    '',
-    function(x) { return type(x) === typeIdent; },
-    function(v) { return [v.value]; }
-  )($.Unknown);
-}
-
-//  UselessType :: Type
-var UselessType = $.NullaryType(
-  'sanctuary/Useless',
-  '',
-  function(x) { return type(x) === 'sanctuary/Useless'; }
-);
-
-//  env :: Array Type
-var env = S.env.concat([
-  UnaryType('sanctuary/Compose'),
-  UnaryType('sanctuary/Identity'),
-  UselessType
+//    env :: Array Type
+const env = S.env.concat ([
+  List.Type ($.Unknown),
+  Sum.Type,
 ]);
 
-module.exports = S.create({checkTypes: true, env: env});
+module.exports = S.create ({checkTypes: true, env});

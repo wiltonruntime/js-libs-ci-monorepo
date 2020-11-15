@@ -1,52 +1,59 @@
 'use strict';
 
-var $ = require('sanctuary-def');
+const $ = require ('sanctuary-def');
 
-var S = require('..');
+const S = require ('..');
 
-var eq = require('./internal/eq');
-var throws = require('./internal/throws');
-
-
-//  FooTrue42 :: Type
-var FooTrue42 = $.EnumType('my-package/FooTrue42', '', ['foo', true, 42]);
-
-//  customEnv :: Array Type
-var customEnv = S.env.concat([FooTrue42]);
-
-var checkedDefaultEnv   = S.create({checkTypes: true, env: S.env});
-var checkedCustomEnv    = S.create({checkTypes: true, env: customEnv});
-var uncheckedDefaultEnv = S.create({checkTypes: false, env: S.env});
-var uncheckedCustomEnv  = S.create({checkTypes: false, env: customEnv});
+const eq = require ('./internal/eq');
+const throws = require ('./internal/throws');
 
 
-test('create', function() {
+//    FooTrue42 :: Type
+const FooTrue42 = $.EnumType ('my-package/FooTrue42') ('') (['foo', true, 42]);
 
-  eq(typeof S.create, 'function');
-  eq(S.create.length, 1);
-  eq(S.create.toString(), 'create :: { checkTypes :: Boolean, env :: Array Any } -> Object');
+//    customEnv :: Array Type
+const customEnv = S.env.concat ([FooTrue42]);
 
-  var expected = Object.keys(S).sort();
-  eq(Object.keys(checkedDefaultEnv).sort(), expected);
-  eq(Object.keys(checkedCustomEnv).sort(), expected);
-  eq(Object.keys(uncheckedDefaultEnv).sort(), expected);
-  eq(Object.keys(uncheckedCustomEnv).sort(), expected);
+const checkedDefaultEnv   = S.create ({checkTypes: true, env: S.env});
+const checkedCustomEnv    = S.create ({checkTypes: true, env: customEnv});
+const uncheckedDefaultEnv = S.create ({checkTypes: false, env: S.env});
+const uncheckedCustomEnv  = S.create ({checkTypes: false, env: customEnv});
 
-  eq(uncheckedDefaultEnv.add(1, 42), S.add(1, 42));
-  eq(uncheckedDefaultEnv.add(1, 'XXX'), '1XXX');
 
-  throws(function() { S.I(['foo', 'foo', 42]); },
-         TypeError,
-         'Type-variable constraint violation\n' +
-         '\n' +
-         'I :: a -> a\n' +
-         '     ^\n' +
-         '     1\n' +
-         '\n' +
-         '1)  ["foo", "foo", 42] :: Array ???\n' +
-         '\n' +
-         'Since there is no type of which all the above values are members, the type-variable constraint has been violated.\n');
+test ('create', () => {
 
-  eq(checkedCustomEnv.I(['foo', 'foo', 42]), ['foo', 'foo', 42]);
+  eq (S.show (S.create)) ('create :: { checkTypes :: Boolean, env :: Array Any } -> Object');
+
+  const expected = S.sort (Object.keys (S));
+  eq (S.sort (Object.keys (checkedDefaultEnv))) (expected);
+  eq (S.sort (Object.keys (checkedCustomEnv))) (expected);
+  eq (S.sort (Object.keys (uncheckedDefaultEnv))) (expected);
+  eq (S.sort (Object.keys (uncheckedCustomEnv))) (expected);
+
+  eq (checkedDefaultEnv.env) (S.env);
+  eq (checkedCustomEnv.env) (customEnv);
+  eq (uncheckedDefaultEnv.env) (S.env);
+  eq (uncheckedCustomEnv.env) (customEnv);
+
+  eq (checkedDefaultEnv.unchecked.env) (S.env);
+  eq (checkedCustomEnv.unchecked.env) (customEnv);
+  eq (uncheckedDefaultEnv.unchecked.env) (S.env);
+  eq (uncheckedCustomEnv.unchecked.env) (customEnv);
+
+  eq (uncheckedDefaultEnv.add (1) (42)) (S.add (1) (42));
+  eq (uncheckedDefaultEnv.add (1) ('XXX')) ('1XXX');
+
+  throws (() => { S.I (['foo', 'foo', 42]); })
+         (new TypeError ('Type-variable constraint violation\n' +
+                         '\n' +
+                         'I :: a -> a\n' +
+                         '     ^\n' +
+                         '     1\n' +
+                         '\n' +
+                         '1)  ["foo", "foo", 42] :: Array ???\n' +
+                         '\n' +
+                         'Since there is no type of which all the above values are members, the type-variable constraint has been violated.\n'));
+
+  eq (checkedCustomEnv.I (['foo', 'foo', 42])) (['foo', 'foo', 42]);
 
 });

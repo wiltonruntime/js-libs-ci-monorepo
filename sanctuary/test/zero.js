@@ -1,18 +1,16 @@
 'use strict';
 
-var S = require('..');
+const S = require ('..');
 
-var eq = require('./internal/eq');
+const eq = require ('./internal/eq');
 
 
-test('zero', function() {
+test ('zero', () => {
 
-  eq(typeof S.zero, 'function');
-  eq(S.zero.length, 1);
-  eq(S.zero.toString(), 'zero :: Plus f => TypeRep f -> f a');
+  eq (S.show (S.zero)) ('zero :: Plus f => TypeRep (f a) -> f a');
 
-  eq(S.zero(Array), []);
-  eq(S.zero(Object), {});
-  eq(S.zero(S.Maybe), S.Nothing);
+  eq (S.zero (Array)) ([]);
+  eq (S.zero (Object)) ({});
+  eq (S.zero (S.Maybe)) (S.Nothing);
 
 });

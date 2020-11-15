@@ -4,6 +4,10 @@
         "main": "index"
     },
     {
+        "name": "arrays",
+        "main": "index"
+    },
+    {
         "name": "assert",
         "main": "assert"
     },
@@ -25,6 +29,10 @@
     },
     {
         "name": "buffer",
+        "main": "index"
+    },
+    {
+        "name": "buffer-from",
         "main": "index"
     },
     {
@@ -82,10 +90,6 @@
     {
         "name": "escape-latex",
         "main": "src/index"
-    },
-    {
-        "name": "es6-shim",
-        "main": "es6-shim"
     },
     {
         "name": "events",
@@ -176,6 +180,10 @@
         "main": "index"
     },
     {
+        "name": "path",
+        "main": "path"
+    },
+    {
         "name": "process-nextick-args",
         "main": "index"
     },
@@ -184,12 +192,12 @@
         "main": "punycode"
     },
     {
-        "name": "qs",
-        "main": "lib/index"
+        "name": "pwdauth",
+        "main": "index"
     },
     {
-        "name": "querystring",
-        "main": "index"
+        "name": "qs",
+        "main": "lib/index"
     },
     {
         "name": "ramda",
@@ -217,19 +225,7 @@
     },
     {
         "name": "sanctuary",
-        "main": "index"
-    },
-    {
-        "name": "sanctuary-def",
-        "main": "index"
-    },
-    {
-        "name": "sanctuary-type-classes",
-        "main": "index"
-    },
-    {
-        "name": "sanctuary-type-identifiers",
-        "main": "index"
+        "main": "dist/bundle"
     },
     {
         "name": "sax",
@@ -304,10 +300,6 @@
         "main": "lib/parser"
     },
     {
-        "name": "uglify-js",
-        "main": "uglify-js"
-    },
-    {
         "name": "unicode-escape",
         "main": "index"
     },
@@ -322,6 +314,10 @@
     {
         "name": "util",
         "main": "util"
+    },
+    {
+        "name": "validator",
+        "main": "index"
     },
     {
         "name": "vue",
@@ -354,9 +350,5 @@
     {
         "name": "xml-writer",
         "main": "index"
-    },
-    {
-        "name": "xregexp",
-        "main": "src/index"
     }
 ]

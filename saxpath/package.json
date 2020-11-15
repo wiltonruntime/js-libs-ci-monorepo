@@ -43,7 +43,8 @@
           "test",
           "Makefile",
           "run.js",
-          "sonar-project.properties"
+          "sonar-project.properties",
+          "test.js"
         ]
     }
 }

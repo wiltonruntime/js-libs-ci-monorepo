@@ -43,10 +43,7 @@
           "benchmark",
           "examples",
           "test",
-          "runAllTests.js"
-      ],
-      "preMinifiedFiles": [
-          "typed-function.js"
+          "test.js"
       ]
   }
 }

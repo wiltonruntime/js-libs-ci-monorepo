@@ -7,3 +7,4 @@ test/browser/worker_bundle.js
 zalgo.js
 coverage/*
 .vscode
+.idea

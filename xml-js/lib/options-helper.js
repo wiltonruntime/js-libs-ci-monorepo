@@ -1,4 +1,6 @@
 define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
+var isArray = require('./array-helper').isArray;
+
 module.exports = {
 
   copyOptions: function (options) {
@@ -20,6 +22,12 @@ module.exports = {
   ensureSpacesExists: function (options) {
     if (!('spaces' in options) || (typeof options.spaces !== 'number' && typeof options.spaces !== 'string')) {
       options.spaces = 0;
+    }
+  },
+
+  ensureAlwaysArrayExists: function (options) {
+    if (!('alwaysArray' in options) || (typeof options.alwaysArray !== 'boolean' && !isArray(options.alwaysArray))) {
+      options.alwaysArray = false;
     }
   },
 

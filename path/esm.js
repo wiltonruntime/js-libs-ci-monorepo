@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
-import { require } from "wilton-requirejs/esmGlobals.js";
+import { require } from "wilton-requirejs";
 
-export default require("path");
+const path = require("path");
+
+export default path;

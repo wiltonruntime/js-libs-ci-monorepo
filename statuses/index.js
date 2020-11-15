@@ -23,10 +23,13 @@ var codes = require('statuses/codes')
 module.exports = status
 
 // status code to message map
-status.STATUS_CODES = codes
+status.message = codes
+
+// status message (lower-case) to code map
+status.code = createMessageToStatusCodeMap(codes)
 
 // array of status codes
-status.codes = populateStatusesMap(status, codes)
+status.codes = createStatusCodeList(codes)
 
 // status codes for redirects
 status.redirect = {
@@ -54,27 +57,33 @@ status.retry = {
 }
 
 /**
- * Populate the statuses map for given codes.
+ * Create a map of message to status code.
  * @private
  */
 
-function populateStatusesMap (statuses, codes) {
-  var arr = []
+function createMessageToStatusCodeMap (codes) {
+  var map = {}
 
   Object.keys(codes).forEach(function forEachCode (code) {
     var message = codes[code]
     var status = Number(code)
 
-    // Populate properties
-    statuses[status] = message
-    statuses[message] = status
-    statuses[message.toLowerCase()] = status
-
-    // Add to array
-    arr.push(status)
+    // populate map
+    map[message.toLowerCase()] = status
   })
 
-  return arr
+  return map
+}
+
+/**
+ * Create a list of all status codes.
+ * @private
+ */
+
+function createStatusCodeList (codes) {
+  return Object.keys(codes).map(function mapCode (code) {
+    return Number(code)
+  })
 }
 
 /**
@@ -93,8 +102,8 @@ function populateStatusesMap (statuses, codes) {
 
 function status (code) {
   if (typeof code === 'number') {
-    if (!status[code]) throw new Error('invalid status code: ' + code)
-    return code
+    if (!status.message[code]) throw new Error('invalid status code: ' + code)
+    return status.message[code]
   }
 
   if (typeof code !== 'string') {
@@ -104,11 +113,11 @@ function status (code) {
   // '403'
   var n = parseInt(code, 10)
   if (!isNaN(n)) {
-    if (!status[n]) throw new Error('invalid status code: ' + n)
-    return n
+    if (!status.message[n]) throw new Error('invalid status code: ' + n)
+    return status.message[n]
   }
 
-  n = status[code.toLowerCase()]
+  n = status.code[code.toLowerCase()]
   if (!n) throw new Error('invalid status message: "' + code + '"')
   return n
 }

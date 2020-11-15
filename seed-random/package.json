@@ -15,7 +15,8 @@
   "wilton": {
     "excludes": [
       "test",
-      "component.json"
+      "component.json",
+      "test.js"
     ]
   }
 }

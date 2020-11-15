@@ -1,16 +1,14 @@
 'use strict';
 
-var S = require('..');
+const S = require ('..');
 
-var eq = require('./internal/eq');
+const eq = require ('./internal/eq');
 
 
-test('lt', function() {
+test ('lt', () => {
 
-  eq(typeof S.lt, 'function');
-  eq(S.lt.length, 1);
-  eq(S.lt.toString(), 'lt :: Ord a => a -> (a -> Boolean)');
+  eq (S.show (S.lt)) ('lt :: Ord a => a -> a -> Boolean');
 
-  eq(S.filter(S.lt(3), [1, 2, 3, 4, 5]), [1, 2]);
+  eq (S.filter (S.lt (3)) ([1, 2, 3, 4, 5])) ([1, 2]);
 
 });

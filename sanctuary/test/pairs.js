@@ -1,28 +1,18 @@
 'use strict';
 
-var S = require('..');
+const S = require ('..');
 
-var eq = require('./internal/eq');
+const eq = require ('./internal/eq');
+const strMap = require ('./internal/strMap');
 
 
-test('pairs', function() {
+test ('pairs', () => {
 
-  function comparePairsAsc(a, b) {
-    return a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0;
-  }
+  eq (S.show (S.pairs)) ('pairs :: StrMap a -> Array (Pair String a)');
 
-  eq(typeof S.pairs, 'function');
-  eq(S.pairs.length, 1);
-  eq(S.pairs.toString(), 'pairs :: StrMap a -> Array (Pair String a)');
+  eq (S.sort (S.pairs ({}))) ([]);
+  eq (S.sort (S.pairs ({a: 1, b: 2, c: 3}))) ([S.Pair ('a') (1), S.Pair ('b') (2), S.Pair ('c') (3)]);
 
-  eq(S.pairs({}), []);
-  eq(S.pairs({a: 1, b: 2, c: 3}).sort(comparePairsAsc), [['a', 1], ['b', 2], ['c', 3]]);
-
-  var proto = {a: 1, b: 2};
-  var obj = Object.create(proto);
-  obj.c = 3;
-  obj.d = 4;
-
-  eq(S.pairs(obj).sort(comparePairsAsc), [['c', 3], ['d', 4]]);
+  eq (S.pairs (strMap)) ([S.Pair ('enumerable own property') ('enumerable own property')]);
 
 });

@@ -1,39 +1,19 @@
-(function(root) {
+define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
 	'use strict';
 
 	var noop = Function.prototype;
 
-	var load = (typeof require == 'function' && !(root.define && define.amd)) ?
-		require :
-		(!root.document && root.java && root.load) || noop;
+	var load = require;
 
-	var QUnit = (function() {
-		return root.QUnit || (
-			root.addEventListener || (root.addEventListener = noop),
-			root.setTimeout || (root.setTimeout = noop),
-			root.QUnit = load('../node_modules/qunitjs/qunit/qunit.js') || root.QUnit,
-			addEventListener === noop && delete root.addEventListener,
-			root.QUnit
-		);
-	}());
-
-	var qe = load('../node_modules/qunit-extras/qunit-extras.js');
-	if (qe) {
-		qe.runInContext(root);
-	}
+        var assert = require("assert");
+        var test = require("tape-compat");
+	var QUnit = test.QUnit;
 
 	/** The `punycode` object to test */
-	var punycode = root.punycode || (root.punycode = (
-		punycode = load('../punycode.js') || root.punycode,
-		punycode = punycode.punycode || punycode
-	));
+	var punycode = require("punycode");
 
 	// Quick and dirty test to see if we’re in Node or PhantomJS
-	var runExtendedTests = (function() {
-		try {
-			return process.argv[0] == 'node' || root.phantom;
-		} catch (exception) { }
-	}());
+	var runExtendedTests = true;
 
 	/** Data that will be used in the tests */
 	var allSymbols = runExtendedTests && require('./data.js');
@@ -289,10 +269,10 @@
 	test('punycode.ucs2.decode', function() {
 		// Test all Unicode code points separately.
 		runExtendedTests && each(allSymbols, function(string, codePoint) {
-			deepEqual(punycode.ucs2.decode(string), [codePoint], 'Decoding symbol with code point ' + codePoint);
+			assert.deepEqual(punycode.ucs2.decode(string), [codePoint], 'Decoding symbol with code point ' + codePoint);
 		});
 		each(testData.ucs2, function(object) {
-			deepEqual(punycode.ucs2.decode(object.encoded), object.decoded, object.description);
+			assert.deepEqual(punycode.ucs2.decode(object.encoded), object.decoded, object.description);
 		});
 		raises(
 			function() {
@@ -313,33 +293,33 @@
 	test('punycode.ucs2.encode', function() {
 		// test all Unicode code points separately
 		runExtendedTests && each(allSymbols, function(string, codePoint) {
-			deepEqual(punycode.ucs2.encode([codePoint]), string, 'Encoding code point ' + codePoint);
+			assert.deepEqual(punycode.ucs2.encode([codePoint]), string, 'Encoding code point ' + codePoint);
 		});
 		each(testData.ucs2, function(object) {
-			equal(punycode.ucs2.encode(object.decoded), object.encoded, object.description);
+			assert.equal(punycode.ucs2.encode(object.decoded), object.encoded, object.description);
 		});
 		var codePoints = [0x61, 0x62, 0x63];
 		var result = punycode.ucs2.encode(codePoints);
-		equal(result, 'abc');
-		deepEqual(codePoints, [0x61, 0x62, 0x63], 'Do not mutate argument array');
+		assert.equal(result, 'abc');
+		assert.deepEqual(codePoints, [0x61, 0x62, 0x63], 'Do not mutate argument array');
 	});
 
 	test('punycode.decode', function() {
 		each(testData.strings, function(object) {
-			equal(punycode.decode(object.encoded), object.decoded, object.description);
+			assert.equal(punycode.decode(object.encoded), object.decoded, object.description);
 		});
-		equal(punycode.decode('ZZZ'), '\u7BA5', 'Uppercase Z');
+		assert.equal(punycode.decode('ZZZ'), '\u7BA5', 'Uppercase Z');
 	});
 
 	test('punycode.encode', function() {
 		each(testData.strings, function(object) {
-			equal(punycode.encode(object.decoded), object.encoded, object.description);
+			assert.equal(punycode.encode(object.decoded), object.encoded, object.description);
 		});
 	});
 
 	test('punycode.toUnicode', function() {
 		each(testData.domains, function(object) {
-			equal(punycode.toUnicode(object.encoded), object.decoded, object.description);
+			assert.equal(punycode.toUnicode(object.encoded), object.decoded, object.description);
 		});
 		/**
 		 * Domain names (or other strings) that don't start with `xn--` may not be
@@ -347,39 +327,30 @@
 		 */
 		each(testData.strings, function(object) {
 			var message = 'Domain names (or other strings) that don\'t start with `xn--` may not be converted';
-			equal(punycode.toUnicode(object.encoded), object.encoded, message);
-			equal(punycode.toUnicode(object.decoded), object.decoded, message);
+			assert.equal(punycode.toUnicode(object.encoded), object.encoded, message);
+			assert.equal(punycode.toUnicode(object.decoded), object.decoded, message);
 		});
 	});
 
 	test('punycode.toASCII', function() {
 		each(testData.domains, function(object) {
-			equal(punycode.toASCII(object.decoded), object.encoded, object.description);
+			assert.equal(punycode.toASCII(object.decoded), object.encoded, object.description);
 		});
 		/**
 		 * Domain names (or other strings) that are already in ASCII may not be
 		 * converted.
 		 */
 		each(testData.strings, function(object) {
-			equal(punycode.toASCII(object.encoded), object.encoded, 'Domain names (or other strings) that are already in ASCII may not be converted');
+			assert.equal(punycode.toASCII(object.encoded), object.encoded, 'Domain names (or other strings) that are already in ASCII may not be converted');
 		});
 		/**
 		 * IDNA2003 separators must be supported for backwards compatibility.
 		 */
 		each(testData.separators, function(object) {
 			var message = 'IDNA2003 separators must be supported for backwards compatibility';
-			equal(punycode.toASCII(object.decoded), object.encoded, message);
+			assert.equal(punycode.toASCII(object.decoded), object.encoded, message);
 		});
 	});
 
-	/*--------------------------------------------------------------------------*/
 
-	// configure QUnit and call `QUnit.start()` for
-	// Narwhal, Node.js, io.js, PhantomJS, Rhino, and RingoJS
-	if (!root.document || root.phantom) {
-		QUnit.config.noglobals = true;
-		QUnit.config.hidepassed = true;
-		QUnit.start();
-	}
-
-}(typeof global == 'object' && global || this));
+require = requireOrig;});

@@ -2,6 +2,7 @@ define(function(localRequire, exports, module) { var requireOrig = require; requ
 'use strict';
 
 var Buffer = require('buffer').Buffer;
+var repeat = require("lodash/repeat");
 
 var isEncoding = Buffer.isEncoding || function (encoding) {
   encoding = '' + encoding;
@@ -158,17 +159,17 @@ function utf8CheckIncomplete(self, buf, i) {
 function utf8CheckExtraBytes(self, buf, p) {
   if ((buf[0] & 0xC0) !== 0x80) {
     self.lastNeed = 0;
-    return '\ufffd'.repeat(p);
+    return repeat('\ufffd',p);
   }
   if (self.lastNeed > 1 && buf.length > 1) {
     if ((buf[1] & 0xC0) !== 0x80) {
       self.lastNeed = 1;
-      return '\ufffd'.repeat(p + 1);
+      return repeat('\ufffd', p + 1);
     }
     if (self.lastNeed > 2 && buf.length > 2) {
       if ((buf[2] & 0xC0) !== 0x80) {
         self.lastNeed = 2;
-        return '\ufffd'.repeat(p + 2);
+        return repeat('\ufffd', p + 2);
       }
     }
   }
@@ -203,7 +204,7 @@ function utf8Text(buf, i) {
 // character needs to be added to the output.
 function utf8End(buf) {
   var r = buf && buf.length ? this.write(buf) : '';
-  if (this.lastNeed) return r + '\ufffd'.repeat(this.lastTotal - this.lastNeed);
+  if (this.lastNeed) return r + repeat('\ufffd', this.lastTotal - this.lastNeed);
   return r;
 }
 

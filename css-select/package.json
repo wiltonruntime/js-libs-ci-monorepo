@@ -61,7 +61,8 @@
   "wilton": {
     "excludes": [
       "test",
-      "browser_functions.js"
+      "browser_functions.js",
+      "test.js"
     ]
   }
 }

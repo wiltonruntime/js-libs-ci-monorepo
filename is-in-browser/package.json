@@ -42,7 +42,8 @@
     "excludes": [
       "src/index.d.ts",
       "test",
-      "readme.md"
+      "readme.md",
+      "test.js"
     ]
   }
 }

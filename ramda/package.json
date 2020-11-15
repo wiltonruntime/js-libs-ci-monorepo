@@ -87,7 +87,7 @@
       "CHANGELOG.md",
       "CONTRIBUTING.md",
       "index.js",
-      "runAllTests.js",
+      "test.js",
       "testem.json"
     ]
   }

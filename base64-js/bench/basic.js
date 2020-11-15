@@ -1,17 +1,20 @@
-define(function(localRequire, exports, module) { var requireOrig = require; require = localRequire;
-var random = require('crypto').pseudoRandomBytes
+var random = require('crypto').randomBytes
 
-var b64 = require('base64-js')
+var b64 = require('../')
 var data = random(1e6).toString('base64')
 var start = Date.now()
 var raw = b64.toByteArray(data)
-var middle = Date.now()
+var middle1 = Date.now()
 data = b64.fromByteArray(raw)
+var middle2 = Date.now()
+var len = b64.byteLength(data)
 var end = Date.now()
 
-console.log('decode ms, decode ops/ms, encode ms, encode ops/ms')
 console.log(
-  middle - start, data.length / (middle - start),
-  end - middle, data.length / (end - middle))
-
-require = requireOrig;});
+  'decode ms, decode ops/ms, encode ms, encode ops/ms, length ms, length ops/ms'
+)
+console.log(
+  middle1 - start, data.length / (middle1 - start),
+  middle2 - middle1, data.length / (middle2 - middle1),
+  end - middle2, len / (end - middle2)
+)

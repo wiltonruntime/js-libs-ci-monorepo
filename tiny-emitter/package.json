@@ -55,10 +55,8 @@
       "test",
       "index.d.ts",
       "index.js",
-      "instance.js"
-    ],
-    "preMinifiedFiles": [
-        "dist/tinyemitter.js"
+      "instance.js",
+      "test.js"
     ]
   }
 }

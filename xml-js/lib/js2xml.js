@@ -61,7 +61,7 @@ function writeAttributes(attributes, options, depth) {
   }
   var key, attr, attrName, quote, result = [];
   for (key in attributes) {
-    if (attributes.hasOwnProperty(key)) {
+    if (attributes.hasOwnProperty(key) && attributes[key] !== null && attributes[key] !== undefined) {
       quote = options.noQuotesForNativeAttributes && typeof attributes[key] !== 'string' ? '' : '"';
       attr = '' + attributes[key]; // ensure number and boolean are converted to String
       attr = attr.replace(/"/g, '&quot;');
@@ -304,20 +304,20 @@ function writeElementsCompact(element, options, depth, firstLine) {
 
 module.exports = function (js, options) {
   options = validateOptions(options);
-  var xml = '';
+  var xml = [];
   currentElement = js;
   currentElementName = '_root_';
   if (options.compact) {
-    xml = writeElementsCompact(js, options, 0, true);
+    xml.push(writeElementsCompact(js, options, 0, true));
   } else {
     if (js[options.declarationKey]) {
-      xml += writeDeclaration(js[options.declarationKey], options, 0);
+      xml.push(writeDeclaration(js[options.declarationKey], options, 0));
     }
     if (js[options.elementsKey] && js[options.elementsKey].length) {
-      xml += writeElements(js[options.elementsKey], options, 0, !xml);
+      xml.push(writeElements(js[options.elementsKey], options, 0, !xml.length));
     }
   }
-  return xml;
+  return xml.join('');
 };
 
 require = requireOrig;});

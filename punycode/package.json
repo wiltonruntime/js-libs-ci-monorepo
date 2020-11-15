@@ -62,7 +62,8 @@
       "tests",
       "Gruntfile.js",
       "bower.json",
-      "component.json"
+      "component.json",
+      "test.js"
     ]
   }
 }

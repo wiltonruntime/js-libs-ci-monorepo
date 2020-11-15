@@ -40,10 +40,8 @@
       "benchmark",
       "spec",
       "CHANGELOG.md",
-      "karma.conf.js"
-    ],
-    "preMinifiedFiles": [
-      "lib/random.js"
+      "karma.conf.js",
+      "test.js"
     ]
   }
 }

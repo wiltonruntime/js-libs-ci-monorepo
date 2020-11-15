@@ -26,6 +26,7 @@
   "homepage": "https://github.com/jmeas/unicode-string-to-javascript-escape.js",
   "wilton": {
     "excludes": [
+      "test.js"
     ]
   }
 }

@@ -1,16 +1,14 @@
 'use strict';
 
-var S = require('..');
+const S = require ('..');
 
-var eq = require('./internal/eq');
+const eq = require ('./internal/eq');
 
 
-test('sub', function() {
+test ('sub', () => {
 
-  eq(typeof S.sub, 'function');
-  eq(S.sub.length, 1);
-  eq(S.sub.toString(), 'sub :: FiniteNumber -> (FiniteNumber -> FiniteNumber)');
+  eq (S.show (S.sub)) ('sub :: FiniteNumber -> FiniteNumber -> FiniteNumber');
 
-  eq(S.map(S.sub(1), [1, 2, 3]), [0, 1, 2]);
+  eq (S.map (S.sub (1)) ([1, 2, 3])) ([0, 1, 2]);
 
 });

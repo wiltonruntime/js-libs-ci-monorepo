@@ -67,7 +67,8 @@
             "scripts",
             "src",
             "tests",
-            "Gruntfile.js"
+            "Gruntfile.js",
+            "test.js"
         ]
     }
 }

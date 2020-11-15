@@ -125,6 +125,7 @@ T('Decimal', function () {
   t('0', '0b0');
   t('0', '0B0');
   t('-5', '-0b101');
+  t('5', '+0b101');
   t('1.5', '0b1.1');
   t('-1.5', '-0b1.1');
 
@@ -140,6 +141,7 @@ T('Decimal', function () {
   // Octal.
   t('8', '0o10');
   t('-8.5', '-0O010.4');
+  t('8.5', '+0O010.4');
   t('-262144.000000059604644775390625', '-0o1000000.00000001');
   t('572315667420.390625', '0o10250053005734.31');
 
@@ -147,6 +149,7 @@ T('Decimal', function () {
   t('1', '0x00001');
   t('255', '0xff');
   t('-15.5', '-0Xf.8');
+  t('15.5', '+0Xf.8');
   t('-16777216.00000000023283064365386962890625', '-0x1000000.00000001');
   t('325927753012307620476767402981591827744994693483231017778102969592507', '0xc16de7aa5bf90c3755ef4dea45e982b351b6e00cd25a82dcfe0646abb');
 
@@ -157,14 +160,18 @@ T('Decimal', function () {
   }
 
   t('NaN', NaN);
+  t('NaN', -NaN);
   t('NaN', 'NaN');
   t('NaN', '-NaN');
+  t('NaN', '+NaN');
 
   tx(function () {new Decimal(' NaN')}, "' NaN'");
   tx(function () {new Decimal('NaN ')}, "'NaN '");
   tx(function () {new Decimal(' NaN ')}, "' NaN '");
-  tx(function () {new Decimal('+NaN')}, "'+NaN'");
+  tx(function () {new Decimal(' -NaN')}, "' -NaN'");
   tx(function () {new Decimal(' +NaN')}, "' +NaN'");
+  tx(function () {new Decimal('-NaN ')}, "'-NaN '");
+  tx(function () {new Decimal('+NaN ')}, "'+NaN '");
   tx(function () {new Decimal('.NaN')}, "'.NaN'");
   tx(function () {new Decimal('NaN.')}, "'NaN.'");
 
@@ -172,11 +179,12 @@ T('Decimal', function () {
   t('-Infinity', -Infinity);
   t('Infinity', 'Infinity');
   t('-Infinity', '-Infinity');
+  t('Infinity', '+Infinity');
 
   tx(function () {new Decimal(' Infinity')}, "' Infinity '");
   tx(function () {new Decimal('Infinity ')}, "'Infinity '");
   tx(function () {new Decimal(' Infinity ')}, "' Infinity '");
-  tx(function () {new Decimal('+Infinity')}, "'+Infinity'");
+  tx(function () {new Decimal(' -Infinity')}, "' -Infinity'");
   tx(function () {new Decimal(' +Infinity')}, "' +Infinity'");
   tx(function () {new Decimal('.Infinity')}, "'.Infinity'");
   tx(function () {new Decimal('Infinity.')}, "'Infinity.'");
@@ -198,7 +206,7 @@ T('Decimal', function () {
   tx(function () {new Decimal('0-')}, "'0-'");
   tx(function () {new Decimal(' -0')}, "' -0'");
   tx(function () {new Decimal('-0 ')}, "'-0 '");
-  tx(function () {new Decimal('+0')}, "'+0'");
+  tx(function () {new Decimal('+0 ')}, "'+0 '");
   tx(function () {new Decimal(' +0')}, "' +0'");
   tx(function () {new Decimal(' .0')}, "' .0'");
   tx(function () {new Decimal('0. ')}, "'0. '");
@@ -223,12 +231,16 @@ T('Decimal', function () {
   t('0.1', '.1');
   t('0.1', '.1');
   t('-0.1', '-.1');
+  t('0.1', '+.1');
   t('1', '1.');
   t('1', '1.0');
   t('-1', '-1.');
+  t('1', '+1.');
   t('-1', '-1.0000');
+  t('1', '1.0000');
   t('1', '1.00000000');
   t('-1', '-1.000000000000000000000000');
+  t('1', '+1.000000000000000000000000');
 
   tx(function () {new Decimal(' 1')}, "' 1'");
   tx(function () {new Decimal('1 ')}, "'1 '");
@@ -236,8 +248,8 @@ T('Decimal', function () {
   tx(function () {new Decimal('1-')}, "'1-'");
   tx(function () {new Decimal(' -1')}, "' -1'");
   tx(function () {new Decimal('-1 ')}, "'-1 '");
-  tx(function () {new Decimal('+1')}, "'+1'");
   tx(function () {new Decimal(' +1')}, "' +1'");
+  tx(function () {new Decimal('+1 ')}, "'+1'");
   tx(function () {new Decimal('.1.')}, "'.1.'");
   tx(function () {new Decimal('+-1')}, "'+-1'");
   tx(function () {new Decimal('-+1')}, "'-+1'");
@@ -263,8 +275,9 @@ T('Decimal', function () {
 
   t('123.456789', 123.456789);
   t('-123.456789', -123.456789);
-  t('123.456789', '123.456789');
   t('-123.456789', '-123.456789');
+  t('123.456789', '123.456789');
+  t('123.456789', '+123.456789');
 
   tx(function () {new Decimal(void 0)}, "void 0");
   tx(function () {new Decimal('undefined')}, "'undefined'");
@@ -283,8 +296,10 @@ T('Decimal', function () {
   tx(function () {new Decimal('ff')}, "'ff'");
   tx(function () {new Decimal('0xg')}, "'oxg'");
   tx(function () {new Decimal('0Xfi')}, "'0Xfi'");
+  tx(function () {new Decimal('++45')}, "'++45'");
   tx(function () {new Decimal('--45')}, "'--45'");
   tx(function () {new Decimal('9.99--')}, "'9.99--'");
+  tx(function () {new Decimal('9.99++')}, "'9.99++'");
   tx(function () {new Decimal('0 0')}, "'0 0'");
 });
 

@@ -16,6 +16,7 @@
   "scripts": { "test": "echo \"See https://travis-ci.org/lodash-archive/lodash-cli for testing details.\"" },
   "wilton": {
     "excludes": [
+        "test.js"
     ]
   }
 }

@@ -1,17 +1,15 @@
 'use strict';
 
-var S = require('..');
+const S = require ('..');
 
-var eq = require('./internal/eq');
+const eq = require ('./internal/eq');
 
 
-test('maybe', function() {
+test ('maybe', () => {
 
-  eq(typeof S.maybe, 'function');
-  eq(S.maybe.length, 3);
-  eq(S.maybe.toString(), 'maybe :: b -> (a -> b) -> Maybe a -> b');
+  eq (S.show (S.maybe)) ('maybe :: b -> (a -> b) -> Maybe a -> b');
 
-  eq(S.maybe(0, Math.sqrt, S.Nothing), 0);
-  eq(S.maybe(0, Math.sqrt, S.Just(9)), 3);
+  eq (S.maybe (0) (Math.sqrt) (S.Nothing)) (0);
+  eq (S.maybe (0) (Math.sqrt) (S.Just (9))) (3);
 
 });
