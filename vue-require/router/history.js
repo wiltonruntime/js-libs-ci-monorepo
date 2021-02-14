@@ -90,8 +90,8 @@ define([
             var store = storeHolder.get();
             if (store && store._mutations.updateCanGoForward && 
                     store._mutations.updateCanGoBack) {
-                commit("updateCanGoBack", canGoBack());
-                commit("updateCanGoForward", canGoForward());
+                commit(null, "updateCanGoBack", canGoBack());
+                commit(null, "updateCanGoForward", canGoForward());
             }
         },
 
