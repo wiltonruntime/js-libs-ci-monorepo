@@ -1,0 +1,8 @@
+{
+    "PRIMARY": "PRIMARY",
+    "SECONDARY": "SECONDARY",
+    "LIGHT": "LIGHT",
+    "SUCCESS": "SUCCESS",
+    "WARN": "WARN",
+    "DANGER": "DANGER"
+}

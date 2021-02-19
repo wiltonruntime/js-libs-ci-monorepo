@@ -1,0 +1,96 @@
+<!--
+ Copyright 2019, alex at staticlibs.net
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<div class="row">
+    <div class="col">
+
+        <div class="row mt-2 mb-4"
+                v-show="showCancelButton">
+            <div class="col">
+                <button
+                    type="button"
+                    class="btn btn-lg btn-danger btn-block"
+                    v-bind:disabled="autoLaunchCanceled"
+                    v-on:click.stop.prevent="cancelAutoLaunch()">
+                    Cancel Launch
+                </button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <launcher-alert
+                        v-bind:message="alertMessage"
+                        v-bind:alert-style="alertStyle"
+                        v-on:close-button-clicked="alertClosed"/>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col">
+                <label class="font-weight-bold" for="application">
+                    Application
+                </label>
+                <select class="form-control form-control-lg"
+                        v-bind:disabled="!enabled"
+                        v-model="application">
+                    <option value="">[Choose]</option>
+                    <option
+                            v-for="app in appList"
+                            v-bind:value="app">
+                        {{app}}
+                    </option>
+                </select>
+                <small class="form-text text-muted">
+                    Choose the application to launch
+                </small>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col">
+                <label class="font-weight-bold" for="automatic">
+                    Launch Automatically
+                </label>
+                <select class="form-control form-control-lg"
+                        v-bind:disabled="!enabled"
+                        v-model="autoLaunch">
+                    <option value="false">No</option>
+                    <option value="true">Yes</option>
+                </select>
+                <small class="form-text text-muted">
+                    With this option enabled selected application will start automatically
+                    without requiring user interaction with Launcher UI.
+                </small>
+            </div>
+        </div>
+
+        <hr/>
+
+        <div class="row mb-5">
+            <div class="col">
+                <button
+                    type="button"
+                    class="btn btn-lg btn-secondary btn-block"
+                    v-bind:disabled="!launchButtonEnabled"
+                    v-on:click.stop.prevent="launch()">
+                    Launch
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>

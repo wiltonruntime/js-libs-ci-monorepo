@@ -16,7 +16,7 @@
 
 // top level define required because enforceDefine is used
 
-define([], function() {
+define([], () => {
 
     // requirejs config, adjust as needed
     requirejs.config({
@@ -25,7 +25,7 @@ define([], function() {
         nodeIdCompat: true,
         waitSeconds: 15,
         paths: {
-            "launcher": "/web/js/launcher"
+            "android-launcher": "/web/js/android-launcher"
         },
         // these plugins are used to load wilton-packages.json
         packages: [
@@ -36,7 +36,7 @@ define([], function() {
 
     // load packages config and compat globals
     require(["json!wilton-requirejs/wilton-packages.json",
-            "wilton-requirejs/compatGlobals"], function(packages) {
+            "wilton-requirejs/compatGlobals"], (packages) => {
 
         // complete config
         requirejs.config({
@@ -44,17 +44,17 @@ define([], function() {
         });
 
         // init buffer
-        require(["buffer"], function(buffer) {
+        require(["buffer"], (buffer) => {
             // set global compat Buffer
             Buffer = buffer.Buffer;
 
             // start app
             require([
                 "vue",
-                "launcher/router",
-                "launcher/store",
-                "launcher/app"
-            ], function(Vue, router, store, app) {
+                "android-launcher/router",
+                "android-launcher/store",
+                "android-launcher/app"
+            ], (Vue, router, store, app) => {
                 new Vue({
                     el: '#root',
                     router: router,

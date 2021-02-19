@@ -1,5 +1,5 @@
 {
-    "appname": "launcher",
+    "appname": "android-launcher",
 
     "server": {
         "ipAddress": "127.0.0.1",

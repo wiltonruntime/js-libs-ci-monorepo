@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+"use strict";
+
 define([
     "module",
     "buffer",
@@ -23,16 +25,23 @@ define([
     "wilton/Logger",
     "wilton/misc",
     "wilton/utils"
-], function(module, buffer, isObject, fs, git, Logger, misc, utils) {
-    "use strict";
+], (module, buffer, isObject, fs, git, Logger, { wiltonConfig }, utils) => {
     var logger = new Logger(module.id);
 
-    function prepareAppsDir() {
-        var appsDir = misc.wiltonConfig().wiltonHome + "apps/";
-        if (!fs.exists(appsDir)) {
-            fs.mkdir(appsDir);
+    function prepareAppsDir(fetchType) {
+        const base = wiltonConfig().wiltonHome;
+        //const base = "/home/alex/projects/wilton_other/tmp/";
+        var dir = "application" === fetchType ? base + "apps/" : base + "libs/";
+        if (!fs.exists(dir)) {
+            fs.mkdir(dir);
         }
-        return appsDir;
+        return dir;
+    }
+
+    function validateDest(destination) {
+        if (!/[A-Za-z0-9_\-]/.test(destination)) {
+            throw new Error(`Invalid destination directory specified, value: [${destination}]`);
+        }
     }
 
     function prepareOpts(username, password, branch) {
@@ -49,46 +58,22 @@ define([
     }
 
     return {
-        cloneOrPull: function(opts) {
-            utils.checkProperties(opts, ["gitUrl", "username", "password", "gitBranch", "skipUpdate", "deleteApp"]);
-            var appsDir = prepareAppsDir();
-            var parts = opts.gitUrl.split("/");
-            var name = parts[parts.length - 1].replace(/\.git$/, "").replace(/\.js$/, "");
-            var repoPath = appsDir + name + "/";
+        cloneOrPull(opts) {
+            utils.checkProperties(opts, ["fetchType", "gitUrl", "destination", "username", "password", "gitBranch"]);
+            const dir = prepareAppsDir(opts.fetchType);
+            validateDest(opts.destination);
+            var repoPath = dir + opts.destination + "/";
             var pwd = buffer.Buffer.from(opts.password, "base64").toString("utf8");
 
             if (!fs.exists(repoPath)) {
                 logger.info("Cloning Git repository on url: [" + opts.url + "] ...");
                 git.clone(opts.gitUrl, repoPath, prepareOpts(opts.username, pwd, opts.gitBranch));
                 logger.info("Clone perfomed successfully");
-            } else if (!opts.skipUpdate) {
-                if (opts.deleteApp) {
-                    fs.rmdir(repoPath);
-                    logger.info("Cloning fresh Git repository on url: [" + opts.url + "] ...");
-                    git.clone(opts.gitUrl, repoPath, prepareOpts(opts.username, pwd, opts.gitBranch));
-                    logger.info("Clone perfomed successfully");
-                } else {
-                    logger.info("Pulling Git repository on url: [" + opts.gitUrl + "] ...");
-                    git.pull(repoPath, prepareOpts(opts.username, pwd, opts.gitBranch));
-                    logger.info("Pull perfomed successfully");
-                }
             } else {
-                // git update skipped
+                logger.info("Pulling Git repository on url: [" + opts.gitUrl + "] ...");
+                git.pull(repoPath, prepareOpts(opts.username, pwd, opts.gitBranch));
+                logger.info("Pull perfomed successfully");
             }
-
-            var confFile = repoPath + "conf/config.json";
-            var confStr = fs.readFile(confFile);
-            var ac = JSON.parse(confStr);
-            var lopts = ac.launcher;
-            if (!isObject(lopts)) {
-                throw new Error("Cannot load launcher options from app config," +
-                        " url: [" + opts.gitUrl + "]");
-            }
-
-            return {
-                repoPath: repoPath,
-                options: lopts
-            };
         }
     };
 });

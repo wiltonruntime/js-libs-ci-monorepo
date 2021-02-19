@@ -14,18 +14,31 @@
  * limitations under the License.
  */
 
+"use strict";
+
 define([
     "module",
+    "wilton/fs",
     "wilton/Channel",
     "wilton/Logger",
     "wilton/misc",
     "wilton/Server",
     "json!./conf/config.json"
-], function(module, Channel, Logger, misc, Server, conf) {
-    "use strict";
-    var logger = new Logger(module.id);
+], (module, fs, Channel, Logger, { wiltonConfig }, Server, conf) => {
+    const logger = new Logger(module.id);
 
-    return function() {
+    function createDirs(wiltonHome) {
+        const appsDir = wiltonHome + "apps";
+        if (!fs.exists(appsDir)) {
+            fs.mkdir(appsDir);
+        }
+        const libsDir = wiltonHome + "libs";
+        if (!fs.exists(libsDir)) {
+            fs.mkdir(libsDir);
+        }
+    }
+
+    return () => {
         // init logging
         Logger.initialize(conf.logging);
 
@@ -34,9 +47,13 @@ define([
         // lock for appState file
         new Channel("android-launcher/server/calls/appState", 1);
 
+        // create dirs
+        const wiltonHome = wiltonConfig().wiltonHome;
+        createDirs(wiltonHome);
+
         // server
         logger.info("Starting server on port: [" + conf.server.tcpPort + "]");
-        var server = new Server({
+        const server = new Server({
             ipAddress: conf.server.ipAddress,
             tcpPort: conf.server.tcpPort,
             views: [
@@ -48,13 +65,15 @@ define([
             documentRoots: [
             {
                 resource: "/web",
-                zipPath: misc.wiltonConfig().wiltonHome + conf.server.stdlibFileName,
+                //dirPath: "/home/alex/projects/wilton/js/android-launcher/web",
+                zipPath: wiltonHome + conf.server.stdlibFileName,
                 zipInnerPrefix: "android-launcher/web/",
                 cacheMaxAgeSeconds: conf.server.cacheMaxAgeSeconds
             },
             {
                 resource: "/stdlib",
-                zipPath: misc.wiltonConfig().wiltonHome + conf.server.stdlibFileName,
+                //dirPath: "/home/alex/projects/wilton/js",
+                zipPath: wiltonHome + conf.server.stdlibFileName,
                 cacheMaxAgeSeconds: conf.server.cacheMaxAgeSeconds
             }]
         });

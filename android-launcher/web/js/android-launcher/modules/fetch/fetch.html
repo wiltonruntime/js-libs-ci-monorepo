@@ -1,0 +1,151 @@
+<!--
+ Copyright 2020, alex at staticlibs.net
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<div class="row">
+    <div class="col">
+
+        <div class="row">
+            <div class="col">
+                <launcher-alert
+                        v-bind:message="alertMessage"
+                        v-bind:alert-style="alertStyle"
+                        v-on:close-button-clicked="alertClosed"/>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col">
+                <label class="font-weight-bold" for="fetchType">
+                    Type
+                </label>
+                <select class="form-control form-control-lg"
+                        v-bind:disabled="!enabled"
+                        v-model="fetchType">
+                    <option value="application">Application</option>
+                    <option value="library">Library</option>
+                </select>
+                <small class="form-text text-muted">
+                    Fetch specified repository as an Application or a Library
+                </small>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col">
+                <label class="font-weight-bold" for="url">
+                    Git URL
+                </label>
+                <input
+                        type="text"
+                        id="url"
+                        name="url"
+                        class="form-control form-control-lg"
+                        v-bind:disabled="!enabled"
+                        v-model="gitUrl">
+                <small class="form-text text-muted">
+                    SSH or HTTPS URL to the Git repository which contains a Wilton Application or a Libary
+                </small>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col">
+                <label class="font-weight-bold" for="destination">
+                    Local Name
+                </label>
+                <input
+                        type="text"
+                        id="destination"
+                        name="destination"
+                        class="form-control form-control-lg"
+                        v-bind:disabled="!enabled"
+                        v-model="destination">
+                <small class="form-text text-muted">
+                    Destination directory name where fetched files are placed
+                </small>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col">
+                <label class="font-weight-bold" for="username">
+                    Username
+                </label>
+                <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        class="form-control form-control-lg"
+                        v-bind:disabled="!enabled"
+                        v-model="username">
+                <small class="form-text text-muted">
+                    User name for SSH or HTTPS authentication
+                </small>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col">
+                <label class="font-weight-bold" for="password">
+                    Password
+                </label>
+                <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        class="form-control form-control-lg"
+                        v-bind:disabled="!enabled"
+                        v-model="password">
+                <small class="form-text text-muted">
+                    Password for SSH or HTTPS authentication
+                </small>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col">
+                <label class="font-weight-bold" for="branch">
+                    Branch
+                </label>
+                <input
+                        type="text"
+                        id="branch"
+                        name="branch"
+                        class="form-control form-control-lg"
+                        v-bind:disabled="!enabled"
+                        v-model="gitBranch">
+                <small class="form-text text-muted">
+                    Git branch name to checkout
+                </small>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row mb-5">
+            <div class="col">
+                <button
+                        type="button"
+                        class="btn btn-lg btn-secondary btn-block"
+                        v-bind:disabled="!enabled"
+                        v-on:click.stop.prevent="fetchRepo()">
+                    Fetch Repository
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>

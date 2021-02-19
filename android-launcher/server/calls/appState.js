@@ -14,28 +14,29 @@
  * limitations under the License.
  */
 
+"use strict";
+
 define([
     "module",
     "wilton/Channel",
     "wilton/fs",
     "wilton/Logger",
     "wilton/misc"
-], function(module, Channel, fs, Logger, misc) {
-    "use strict";
-    var logger = new Logger(module.id);
+], (module, Channel, fs, Logger, misc) => {
+    const logger = new Logger(module.id);
 
-    var path = misc.wiltonConfig().wiltonHome + "launcher.json";
-    var lock = Channel.lookup(module.id);
+    const path = misc.wiltonConfig().wiltonHome + "launcher.json";
+    const lock = Channel.lookup(module.id);
 
     return {
-        save: function(state) {
-            lock.synchronize(function() {
+        save(state) {
+            lock.synchronize(() => {
                 fs.writeFile(path, JSON.stringify(state, null, 4));
             });
         },
 
-        load: function() {
-            return lock.synchronize(function() {
+        load() {
+            return lock.synchronize(() => {
                 if (fs.exists(path)) {
                     var str = fs.readFile(path);
                     return JSON.parse(str);
