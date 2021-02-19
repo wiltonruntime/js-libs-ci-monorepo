@@ -51,6 +51,7 @@ define([
     "is-in-browser/test",
     "javascript-natural-sort/test",
     "json/test",
+    "json-schema/test",
     "json-stringify-safe/test",
     "jsverify/test",
     "lazy-seq/test",

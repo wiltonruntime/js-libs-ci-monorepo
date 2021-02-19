@@ -52,6 +52,7 @@ define([
     "is-in-browser",
     "javascript-natural-sort",
     "json",
+    "json-schema",
     "json-stringify-safe",
     "jsverify",
     "lazy-seq",

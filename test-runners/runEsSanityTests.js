@@ -50,6 +50,7 @@ import "immutable";
 import "ip";
 import "is-in-browser";
 import "javascript-natural-sort";
+import "json-schema";
 import "json-stringify-safe";
 import "jsverify";
 import "lazy-seq";
