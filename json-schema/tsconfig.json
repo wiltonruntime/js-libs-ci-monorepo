@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "amd",
+    "target": "ES5",
+    "lib": ["ES5"],
+    "outDir": "dist",
+    "rootDir": "./src"
+  },
+  "include": ["src"]
+}
